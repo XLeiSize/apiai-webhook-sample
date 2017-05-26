@@ -55,11 +55,11 @@ restService.post('/hook', function (req, res) {
 
         return res.json({
             speech: speech,
-            displayText: speech,
+            displayText: speech + speech + speech + speech,
             data: {
                 "hologramme": "lol",
                 "shit": true
-            }
+            },
             source: 'berniewebhook'
         });
     } catch (err) {
