@@ -39,7 +39,7 @@ restService.post('/hook', function (req, res) {
             data: {
                 "hologramme": "lol",
                 "shit": true
-            }
+            },
             messages: [
                 {
                   "type": 0,
