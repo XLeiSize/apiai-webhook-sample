@@ -1,16 +1,41 @@
 {
-  "name": "apiai-webhook-sample",
-  "version": "1.0.0",
-  "description": "Webhook sample",
-  "main": "index.js",
+  "name": "api-ai-facebook",
+  "version": "1.1.0",
+  "description": "API.AI Facebook Bot",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha"
   },
   "author": "Danil Skachkov <danil.skachkov@speaktoit.com> (https://api.ai)",
-  "license": "Apache 2.0",
+  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "@google-cloud/vision": "^0.10.0",
+    "apiai": "^3.0.3",
+    "async": "^2.0.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.13.4",
+    "form-data": "^2.1.4",
+    "handlebars": "^4.0.6",
+    "html-entities": "^1.2.0",
+    "json-bigint": "^0.2.0",
+    "lodash": "^4.17.4",
+    "node-uuid": "^1.4.7",
+    "python-shell": "^0.4.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
+    "vuforiajs": "^0.2.5",
+    "wikijs": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/api-ai/api-ai-facebook"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "rewire": "^2.5.2",
+    "should": "^11.2.0",
+    "supertest": "^3.0.0"
   }
 }

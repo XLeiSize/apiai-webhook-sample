@@ -36,6 +36,7 @@ restService.post('/hook', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
+            holograme: true,
             source: 'apiai-webhook-sample'
         });
     } catch (err) {

@@ -1,0 +1,58 @@
+{
+  "artists": [
+    {
+      "firstName": "Ashley",
+      "lastName": "Bickerton",
+      "slug": "ashley-bickerton",
+      "dayOfBirth": "",
+      "monthOfBirth": "",
+      "yearOfBirth": "1959",
+      "cityOfBirth": "",
+      "countryOfBirth": "Barbades",
+      "dayOfDeath": "",
+      "monthOfDeath": "",
+      "yearOfDeath": "",
+      "cityOfDeath": "",
+      "countryOfDeath": "",
+      "portrait": "https://www.image.com/image.jpeg",
+      "content": "",
+      "nationality": "",
+      "influencers": "",
+      "mainArtworks": "",
+      "beginningOfArt": "",
+      "endOfArt": "",
+      "gender": "",
+      "movements": "",
+      "field": ""
+    }
+  ],
+  "artworks": [
+    {
+      "title": "",
+      "field": "",
+      "movement": "",
+      "startYear": "",
+      "endYear": "",
+      "content": "",
+      "isACollection": "",
+      "images": "",
+      "dimensions": "",
+      "composition": "",
+      "technique": ""
+    }
+  ],
+  "movement": [
+    {
+      "name": "",
+      "slug": "",
+      "content": "",
+      "startYear": "",
+      "endYear": "",
+      "displayAs": "",
+      "mainArtists": "",
+      "mainArtworks": "",
+      "influencedBy": "",
+      "hasInfluenced": ""
+    }
+  ]
+}
