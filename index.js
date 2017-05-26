@@ -36,8 +36,21 @@ restService.post('/hook', function (req, res) {
         return res.json({
             speech: speech,
             displayText: speech,
-            holograme: true,
-            source: 'apiai-webhook-sample'
+            data: {
+                "hologramme": "lol",
+                "shit": true
+            }
+            messages: [
+                {
+                  "type": 0,
+                  "speech": " action: search_artist"
+                },
+                {
+                "type": 0,
+                "speech": " MDR"
+                }
+            ]
+            source: 'berniewebhook'
         });
     } catch (err) {
         console.error("Can't process request", err);
