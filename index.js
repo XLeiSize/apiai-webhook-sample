@@ -54,22 +54,12 @@ restService.post('/hook', function (req, res) {
         // }
 
         return res.json({
-            speech: "speech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeech",
-            displayText: speech,
+            speech: speech,
+            displayText: speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech,
             data: {
                 "hologramme": "lol",
                 "shit": true
-            },
-            messages: [
-                {
-                  "type": 0,
-                  "speech": " action: search_artist"
-                },
-                {
-                "type": 0,
-                "speech": " MDR"
-                }
-            ],
+            }
             source: 'berniewebhook'
         });
     } catch (err) {
