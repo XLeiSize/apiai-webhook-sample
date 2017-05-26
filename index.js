@@ -33,8 +33,28 @@ restService.post('/hook', function (req, res) {
 
         console.log('result: ', speech);
 
+        // "fulfillment": {
+        //     "speech": " action: search_artist",
+        //     "source": "berniewebhook",
+        //     "displayText": " action: search_artist",
+        //     "messages": [
+        //     {
+        //       "type": 0,
+        //       "speech": " action: search_artist"
+        //     },
+        //     {
+        //       "type": 0,
+        //       "speech": " MDR"
+        //     }
+        //     ],
+        //     "data": {
+        //     "hologramme": "lol",
+        //     "shit": true
+        //     }
+        // }
+
         return res.json({
-            speech: speech,
+            speech: "speech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeechspeech speech speech speech speechspeechspeechspeechspeechspeech speechspeechspeech",
             displayText: speech,
             data: {
                 "hologramme": "lol",
