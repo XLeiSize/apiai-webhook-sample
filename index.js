@@ -54,7 +54,7 @@ restService.post('/hook', function (req, res) {
         // }
 
         return res.json({
-            speech: speech,
+            speech: speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech,
             displayText: speech + speech + speech + speech,
             data: {
                 "hologramme": "lol",
