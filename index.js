@@ -49,7 +49,7 @@ restService.post('/hook', function (req, res) {
                 "type": 0,
                 "speech": " MDR"
                 }
-            ]
+            ],
             source: 'berniewebhook'
         });
     } catch (err) {
