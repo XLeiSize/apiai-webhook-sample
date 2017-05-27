@@ -111,7 +111,7 @@ class Bernie {
 
 
 	// TRAITE LES DATAS
-	processAPIAIResult(response, image) {
+	processAPIAIResult(response) {
 		return new Promise((resolve, reject) => {
 			let sender = this.sender;
 
@@ -124,7 +124,8 @@ class Bernie {
 
 				let action = response.result.action;
 
-				if(image && action == 'send_url') {
+				if(action == 'send_url') {
+					let image = response.result.resolvedQuery;
 					responseMessages = this.createImageRequestResponse( image, responseMessages );
 				}
 
