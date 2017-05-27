@@ -128,10 +128,11 @@ class Bernie {
 					let image = response.result.resolvedQuery;
 					this.processData.imageRecognition( image ).then(( painting ) => {
 						responseMessages = this.createImageRequestResponse( painting, responseMessages );
-						}).catch( err => {
-							console.log(err);
-							reject(err);
-						});
+						resolve( {type: 'richContent', messages: responseMessages} );
+					}).catch( err => {
+						console.log(err);
+						reject(err);
+					});
 
 				}
 
