@@ -31,8 +31,8 @@ restService.post('/hook', function (req, res) {
                     speech += 'action: ' + requestBody.result.action;
                 }
 
-                bernie.processAPIAIResult(requestBody).then(( {type, sender, response} ) => {
-					console.log("XXXXXXXXXXXXXXXXXXXX", type, sender, response);
+                bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
+					console.log("XXXXXXXXXXXXXXXXXXXX", type, messages);
                     console.log('result: ', speech);
 
                     return res.json({
