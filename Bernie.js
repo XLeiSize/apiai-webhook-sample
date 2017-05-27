@@ -126,7 +126,13 @@ class Bernie {
 
 				if(action == 'send_url') {
 					let image = response.result.resolvedQuery;
-					responseMessages = this.createImageRequestResponse( image, responseMessages );
+					this.processData.imageRecognition( image ).then(( painting ) => {
+						responseMessages = this.createImageRequestResponse( painting, responseMessages );
+						}).catch( err => {
+							console.log(err);
+							reject(err);
+						});
+
 				}
 
 				if (this.isDefined(responseMessages) && responseMessages.length > 0) {
