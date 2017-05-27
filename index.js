@@ -33,6 +33,18 @@ restService.post('/hook', function (req, res) {
 
                 bernie.processAPIAIResult(requestBody).then(( {type, sender, response} ) => {
 					console.log("XXXXXXXXXXXXXXXXXXXX", type, sender, response);
+                    console.log('result: ', speech);
+
+                    return res.json({
+                        speech: speech,
+                        displayText: speech,
+                        data: {
+                            "hologramme": "lol",
+                            "shit": true
+                        },
+                        source: 'berniewebhook'
+                    });
+
 				}).catch( err => {
                     console.log("errr", err);
                     reject(err);
@@ -41,7 +53,6 @@ restService.post('/hook', function (req, res) {
             }
         }
 
-        console.log('result: ', speech);
 
         // "fulfillment": {
         //     "speech": " action: search_artist",
@@ -63,15 +74,7 @@ restService.post('/hook', function (req, res) {
         //     }
         // }
 
-        return res.json({
-            speech: speech,
-            displayText: speech,
-            data: {
-                "hologramme": "lol",
-                "shit": true
-            },
-            source: 'berniewebhook'
-        });
+
     } catch (err) {
         console.error("Can't process request", err);
 
