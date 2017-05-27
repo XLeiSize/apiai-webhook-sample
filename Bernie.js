@@ -126,8 +126,10 @@ class Bernie {
 
 				if(action == 'send_url') {
 					let image = response.result.resolvedQuery;
+					console.log("url", image);
 					this.processData.imageRecognition( image ).then(( painting ) => {
 						responseMessages = this.createImageRequestResponse( painting, responseMessages );
+						console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
 						resolve( {type: 'richContent', messages: responseMessages} );
 					}).catch( err => {
 						console.log(err);
@@ -204,11 +206,6 @@ class Bernie {
 										default: break;
 									}
 								});
-
-
-							} else if ( keyword == 'url' ) {
-
-								resolve( {type: 'richContent', messages: responseMessages} );
 
 
 							} else if ( keyword == "richcards" ) {
@@ -538,7 +535,6 @@ class Bernie {
 			payload: "néo-géo"
 		}];
 		responseMessages.push(moreInfoOpening);
-		console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
 		return responseMessages;
 	}
 
