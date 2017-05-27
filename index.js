@@ -2,6 +2,8 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const Bernie = require('./Bernie.js');
+let bernie = new Bernie();
 
 
 const restService = express();
@@ -28,6 +30,14 @@ restService.post('/hook', function (req, res) {
                 if (requestBody.result.action) {
                     speech += 'action: ' + requestBody.result.action;
                 }
+
+                bernie.processAPIAIResult(requestBody).then(( {type, sender, response} ) => {
+					console.log("XXXXXXXXXXXXXXXXXXXX", type, sender, response);
+				}).catch( err => {
+                    console.log("errr", err);
+                    reject(err);
+                });;
+
             }
         }
 
@@ -43,7 +53,7 @@ restService.post('/hook', function (req, res) {
         //       "speech": " action: search_artist"
         //     },
         //     {
-        //       "type": 0,
+        //       "type": 1,
         //       "speech": " MDR"
         //     }
         //     ],
@@ -54,8 +64,8 @@ restService.post('/hook', function (req, res) {
         // }
 
         return res.json({
-            speech: speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech + speech,
-            displayText: speech + speech + speech + speech,
+            speech: speech,
+            displayText: speech,
             data: {
                 "hologramme": "lol",
                 "shit": true

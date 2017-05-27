@@ -111,10 +111,9 @@ class Bernie {
 
 
 	// TRAITE LES DATAS
-	processAPIAIResult(response, options) {
+	processAPIAIResult(response, image) {
 		return new Promise((resolve, reject) => {
 			let sender = this.sender;
-			let image = options.image;
 
 			if (this.isDefined(response.result) && this.isDefined(response.result.fulfillment)) {
 				let responseText = response.result.fulfillment.speech;
