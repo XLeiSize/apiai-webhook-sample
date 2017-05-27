@@ -42,7 +42,7 @@ restService.post('/hook', function (req, res) {
                             "hologramme": "lol",
                             "shit": true
                         },
-                        messages: messages
+                        messages: messages,
                         source: 'berniewebhook'
                     });
 
