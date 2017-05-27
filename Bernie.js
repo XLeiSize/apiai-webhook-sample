@@ -538,6 +538,7 @@ class Bernie {
 			payload: "néo-géo"
 		}];
 		responseMessages.push(moreInfoOpening);
+		console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
 		return responseMessages;
 	}
 
