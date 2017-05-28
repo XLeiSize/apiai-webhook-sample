@@ -39,14 +39,15 @@ class Bernie {
 			options.sessionId = this.sessionIds.get(this.sender);
 			console.log(options.sessionId);
 
-			this.processData.apiaiRequest(options).then( ( response ) => {
+			this.processData.apiaiRequest( options ).then( ( response ) => {
 				console.log('----------------------------------------------------------------------------------')
 				// console.log('actionRequested', actionRequested);
+				console.log('@@@@@@@@@response', response);
 				console.log('@@@@@@@@@response.result.action', response.result.action);
 				console.log('@@@@@@@@@options', options);
 				if(actionRequested) {
 					for (let i = 0; i < actionRequested.length; i++) {
-						console.log('bbbbbbbbbbbbiatch', actionRequested, response.result.action);
+						console.log('bbbbbbbbbbbbiatch', actionRequested[i], response.result.action);
 						if (response.result.action == actionRequested[i]) {
 							this.processAPIAIResult(response, options).then( ( {type, messages} ) => {
 								console.log( "MDRR", type, messages );
