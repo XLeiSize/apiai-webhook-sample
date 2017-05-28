@@ -29,7 +29,7 @@ class ProcessData {
             sessionId: options.sessionId,
             originalRequest: {
                 data: options.event,
-                source: "facebook"
+                source: "webhook"
             }
         });
     return new Promise((resolve, reject) => {

@@ -35,13 +35,19 @@ restService.post('/hook', function (req, res) {
 					console.log("XXXXXXXXXXXXXXXXXXXX", type, messages);
                     console.log('result: ', speech);
 
+                    messages.forEach( ( msg ) => {
+                        if( msg.speech !== "" ){
+                            bernie.parseSentMessages( messageData ).then(( {sender, response } ) => {
+                				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                			}.catch( error => {
+                                console.log( error );
+                            } )
+                        }
+                    } )
+
                     return res.json({
                         speech: speech,
                         displayText: speech,
-                        data: {
-                            "hologramme": "lol",
-                            "shit": true
-                        },
                         messages: messages,
                         source: 'berniewebhook'
                     });

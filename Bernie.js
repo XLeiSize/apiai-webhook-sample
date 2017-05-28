@@ -95,8 +95,18 @@ class Bernie {
 	parseSentMessages( message ){
 		let promises = [];
 		let responseMessages = [];
-		let options = JSON.parse(JSON.stringify(this.options));
-		options.text = message.text;
+		let options = {
+			'sender': 'apiai',
+			'text':  message.text,
+			'event': event
+		}
+		this.sender = options.sender;
+
+		if (!this.sessionIds.has(this.sender)) {
+			this.sessionIds.set(this.sender, uuid.v4());
+		}
+
+		options.sessionId = this.sessionIds.get(this.sender);
 
 		return new Promise((resolve, reject) => {
 
@@ -313,197 +323,6 @@ class Bernie {
 							}
 						}
 					}.bind(this));
-
-					// let query;
-					//
-					// let wikiart = new Wikiart();
-					// let promises = [];
-
-					// switch (action) {
-					// 	case 'search':
-					// 		query = response.result.parameters.name;
-					// 		console.log('query', query);
-					// 		custom.getEntityByName('artists', query)
-					// 		.then((artist) => {
-					// 			console.log("custom artist", artist);
-					// 			if (artist) {
-					//
-					// 				responseMessages = this.createArtistResponseMessage(artist, action, responseMessages);
-					//
-					// 				this.doRichContentResponse(sender, responseMessages);
-					// 			}
-					// 		})
-					// 		.catch(e => {
-					// 			wikiart.getArtistByName(query).then((artist) => {
-					// 				if (artist) {
-					// 					responseMessages = this.createArtistResponseMessage( artist, action, responseMessages);
-					//
-					// 					this.doRichContentResponse(sender, responseMessages);
-					// 				}
-					// 			})
-					// 			.catch( err => {console.log(err);});
-					// 		});
-					// 		break;
-					//
-					// 	case 'search-movement':
-					// 		query = response.result.parameters.movement;
-					// 		custom.getEntityByName('movements', query).then((movement) => {
-					// 			if (movement) {
-					//
-					// 				responseMessages = this.createMovementResponseMessage(movement, action, responseMessages);
-					// 				this.doRichContentResponse(sender, responseMessages);
-					// 			}
-					// 		})
-					// 		.catch(e => {
-					//
-					// 			console.log('Custom DB err', e);
-					// 			wikiart.getMovementByName(query)
-					// 			.then((movement) => {
-					// 				if (movement) {
-					// 					responseMessages = this.createMovementResponseMessage(movement, action, responseMessages);
-					//
-					// 					this.doRichContentResponse(sender, responseMessages);
-					// 				}
-					// 			})
-					// 			.catch( e => {
-					// 				console.log(e);
-					// 			});
-					// 		});
-					//
-					//
-					// 		break;
-					// 	case 'artists_richcards':
-					// 			const artists = response.result.parameters.artist;
-					//
-					// 			console.log('richcards artists ---> ', artists);
-					//
-					// 			for (let i = 0; i < artists.length; i++) {
-					// 				promises.push(
-					// 					custom.getEntityByName('artists', artists[i])
-					// 				);
-					// 			}
-					//
-					// 			Promise.all(promises)
-					// 			.then( results => {
-					// 				let artistPromises = [];
-					// 				for (let i = 0; i < results.length; i++) {
-					// 					const artist = results[i];
-					// 					if (typeof artist == 'object') {
-					// 						artistPromises.push(new Promise( resolve => {
-					// 							responseMessages = this.createArtistRichcard(artist, action, responseMessages);
-					// 							resolve('success');
-					// 						}));
-					// 					}
-					// 					else {
-					// 						console.log('artist not found in custom DB');
-					// 						const name = artists[i];
-					//
-					// 						console.log('Artist to search in wikiart', name);
-					//
-					// 						artistPromises.push(new Promise( resolve => {
-					// 							wikiart.getArtistByName(name).then((artist) => {
-					// 								if (typeof artist == "object") {
-					// 									responseMessages = this.createArtistRichcard(artist, action, responseMessages);
-					// 								}
-					// 								resolve('success');
-					// 							})
-					// 							.catch( e => {console.log(e);});
-					// 						}));
-					// 					}
-					// 				}
-					//
-					// 				Promise.all(artistPromises)
-					// 				.then( response => {
-					// 					this.doRichContentResponse(sender, responseMessages);
-					// 				})
-					// 				.catch( e => {
-					// 					console.log(e)
-					// 				});
-					// 			})
-					// 			.catch(e => {
-					// 				console.log('Error in promise', e);
-					// 			});
-					// 			break;
-					// 	case 'artworks_richcards':
-					// 		const artworks = response.result.parameters.artwork;
-					//
-					// 		console.log('richcards artworks ---> ', artworks);
-					//
-					// 		for (let i = 0; i < artworks.length; i++) {
-					// 			promises.push(
-					// 				custom.getEntityByName('artworks', artworks[i])
-					// 			);
-					// 		}
-					//
-					// 		Promise.all(promises)
-					// 		.then( results => {
-					// 			let artworkPromises = [];
-					// 			for (let i = 0; i < results.length; i++) {
-					// 				const artwork = results[i];
-					// 				if (typeof artwork == 'object') {
-					// 					artworkPromises.push(new Promise( resolve => {
-					// 						responseMessages = this.createArtworkRichcard(artwork, action, responseMessages);
-					// 						resolve('success');
-					// 					}));
-					// 				}
-					// 				else {
-					// 					console.log('artwork not found in custom DB');
-					// 					const name = artworks[i];
-					//
-					// 					console.log('Artwork to search in wikiart', name);
-					//
-					// 					artworkPromises.push(new Promise( resolve => {
-					// 						wikiart.getArtworkByName(name).then((artwork) => {
-					// 							if (typeof artwork == "object") {
-					// 								responseMessages = this.createArtworkRichcard(artwork, action, responseMessages);
-					// 							}
-					// 							resolve('success');
-					// 						})
-					// 						.catch( e => {console.log(e);});
-					// 					}));
-					// 				}
-					// 			}
-					//
-					// 			Promise.all(artworkPromises)
-					// 			.then( response => {
-					// 				this.doRichContentResponse(sender, responseMessages);
-					// 			})
-					// 			.catch( e => {
-					// 				console.log(e)
-					// 			});
-					// 		})
-					// 		.catch(e => {
-					// 			console.log('Error in promise', e);
-					// 		});
-					// 		break;
-					// 	case 'search-artwork':
-					// 		query = response.result.parameters.artwork;
-					// 		console.log('query', query);
-					//
-					// 		custom.getEntityByName('artworks', query)
-					// 		.then((artwork) => {
-					// 			if (artwork) {
-					// 				console.log(artwork);
-					// 				responseMessages = this.createArtworkResponseMessage(artwork, action, responseMessages);
-					//
-					// 				this.doRichContentResponse(sender, responseMessages);
-					// 			}
-					// 		})
-					// 		.catch(e => {
-					// 			console.log('Custom DB err', e);
-					// 		});
-					//
-					//
-					// 		break;
-					// 	default:
-					// 		//send again to set the context params
-					// 		this.processData.apiaiRequest( options ).then( (response) => {
-					// 			this.doRichContentResponse(sender, responseMessages);
-					// 		})
-					// 		.catch(err => console.log(err));
-					// 		break;
-					// }
-
 				}
 				else if (this.isDefined(responseText)) {
 
