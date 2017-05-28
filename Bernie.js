@@ -37,6 +37,7 @@ class Bernie {
 			}
 
 			options.sessionId = this.sessionIds.get(this.sender);
+			console.log(options.sessionId);
 
 			this.processData.apiaiRequest(options).then( ( response ) => {
 				console.log('----------------------------------------------------------------------------------')

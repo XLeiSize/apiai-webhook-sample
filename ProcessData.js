@@ -26,11 +26,7 @@ class ProcessData {
 
     let apiaiRequest = this.apiAiService.textRequest(options.text,
         {
-            sessionId: options.sessionId,
-            originalRequest: {
-                data: options.event,
-                source: "webhook"
-            }
+            sessionId: options.sessionId
         });
     return new Promise((resolve, reject) => {
     //get response from api.ai
