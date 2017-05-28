@@ -37,7 +37,7 @@ restService.post('/hook', function (req, res) {
 
                     messages.forEach( ( msg ) => {
                         console.log(msg);
-                        if( msg.speech !== "" ){
+                        if( msg.speech && msg.speech !== "" ){
                             bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                 				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
                 			}).catch( error => {

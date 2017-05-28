@@ -9,14 +9,12 @@ class Template {
 		this.action = action;
 		this.params = params;
 		this.keys   = Object.keys(this.params);
-		console.log("KEYS", this.keys);
 		this.handlebarsInit();
 		this.setMessage();
 	}
 
 	getTemplate() {
 		const tpl       = templates[this.action];
-		console.log("tpl", tpl);
 
 		let commonParamsArray = [];
 
@@ -36,11 +34,8 @@ class Template {
 
 				commonParams++;
 
-				console.log('tpl params', tpl[i].params[j]);
-				console.log('params tpl params', this.params[tpl[i].params[j]]);
 			}
 
-			console.log("commonParams", commonParams);
 
 			if(continueFlag) {
 				continueFlag = false;
@@ -53,12 +48,9 @@ class Template {
 			});
 		}
 
-		console.log("commonParamsArray", commonParamsArray);
 
 		const orderedCommonParams = _.orderBy(commonParamsArray, ['value'], ['desc']);
-		console.log("orderedCommonParams", orderedCommonParams);
 		if(orderedCommonParams.length > 0) {
-		console.log("tpl[orderedCommonParams[0].index]", tpl[orderedCommonParams[0].index]);
 			return tpl[orderedCommonParams[0].index];
 		} else {
 			return false;
@@ -74,16 +66,13 @@ class Template {
 		}
 
 		this.templateSentence = this.template.templates[Math.floor(Math.random() * this.template.templates.length)];
-		console.log("templateSentence", this.templateSentence);
 
 		this.parseMessage();
 	}
 
 	parseMessage() {
 		this.templateSentence = Hb.compile(this.templateSentence);
-		console.log("templateSentence 2", this.templateSentence);
 		this.message = this.templateSentence(this.params);
-		console.log("message", this.message);
 	}
 
 	handlebarsInit() {
