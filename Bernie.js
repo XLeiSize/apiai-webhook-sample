@@ -98,7 +98,7 @@ class Bernie {
 		let options = {
 			'sender': 'apiai',
 			'text':  message.text,
-			'event': event
+			'event': 'event'
 		}
 		this.sender = options.sender;
 
