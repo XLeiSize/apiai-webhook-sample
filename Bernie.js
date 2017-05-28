@@ -16,7 +16,7 @@ const Utils = require('./helpers/utils.js');
 const WikiAPI = require('wikijs');
 const wiki = WikiAPI.default();
 
-const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'a881a3adcd5642e3b9ce925de1479dae';
+const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'ede1c18802a34ed68e8ca30aa2a69122';
 const APIAI_LANG = process.env.APIAI_LANG || 'fr';
 
 
