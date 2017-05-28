@@ -39,7 +39,7 @@ restService.post('/hook', function (req, res) {
                         if( msg.speech !== "" ){
                             bernie.parseSentMessages( messageData ).then(( {sender, response } ) => {
                 				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
-                			}.catch( error => {
+                			}).catch( error => {
                                 console.log( error );
                             } )
                         }
