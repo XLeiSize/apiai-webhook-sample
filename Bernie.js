@@ -322,13 +322,14 @@ class Bernie {
 										});
 									}
 								}
+							} else {
+								console.log('other actions');
 							}
 						}
 					}.bind(this));
 				}
 				else if (this.isDefined(responseText)) {
-
-					// this.doTextResponse(sender, responseText);
+					resolve( {type: 'text', messages: responseText } )
 				}
 			}
 		});

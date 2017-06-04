@@ -40,6 +40,7 @@ restService.post('/hook', function (req, res) {
                         if( msg.speech && msg.speech !== "" ){
                             bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                 				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                                //put this response after previous one
                 			}).catch( error => {
                                 console.log( error );
                             } )
