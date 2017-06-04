@@ -323,7 +323,7 @@ class Bernie {
 									}
 								}
 							} else {
-								resolve( {type: 'richContent', messages: responseMessages}
+								resolve( {type: 'richContent', messages: responseMessages } )
 							}
 						}
 					}.bind(this));
