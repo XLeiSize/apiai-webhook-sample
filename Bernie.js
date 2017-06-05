@@ -136,22 +136,6 @@ class Bernie {
 
 				let action = response.result.action;
 
-				if(action == 'send_url') {
-					let image = response.result.resolvedQuery;
-					console.log("url", image);
-					this.processData.imageRecognition( image ).then(( { source, painting } ) => {
-						console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@" );
-
-						responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
-						console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
-						resolve( {type: 'richContent', messages: responseMessages} );
-					}).catch( err => {
-						console.log(err);
-						reject(err);
-					});
-
-				}
-
 				if (this.isDefined(responseMessages) && responseMessages.length > 0) {
 					console.log("custom entity is defined", this.isDefined(responseMessages) );
 
@@ -324,6 +308,20 @@ class Bernie {
 										});
 									}
 								}
+							} else if ( keyword === 'url' ) {
+								let image = response.result.resolvedQuery;
+								console.log("url", image);
+								this.processData.imageRecognition( image ).then(( { source, painting } ) => {
+									console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@" );
+
+									responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
+									console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
+									resolve( {type: 'richContent', messages: responseMessages} );
+								}).catch( err => {
+									console.log(err);
+									reject(err);
+								});
+							}
 							} else {
 								resolve( {type: 'richContent', messages: responseMessages } )
 							}
