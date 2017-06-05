@@ -322,9 +322,6 @@ class Bernie {
 									reject(err);
 								});
 							}
-							//  else {
-							// 	resolve( {type: 'richContent', messages: responseMessages } )
-							// }
 						}
 					}.bind(this));
 				}
@@ -353,8 +350,9 @@ class Bernie {
 			} else {
 				year = " en " +image.endYear
 			}
-
-			movement = image.author.fields.movements[0].fields.name
+			if( image.author.fields.movements[0] || image.movements[0] ){
+				movement = image.author.fields.movements[0].fields.name
+			}
 		}
 
 		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
@@ -371,11 +369,15 @@ class Bernie {
 			content_type: "text",
 			title: "l'artiste 👑",
 			payload: "Qui est " + artistName
-		},{
-			content_type: "text",
-			title: "le mouvement 💫",
-			payload: "Qu'est ce que" + movement
 		}];
+
+		if( movement ){
+			moreInfoOpening.quick_replies.push( {
+				content_type: "text",
+				title: "le mouvement 💫",
+				payload: "Qu'est ce que" + movement
+			} )
+		}
 		responseMessages.push(moreInfoOpening);
 		return responseMessages;
 	}
@@ -435,16 +437,22 @@ class Bernie {
 	}
 
 	createArtworkRichcard(artwork, action, responseMessages) {
+		let date, url, title
 		if( typeof artwork.fields == "object" ){
 			artwork = artwork.fields
+			date = artwork.endYear
+			url = 'https:' + artwork.images[0].fields.file.url
+		} else {
+			date = artwork.year
+			url = artwork.image
 		}
-		const title = artwork.title;
+		title = artwork.title
 
 		const newMsg = {
 			type: 1,
 			title: title,
-			subtitle: artwork.date,
-			imageUrl: artwork.url,
+			subtitle: date,
+			imageUrl: url,
 			buttons: [
 				{
 					type: 'postback',
@@ -454,7 +462,7 @@ class Bernie {
 			]
 		};
 
-		if(newMsg.title && (newMsg.subtitle || newMsg.imageUrl))
+		if( newMsg.title && ( newMsg.subtitle || newMsg.imageUrl ) )
 			responseMessages.push(newMsg);
 
 		return responseMessages;
