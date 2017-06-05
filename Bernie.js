@@ -142,7 +142,7 @@ class Bernie {
 					this.processData.imageRecognition( image ).then(( { source, painting } ) => {
 						console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@", painting );
 
-						responseMessages = this.createImageRequestResponse( painting, responseMessages );
+						responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
 						console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
 						resolve( {type: 'richContent', messages: responseMessages} );
 					}).catch( err => {
@@ -337,9 +337,23 @@ class Bernie {
 		});
 	}
 
-	createImageRequestResponse( image, responseMessages ) {
+	createImageRequestResponse( source, image, responseMessages ) {
 		console.log("immmmmmmmaaaaaaageeeeeeeee", image);
-		responseMessages[responseMessages.length - 1].speech += " '" + image.title + "', réalisé par " + image.artistName + " en " + image.yearAsString + " 🤓";
+		let title, artistName, year, movement;
+
+		if( source === 'wikiart' ) {
+			title = image.title
+			artistName = image.artistName
+			year = image.yearAsString
+			movement = "néo-géo"
+		} else {
+			title = image.title
+			artistName = image.author.fields.firstName + " " +  image.author.fields.lastName
+			year = image.endYear
+			movement = image.author.fields.movements[0].fields.name
+		}
+
+		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + " en " + year + " 🤓";
 		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
 
 		let moreInfoOpening = {};
@@ -348,15 +362,15 @@ class Bernie {
 		moreInfoOpening.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",
-			payload: image.title
+			payload: "Qu'est ce que" + titre
 		},{
 			content_type: "text",
 			title: "l'artiste 👑",
-			payload: "Qui est " + image.artistName
+			payload: "Qui est " + artistName
 		},{
 			content_type: "text",
 			title: "le mouvement 💫",
-			payload: "néo-géo"
+			payload: "Qu'est ce que" + movement
 		}];
 		responseMessages.push(moreInfoOpening);
 		return responseMessages;
