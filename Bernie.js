@@ -321,7 +321,6 @@ class Bernie {
 									console.log(err);
 									reject(err);
 								});
-							}
 							} else {
 								resolve( {type: 'richContent', messages: responseMessages } )
 							}
