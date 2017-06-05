@@ -362,7 +362,7 @@ class Bernie {
 		moreInfoOpening.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",
-			payload: "Qu'est ce que" + titre
+			payload: "Qu'est ce que" + title
 		},{
 			content_type: "text",
 			title: "l'artiste 👑",
