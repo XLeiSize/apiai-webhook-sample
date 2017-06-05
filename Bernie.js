@@ -140,7 +140,7 @@ class Bernie {
 					let image = response.result.resolvedQuery;
 					console.log("url", image);
 					this.processData.imageRecognition( image ).then(( { source, painting } ) => {
-						console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@", painting );
+						console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@" );
 
 						responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
 						console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
@@ -357,8 +357,8 @@ class Bernie {
 		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
 
 		let moreInfoOpening = {};
-		moreInfoOpening.text = 'Tu veux en savoir plus sur quoi ?';
 		moreInfoOpening.type = 2;
+		moreInfoOpening.text = 'Tu veux en savoir plus sur quoi ?';
 		moreInfoOpening.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",

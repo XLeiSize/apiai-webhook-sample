@@ -32,7 +32,7 @@ restService.post('/hook', function (req, res) {
                 }
 
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
-					console.log("XXXXXXXXXXXXXXXXXXXX", type, messages);
+					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
 
                     messages.forEach( ( msg ) => {
