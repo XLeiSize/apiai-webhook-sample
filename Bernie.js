@@ -342,16 +342,22 @@ class Bernie {
 		if( source === 'wikiart' ) {
 			title = image.title
 			artistName = image.artistName
-			year = image.yearAsString
+			year = " en " + image.yearAsString
 			movement = "néo-géo"
 		} else {
 			title = image.title
 			artistName = image.author.fields.firstName + " " +  image.author.fields.lastName
-			year = image.endYear
+
+			if( image.startYear && image.endYear && image.startYear < image.endYear ) {
+				year = " entre " + image.startYear + " et " + image.endYear
+			} else {
+				year = " en " +image.endYear
+			}
+
 			movement = image.author.fields.movements[0].fields.name
 		}
 
-		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + " en " + year + " 🤓";
+		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
 		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
 
 		let moreInfoOpening = {};
