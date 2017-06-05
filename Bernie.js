@@ -16,7 +16,7 @@ const Utils = require('./helpers/utils.js');
 const WikiAPI = require('wikijs');
 const wiki = WikiAPI.default();
 
-const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'ede1c18802a34ed68e8ca30aa2a69122';
+const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'c0e6a20179364246b80d32aa489324e0';
 const APIAI_LANG = process.env.APIAI_LANG || 'fr';
 
 
@@ -63,8 +63,8 @@ class Bernie {
 				else {
 					if( options.image ) {
 						let url = options.image
-						this.processData.imageRecognition( url ).then(( painting ) => {
-							console.log("@@@@@@@@@@@@@@@@@@@@PAINTING@@@@@@@@@@@@@@@@@@@@", painting);
+						this.processData.imageRecognition( url ).then(( { source, painting } ) => {
+							console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING @@@@@@@@@@@@@@@@@@@@", painting);
 							options.text = url;
 							options.image = painting;
 
@@ -139,7 +139,9 @@ class Bernie {
 				if(action == 'send_url') {
 					let image = response.result.resolvedQuery;
 					console.log("url", image);
-					this.processData.imageRecognition( image ).then(( painting ) => {
+					this.processData.imageRecognition( image ).then(( { source, painting } ) => {
+						console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@", painting );
+
 						responseMessages = this.createImageRequestResponse( painting, responseMessages );
 						console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
 						resolve( {type: 'richContent', messages: responseMessages} );

@@ -4,7 +4,8 @@ const vision = require('@google-cloud/vision');
 const fs = require('fs');
 
 const Wikiart = require('./database/wikiart.js');
-const Custom = require('./database/custom.js');const Vuforia = require('./database/vuforia.js');
+const Custom = require('./database/custom.js');
+const Vuforia = require('./database/vuforia.js');
 const Utils = require('./helpers/utils.js');
 
 
@@ -71,22 +72,35 @@ class ProcessData {
     return new Promise((resolve, reject) => {
       this.download( url, tempImg, function(){
         let wikiart =  new Wikiart();
+        let custom =  new Custom();
         let vuforia = new Vuforia();
-        vuforia.recognitionQuery( tempImg ).then((id) => {
-          if( id ){
+        vuforia.recognitionQuery( tempImg ).then( ( name ) => {
 
-            wikiart.getPaintingById(id).then( ( painting ) => {
-              resolve( painting );
-            } ).catch( err => reject(err))
+          if( name ){
+            //PATTERN MUST BE slug_id
+            let ids = name.split('_')
+            let slug = ids[0]
+            custom.getEntityByName('artwork', slug)
+            .then((result) => {
+
+              let entity = result.fields;
+
+              if ( entity != null ) {
+                resolve( { source: 'custom', painting: entity } );
+              }
+            })
+            // wikiart.getPaintingById(name).then( ( painting ) => {
+            //   resolve( { source: 'wikiart', painting: painting } );
+            // } ).catch( err => reject(err))
 
           } else {
-            visionClient.detectLogos( tempImg, {verbose: true}, function(err, logos, apiResponse) {
+            visionClient.detectLogos( tempImg, {verbose: true}, function( err, logos, apiResponse ) {
               //get response from api.ai
               //send user's text to api.ai service
               if( logos && logos[0] && logos[0].desc ){
 
-                wikiart.getPaintingByName(logos[0].desc).then((painting) => {
-                    resolve( painting );
+                wikiart.getPaintingByName( logos[0].desc ).then( (painting ) => {
+                    resolve( { source: 'wikiart', painting: painting } );
                 })
               } else {
                 reject( 'NOPE' );
