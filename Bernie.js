@@ -59,6 +59,7 @@ class Bernie {
 								reject(err);
 							});
 						} else {
+							console.log(' lolilolilolilolilolilolilolilol ');
 							resolve( {type: 'richContent', sender: this.sender, response: {type:'0', speech: options.text }} );
 						}
 					}
