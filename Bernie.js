@@ -149,7 +149,7 @@ class Bernie {
 					if( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
-						let keyword = keywords[0]
+						let keyword = keywords[1]
 						query = response.result.parameters[keyword];
 						console.log(query);
 
