@@ -42,9 +42,14 @@ restService.post('/hook', function (req, res) {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                     				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
                                     //put this response after previous one
-                                    messages.concat( response )
-
+                                    if( Array.isArray( response ) ){
+                                        messages = messages.concat( response )
+                                    } else {
+                                        messages.push( response )
+                                    }
+                                    console.log("messages", messages);
                                     resolve( messages )
+
                     			}).catch( error => {
                                     console.log( error );
                                     reject( error )
