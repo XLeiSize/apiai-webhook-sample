@@ -307,45 +307,13 @@ class Bernie {
 									}
 								}
 							} else if ( keywords[0] == "artist" || keywords[0] == "artwork" || keywords[0] == "movement" ) {
-								let params = keywords[1]
-								console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", params);
-								query = response.result.parameters[keywords[0]];
-								console.log(response.result.parameters);
-								console.log(query);
-
-								custom.getEntityByName(keywords[0], query)
-								.then((result) => {
-
-									this.entity = result.fields;
-
-									switch( params ){
-										case 'context':
-										console.log(' yessai ');
-											this.entity.content.forEach( function( content ) {
-												content  = content.fields
-												if ( content.type === 'Description' ){
-													content.content.forEach( function( description ) {
-														description = description.fields
-														if( description.body ) {
-															responseMessages.push( {
-																type: 0,
-																speech: description.body
-															} )
-														}
-														if( description.media ) {
-															responseMessages.push( {
-																type: 3,
-																imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
-															} )
-														}
-													} )
-												}
-											} )
-									}
-
-									console.log(responseMessages);
-									resolve( {type: 'richContent', messages: responseMessages} );
-								})
+								let query = response.result.parameters[keywords[0]]
+								this.handleEntityWithParams( query, keywords[0], keywords[1], action, responseMessages ).then( ( messages ) => {
+									resolve( {type: 'richContent', messages: messages } );
+								} ).catch( err => {
+									console.log(err);
+									reject(err);
+								});
 
 							} else if ( keyword === 'url' ) {
 								let image = response.result.resolvedQuery;
@@ -371,6 +339,48 @@ class Bernie {
 				// }
 			}
 		});
+	}
+
+	handleEntityWithParams( query, keyword, params, action, responseMessages ) {
+		console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", params);
+		return new Promise( (resolve, reject) => {
+			custom.getEntityByName(keyword, query)
+			.then((result) => {
+				this.entity = result.fields;
+				switch( params ){
+					case 'artistName':
+						responseMessages = this.generateResponse( this.entity, action, responseMessages )
+						console.log( "ARTISTNAME %%%%%%%%%%%%%%%%%%", responseMessages );
+
+					case 'context':
+						this.entity.content.forEach( function( content ) {
+							content  = content.fields
+							if ( content.type === 'Description' ){
+								content.content.forEach( function( description ) {
+									description = description.fields
+									if( description.body ) {
+										responseMessages.push( {
+											type: 0,
+											speech: description.body
+										} )
+									}
+									if( description.media ) {
+										responseMessages.push( {
+											type: 3,
+											imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
+										} )
+									}
+								} )
+							}
+						} )
+				}
+
+				console.log(responseMessages);
+				resolve( responseMessages );
+
+			})
+		} )
+
 	}
 
 	createImageRequestResponse( source, image, responseMessages ) {

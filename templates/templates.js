@@ -31,15 +31,6 @@ module.exports = {
 			templates: [
 				"{{#content}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/content}}"
 			]
-		},
-		{
-			id: 1,
-			params: [
-				'content'
-			],
-			templates: [
-				"{{#content}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/content}}"
-			]
 		}
 	],
 	'search_artwork': [
@@ -50,6 +41,18 @@ module.exports = {
 			],
 			templates: [
 				"{{#content}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/content}}"
+			]
+		}
+	],
+	'artwork_artistName': [
+		{
+			id: 1,
+			params: [
+				'title',
+				'author'
+			],
+			templates: [
+				"{{title}} a été réalisé par {{#author}}{{{ fields.firstName }}} {{{ fields.lastName }}}{{/author}}"
 			]
 		}
 	]
