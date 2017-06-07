@@ -351,7 +351,7 @@ class Bernie {
 					case 'artistName':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						console.log( "ARTISTNAME %%%%%%%%%%%%%%%%%%", responseMessages );
-
+						break;
 					case 'context':
 						this.entity.content.forEach( function( content ) {
 							content  = content.fields
@@ -373,6 +373,7 @@ class Bernie {
 								} )
 							}
 						} )
+						break;
 				}
 
 				console.log(responseMessages);
