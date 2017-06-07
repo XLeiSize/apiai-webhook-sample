@@ -245,7 +245,8 @@ class Bernie {
 													default:
 														break;
 												}
-												reso('success');
+												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
+												reso('success Custom');
 
 											}));
 										}
@@ -262,7 +263,7 @@ class Bernie {
 															if (typeof artist == "object") {
 																responseMessages = this.createArtistRichcard(artist, action, responseMessages);
 															}
-															reso('success');
+															reso('success Wikiart');
 														})
 														.catch( e => { reject(e) });
 														break;
@@ -271,7 +272,7 @@ class Bernie {
 															if (typeof artwork == "object") {
 																responseMessages = this.createArtistRichcard( artwork , action, responseMessages);
 															}
-															reso('success');
+															reso('success Wikiart');
 														})
 														.catch( e => { reject(e) });
 														break;
@@ -280,7 +281,7 @@ class Bernie {
 															if (typeof artwork == "object") {
 																responseMessages = this.createArtistRichcard( movement , action, responseMessages );
 															}
-															reso('success');
+															reso('success Wikiart');
 														})
 														.catch( e => { reject(e) });
 														break;
