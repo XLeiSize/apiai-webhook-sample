@@ -34,11 +34,11 @@ restService.post('/hook', function (req, res) {
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
-                     let promises = []
+                     let richcardPromises = []
                     messages.forEach( ( msg ) => {
                         console.log(msg);
                         if( msg.speech && msg.speech !== "" ){
-                            promises.push( new Promise( ( resolve, reject ) => {
+                            richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                     				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
                                     //put this response after previous one
