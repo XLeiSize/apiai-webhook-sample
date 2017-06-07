@@ -137,7 +137,6 @@ class Bernie {
 				let action = response.result.action;
 
 				if (this.isDefined(responseMessages) && responseMessages.length > 0) {
-					console.log("custom entity is defined", this.isDefined(responseMessages) );
 
 					let keywords = action.split('_');
 					console.log(keywords);
@@ -149,13 +148,12 @@ class Bernie {
 						let query = response.result.parameters[keyword];
 
 					  if( keyword !== 'search'  ) {
-							if( keyword == "artist" || keyword == "artwork" || keyword == "movement" ){
+							if( keyword[0] == "artist" || keyword[0] == "artwork" || keyword[0] == "movement" ){
 								//DO REQUEST TO BACKOFFICE
 								//:keyword/query
-
 								console.log(query);
 
-								custom.getEntityByName(keyword, query)
+								custom.getEntityByName(keywords[0], query)
 								.then((result) => {
 
 									this.entity = result.fields;
@@ -308,6 +306,47 @@ class Bernie {
 										});
 									}
 								}
+							} else if ( keywords[0] == "artist" || keywords[0] == "artwork" || keywords[0] == "movement" ) {
+								let params = keywords[1]
+								console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", params);
+								query = response.result.parameters[keywords[0]];
+								console.log(response.result.parameters);
+								console.log(query);
+
+								custom.getEntityByName(keywords[0], query)
+								.then((result) => {
+
+									this.entity = result.fields;
+
+									switch( params ){
+										case 'context':
+										console.log(' yessai ');
+											this.entity.content.forEach( function( content ) {
+												content  = content.fields
+												if ( content.type === 'Description' ){
+													content.content.forEach( function( description ) {
+														description = description.fields
+														if( description.body ) {
+															responseMessages.push( {
+																type: 0,
+																speech: description.body
+															} )
+														}
+														if( description.media ) {
+															responseMessages.push( {
+																type: 3,
+																imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
+															} )
+														}
+													} )
+												}
+											} )
+									}
+
+									console.log(responseMessages);
+									resolve( {type: 'richContent', messages: responseMessages} );
+								})
+
 							} else if ( keyword === 'url' ) {
 								let image = response.result.resolvedQuery;
 								console.log("url", image);
@@ -321,6 +360,8 @@ class Bernie {
 									console.log(err);
 									reject(err);
 								});
+							} else {
+								resolve( {type: 'richContent', messages: responseMessages} );
 							}
 						}
 					}.bind(this));
@@ -343,7 +384,7 @@ class Bernie {
 			movement = "néo-géo"
 		} else {
 			title = image.title
-			artistName = image.author.fields.firstName + " " +  image.author.fields.lastName
+			artistName = image.author.fields.firstName ? image.author.fields.firstName + " " +  image.author.fields.lastName : image.author.fields.lastName
 
 			if( image.startYear && image.endYear && image.startYear < image.endYear ) {
 				year = " entre " + image.startYear + " et " + image.endYear
@@ -364,7 +405,7 @@ class Bernie {
 		moreInfoOpening.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",
-			payload: "Qu'est ce que" + title
+			payload: "Qu'est ce que " + artistName + " voulais dire avec "  + title
 		},{
 			content_type: "text",
 			title: "l'artiste 👑",
@@ -375,7 +416,7 @@ class Bernie {
 			moreInfoOpening.quick_replies.push( {
 				content_type: "text",
 				title: "le mouvement 💫",
-				payload: "Qu'est ce que" + movement
+				payload: "Qu'est ce que " + movement
 			} )
 		}
 		responseMessages.push(moreInfoOpening);
