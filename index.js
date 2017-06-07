@@ -49,7 +49,7 @@ restService.post('/hook', function (req, res) {
                                     console.log( error );
                                     reject( error )
                                 } )
-                            } )
+                            } ) )
                         }
                     } )
 
