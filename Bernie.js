@@ -60,7 +60,7 @@ class Bernie {
 							});
 						} else {
 							console.log(' lolilolilolilolilolilolilolilol ');
-							resolve( {type: 'richContent', sender: this.sender, response: {type:'0', speech: options.text }} );
+							reject('not richcard');
 						}
 					}
 				}
