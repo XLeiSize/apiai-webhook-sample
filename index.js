@@ -34,17 +34,31 @@ restService.post('/hook', function (req, res) {
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
-
+                     let promises = []
                     messages.forEach( ( msg ) => {
                         console.log(msg);
                         if( msg.speech && msg.speech !== "" ){
-                            bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
-                                //put this response after previous one
-                			}).catch( error => {
-                                console.log( error );
+                            promises.push( new Promise( ( resolve, reject ) => {
+                                bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                    				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                                    //put this response after previous one
+                                    messages.concat( response )
+
+                                    resolve( messages )
+                    			}).catch( error => {
+                                    console.log( error );
+                                    reject( error )
+                                } )
                             } )
                         }
+                    } )
+
+                    Promise.all(richcardPromises)
+                    .then( response => {
+                        console.log( "AQAQAQAQAQAQAQAQAQAQAQAQAQAAQ" );
+                        console.log( response );
+                    }).catch( error => {
+                        console.log( error );
                     } )
 
                     return res.json({
