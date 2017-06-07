@@ -24,6 +24,9 @@ class Bernie {
 	constructor( options ) {
 		this.processData = new ProcessData(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "fb"});
 		this.sessionIds = new Map();
+
+		this.wikiart = new Wikiart();
+		this.custom = new Custom();
 	}
 
 	apiaiRequest(options, actionRequested) {
@@ -141,9 +144,6 @@ class Bernie {
 					let keywords = action.split('_');
 					console.log(keywords);
 
-					const wikiart = new Wikiart();
-					const custom = new Custom();
-
 					keywords.forEach(function(keyword) {
 						let query = response.result.parameters[keyword];
 
@@ -153,7 +153,7 @@ class Bernie {
 								//:keyword/query
 								console.log(query);
 
-								custom.getEntityByName(keywords[0], query)
+								this.custom.getEntityByName(keywords[0], query)
 								.then((result) => {
 
 									this.entity = result.fields;
@@ -168,7 +168,7 @@ class Bernie {
 									console.log("IF CAN'T FIND IN CONTENTFUL -> GO WIKIART");
 									switch (keyword) {
 										case 'artist': {
-											wikiart.getArtistByName( query ).then((artist) => {
+											this.wikiart.getArtistByName( query ).then((artist) => {
 												if ( typeof artist == "object" ) {
 													responseMessages = this.generateResponse( artist, action, responseMessages);
 
@@ -179,7 +179,7 @@ class Bernie {
 										}
 										break;
 										case 'artwork': {
-											wikiart.getArtworkByName( query ).then((artwork) => {
+											this.wikiart.getArtworkByName( query ).then((artwork) => {
 												if (typeof artwork == "object") {
 													responseMessages = artwork;
 													resolve( {type: 'richContent', messages: responseMessages} );
@@ -190,7 +190,7 @@ class Bernie {
 										}
 										break;
 										case 'movement': {
-											wikiart.getMovementByName( query ).then(( movement ) => {
+											this.wikiart.getMovementByName( query ).then(( movement ) => {
 												if ( typeof movement == "object" ) {
 													responseMessages = this.generateResponse( movement, action, responseMessages);
 													resolve( {type: 'richContent', messages: responseMessages} );
@@ -219,7 +219,7 @@ class Bernie {
 										for (let j = 0; j < richcards.length; j++) {
 											console.log(key[i], richcards[j]);
 											promises.push(
-												custom.getEntityByName(key[i], richcards[j])
+												this.custom.getEntityByName(key[i], richcards[j])
 											);
 										}
 
@@ -258,7 +258,7 @@ class Bernie {
 													richcardPromises.push( new Promise( reso => {
 														switch(key[i]) {
 															case 'artist':
-																wikiart.getArtistByName( name ).then((artist) => {
+																this.wikiart.getArtistByName( name ).then((artist) => {
 																	if (typeof artist == "object") {
 																		responseMessages = this.createArtistRichcard(artist, action, responseMessages);
 																	}
@@ -267,7 +267,7 @@ class Bernie {
 																.catch( e => { reject(e) });
 																break;
 															case 'artwork':
-																wikiart.getArtworkByName( name ).then(( artwork ) => {
+																this.wikiart.getArtworkByName( name ).then(( artwork ) => {
 																	if (typeof artwork == "object") {
 																		responseMessages = this.createArtistRichcard( artwork , action, responseMessages);
 																	}
@@ -276,7 +276,7 @@ class Bernie {
 																.catch( e => { reject(e) });
 																break;
 															case 'movement':
-																wikiart.getMovementByName( name ).then(( movement ) => {
+																this.wikiart.getMovementByName( name ).then(( movement ) => {
 																	if (typeof artwork == "object") {
 																		responseMessages = this.createArtistRichcard( movement , action, responseMessages );
 																	}
@@ -344,7 +344,7 @@ class Bernie {
 	handleEntityWithParams( query, keyword, params, action, responseMessages ) {
 		console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", params);
 		return new Promise( (resolve, reject) => {
-			custom.getEntityByName(keyword, query)
+			this.custom.getEntityByName(keyword, query)
 			.then((result) => {
 				this.entity = result.fields;
 				switch( params ){
