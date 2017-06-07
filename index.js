@@ -34,7 +34,7 @@ restService.post('/hook', function (req, res) {
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
-                     let richcardPromises = []
+                    let richcardPromises = []
                     messages.forEach( ( msg ) => {
                         console.log(msg);
                         if( msg.speech && msg.speech !== "" ){
@@ -60,18 +60,24 @@ restService.post('/hook', function (req, res) {
 
                     Promise.all(richcardPromises)
                     .then( response => {
-                        console.log( "AQAQAQAQAQAQAQAQAQAQAQAQAQAAQ" );
-                        console.log( response );
+                        console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            messages: messages,
+                            source: 'berniewebhook'
+                        });
                     }).catch( error => {
                         console.log( error );
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            messages: messages,
+                            source: 'berniewebhook'
+                        });
                     } )
 
-                    return res.json({
-                        speech: speech,
-                        displayText: speech,
-                        messages: messages,
-                        source: 'berniewebhook'
-                    });
+
 
 				}).catch( err => {
                     console.log("errr", err);
