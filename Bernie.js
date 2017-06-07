@@ -141,198 +141,196 @@ class Bernie {
 
 				if (this.isDefined(responseMessages) && responseMessages.length > 0) {
 
+					let query;
 					let keywords = action.split('_');
 					console.log(keywords);
 
-					keywords.forEach(function(keyword) {
-						let query = response.result.parameters[keyword];
+					if( keywords[0] == "artist" || keywords[0] == "artwork" || keywords[0] == "movement" ) {
+						//DO REQUEST TO BACKOFFICE
+						//:keyword/query
+						let keyword = keywords[0]
+						query = response.result.parameters[keyword];
+						console.log(query);
 
-					  if( keyword !== 'search'  ) {
-							if( keyword[0] == "artist" || keyword[0] == "artwork" || keyword[0] == "movement" ){
-								//DO REQUEST TO BACKOFFICE
-								//:keyword/query
-								console.log(query);
+						this.custom.getEntityByName(keyword, query)
+						.then((result) => {
 
-								this.custom.getEntityByName(keywords[0], query)
-								.then((result) => {
+							this.entity = result.fields;
 
-									this.entity = result.fields;
-
-									if ( this.entity != null ) {
-										responseMessages = this.generateResponse( this.entity, action, responseMessages);
-										resolve( {type: 'richContent', messages: responseMessages} );
-									}
-								})
-								.catch(e => {
-									// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART
-									console.log("IF CAN'T FIND IN CONTENTFUL -> GO WIKIART");
-									switch (keyword) {
-										case 'artist': {
-											this.wikiart.getArtistByName( query ).then((artist) => {
-												if ( typeof artist == "object" ) {
-													responseMessages = this.generateResponse( artist, action, responseMessages);
-
-													resolve( {type: 'richContent', messages: responseMessages} );
-												}
-											})
-											.catch( err => { reject(err) } );
-										}
-										break;
-										case 'artwork': {
-											this.wikiart.getArtworkByName( query ).then((artwork) => {
-												if (typeof artwork == "object") {
-													responseMessages = artwork;
-													resolve( {type: 'richContent', messages: responseMessages} );
-												} else {
-													reject();
-												}
-											})
-										}
-										break;
-										case 'movement': {
-											this.wikiart.getMovementByName( query ).then(( movement ) => {
-												if ( typeof movement == "object" ) {
-													responseMessages = this.generateResponse( movement, action, responseMessages);
-													resolve( {type: 'richContent', messages: responseMessages} );
-												}
-											})
-											.catch( err => { reject(err) } );
-										}
-										break;
-										default: break;
-									}
-								});
-
-
-							} else if ( keyword == "richcards" ) {
-
-								console.log("IN RICHCARDS STUFF");
-								let promises = [];
-
-								const keys = [ 'artists', 'artworks', 'movements' ];
-								const key = [ 'artist', 'artwork', 'movement' ];
-								for( let i = 0; i < key.length; i++ ){
-									if( response.result.parameters[ keys[i] ].length > 1 ) {
-										const richcards = response.result.parameters[ keys[i] ];
-										console.log('richcards ' + keys[i] + ' ---> ', richcards);
-
-										for (let j = 0; j < richcards.length; j++) {
-											console.log(key[i], richcards[j]);
-											promises.push(
-												this.custom.getEntityByName(key[i], richcards[j])
-											);
-										}
-
-										Promise.all(promises)
-										.then( results => {
-											let richcardPromises = [];
-											for (let j = 0; j < results.length; j++) {
-												const entity = results[j];
-												console.log("&&&&&&&&&&&&&&&&&&&&&&&", entity);
-												if (typeof entity == 'object') {
-													richcardPromises.push(new Promise( reso => {
-														console.log('key[i]', key[i]);
-														switch(key[i]) {
-															case 'artist':
-																responseMessages = this.createArtistRichcard(entity, action, responseMessages);
-																break;
-															case 'artwork':
-																responseMessages = this.createArtworkRichcard(entity, action, responseMessages);
-																break;
-															case 'movement':
-																responseMessages = this.createMovementRichcard(entity, action, responseMessages);
-																break;
-															default:
-																break;
-														}
-														reso('success');
-
-													}));
-												}
-												else {
-													console.log('entity not found in custom DB');
-													const name = entity.fields.slug;
-
-													console.log('entity to search in wikiart', name);
-
-													richcardPromises.push( new Promise( reso => {
-														switch(key[i]) {
-															case 'artist':
-																this.wikiart.getArtistByName( name ).then((artist) => {
-																	if (typeof artist == "object") {
-																		responseMessages = this.createArtistRichcard(artist, action, responseMessages);
-																	}
-																	reso('success');
-																})
-																.catch( e => { reject(e) });
-																break;
-															case 'artwork':
-																this.wikiart.getArtworkByName( name ).then(( artwork ) => {
-																	if (typeof artwork == "object") {
-																		responseMessages = this.createArtistRichcard( artwork , action, responseMessages);
-																	}
-																	reso('success');
-																})
-																.catch( e => { reject(e) });
-																break;
-															case 'movement':
-																this.wikiart.getMovementByName( name ).then(( movement ) => {
-																	if (typeof artwork == "object") {
-																		responseMessages = this.createArtistRichcard( movement , action, responseMessages );
-																	}
-																	reso('success');
-																})
-																.catch( e => { reject(e) });
-																break;
-															default:
-																break;
-														}
-													}));
-												}
-											}
-
-											Promise.all(richcardPromises)
-											.then( response => {
-												console.log(" ------------------------ RICHCARD R-E-S-P-O-N-S-E ------------------------ ", response);
-												resolve( {type: 'richContent', messages: responseMessages} );
-											})
-											.catch( e => {
-												console.log(e)
-												reject(e);
-											});
-										})
-										.catch(e => {
-											console.log('------------------------ Error in promise richcard ------------------------', e);
-										});
-									}
-								}
-							} else if ( keywords[0] == "artist" || keywords[0] == "artwork" || keywords[0] == "movement" ) {
-								let query = response.result.parameters[keywords[0]]
-								this.handleEntityWithParams( query, keywords[0], keywords[1], action, responseMessages ).then( ( messages ) => {
-									resolve( {type: 'richContent', messages: messages } );
-								} ).catch( err => {
-									console.log(err);
-									reject(err);
-								});
-
-							} else if ( keyword === 'url' ) {
-								let image = response.result.resolvedQuery;
-								console.log("url", image);
-								this.processData.imageRecognition( image ).then(( { source, painting } ) => {
-									console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@" );
-
-									responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
-									console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
-									resolve( {type: 'richContent', messages: responseMessages} );
-								}).catch( err => {
-									console.log(err);
-									reject(err);
-								});
-							} else {
+							if ( this.entity != null ) {
+								responseMessages = this.generateResponse( this.entity, action, responseMessages);
 								resolve( {type: 'richContent', messages: responseMessages} );
 							}
+						})
+						.catch(e => {
+							// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART
+							console.log("IF CAN'T FIND IN CONTENTFUL -> GO WIKIART");
+							switch ( keyword ) {
+								case 'artist': {
+									this.wikiart.getArtistByName( query ).then((artist) => {
+										if ( typeof artist == "object" ) {
+											responseMessages = this.generateResponse( artist, action, responseMessages);
+
+											resolve( {type: 'richContent', messages: responseMessages} );
+										}
+									})
+									.catch( err => { reject(err) } );
+								}
+								break;
+								case 'artwork': {
+									this.wikiart.getArtworkByName( query ).then((artwork) => {
+										if (typeof artwork == "object") {
+											responseMessages = artwork;
+											resolve( {type: 'richContent', messages: responseMessages} );
+										} else {
+											reject();
+										}
+									})
+								}
+								break;
+								case 'movement': {
+									this.wikiart.getMovementByName( query ).then(( movement ) => {
+										if ( typeof movement == "object" ) {
+											responseMessages = this.generateResponse( movement, action, responseMessages);
+											resolve( {type: 'richContent', messages: responseMessages} );
+										}
+									})
+									.catch( err => { reject(err) } );
+								}
+								break;
+								default: break;
+							}
+						});
+
+
+					} else if ( keywords[0] == "richcards" ) {
+
+						console.log("IN RICHCARDS STUFF");
+						let promises = [];
+
+						const keys = [ 'artists', 'artworks', 'movements' ];
+						const key = [ 'artist', 'artwork', 'movement' ];
+						for( let i = 0; i < key.length; i++ ){
+							if( response.result.parameters[ keys[i] ].length > 1 ) {
+								const richcards = response.result.parameters[ keys[i] ];
+								console.log('richcards ' + keys[i] + ' ---> ', richcards);
+
+								for (let j = 0; j < richcards.length; j++) {
+									console.log(key[i], richcards[j]);
+									promises.push(
+										this.custom.getEntityByName(key[i], richcards[j])
+									);
+								}
+
+								Promise.all(promises)
+								.then( results => {
+									let richcardPromises = [];
+									for (let j = 0; j < results.length; j++) {
+										const entity = results[j];
+										console.log("&&&&&&&&&&&&&&&&&&&&&&&", entity);
+										if (typeof entity == 'object') {
+											richcardPromises.push(new Promise( reso => {
+												console.log('key[i]', key[i]);
+												switch(key[i]) {
+													case 'artist':
+														responseMessages = this.createArtistRichcard(entity, action, responseMessages);
+														break;
+													case 'artwork':
+														responseMessages = this.createArtworkRichcard(entity, action, responseMessages);
+														break;
+													case 'movement':
+														responseMessages = this.createMovementRichcard(entity, action, responseMessages);
+														break;
+													default:
+														break;
+												}
+												reso('success');
+
+											}));
+										}
+										else {
+											console.log('entity not found in custom DB');
+											const name = entity.fields.slug;
+
+											console.log('entity to search in wikiart', name);
+
+											richcardPromises.push( new Promise( reso => {
+												switch(key[i]) {
+													case 'artist':
+														this.wikiart.getArtistByName( name ).then((artist) => {
+															if (typeof artist == "object") {
+																responseMessages = this.createArtistRichcard(artist, action, responseMessages);
+															}
+															reso('success');
+														})
+														.catch( e => { reject(e) });
+														break;
+													case 'artwork':
+														this.wikiart.getArtworkByName( name ).then(( artwork ) => {
+															if (typeof artwork == "object") {
+																responseMessages = this.createArtistRichcard( artwork , action, responseMessages);
+															}
+															reso('success');
+														})
+														.catch( e => { reject(e) });
+														break;
+													case 'movement':
+														this.wikiart.getMovementByName( name ).then(( movement ) => {
+															if (typeof artwork == "object") {
+																responseMessages = this.createArtistRichcard( movement , action, responseMessages );
+															}
+															reso('success');
+														})
+														.catch( e => { reject(e) });
+														break;
+													default:
+														break;
+												}
+											}));
+										}
+									}
+
+									Promise.all(richcardPromises)
+									.then( response => {
+										console.log(" ------------------------ RICHCARD R-E-S-P-O-N-S-E ------------------------ ", response);
+										resolve( {type: 'richContent', messages: responseMessages} );
+									})
+									.catch( e => {
+										console.log(e)
+										reject(e);
+									});
+								})
+								.catch(e => {
+									console.log('------------------------ Error in promise richcard ------------------------', e);
+								});
+							}
 						}
-					}.bind(this));
+					} else if ( keywords[0] == "artist" || keywords[0] == "artwork" || keywords[0] == "movement" ) {
+						let query = response.result.parameters[keywords[0]]
+						this.handleEntityWithParams( query, keywords[0], keywords[1], action, responseMessages ).then( ( messages ) => {
+							resolve( {type: 'richContent', messages: messages } );
+						} ).catch( err => {
+							console.log(err);
+							reject(err);
+						});
+
+					} else if ( keywords[1] === 'url' ) {
+						let image = response.result.resolvedQuery;
+						console.log("url", image);
+						this.processData.imageRecognition( image ).then(( { source, painting } ) => {
+							console.log("@@@@@@@@@@@@@@@@@@@@ HAVE PAINTING IN PROCESS @@@@@@@@@@@@@@@@@@@@" );
+
+							responseMessages = this.createImageRequestResponse( source, painting, responseMessages );
+							console.log("ressssspooooooooonnnnnnnsssseeeeeeeeemsg", responseMessages);
+							resolve( {type: 'richContent', messages: responseMessages} );
+						}).catch( err => {
+							console.log(err);
+							reject(err);
+						});
+					} else {
+						resolve( {type: 'richContent', messages: responseMessages} );
+					}
+
 				}
 				// else if (this.isDefined(responseText)) {
 				// 	resolve( {type: 'text', messages: responseText } )
