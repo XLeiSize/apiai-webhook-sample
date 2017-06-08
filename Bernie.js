@@ -350,14 +350,14 @@ class Bernie {
 				switch( params ){
 					case 'image': // PORTRAIT OR IMAGE
 						let images = this.entity.images ? this.entity.images : this.entity.portrait
-						if( images.length > 1 ){
+						if( images.length > 1 ) {
 							images.forEach( function( image ){
 								responseMessages.push({
 									type: 1,
 									title: image.fields.title,
 									imageUrl: "https:" + image.fields.file.url
 								})
-							}
+							})
 						} else {
 							let image = images[0]
 							responseMessages.push({
