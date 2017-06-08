@@ -576,7 +576,7 @@ class Bernie {
 			type: 1,
 			title: name,
 			subtitle: movement.startYear + " - " + movement.endYear,
-			imageUrl: "https:" + movement.image.file.url,
+			imageUrl: "https:" + movement.image.fields.file.url,
 			buttons: [
 				{
 					type: 'postback',
