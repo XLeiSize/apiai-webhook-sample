@@ -59,7 +59,7 @@ restService.post('/hook', function (req, res) {
                             } ) )
                         }
                     } )
-
+                    console.log("YEAH ALRIGHT", richcardPromises);
                     Promise.all(richcardPromises)
                     .then( response => {
                         console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
