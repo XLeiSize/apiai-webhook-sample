@@ -410,20 +410,21 @@ class Bernie {
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
 
 						this.entity.movements.forEach( function( movement ){
-							responseMessages.push({
-								type: 1,
-								title: movement.fields.name,
-								subtitle: movement.fields.startYear + " - " + movement.endYear,
-								imageUrl: "https:" + movement.fields.image.file.url
-								buttons: [
-									{
-										type: 'postback',
-										title: 'dis m\'en plus',
-										payload: 'Qu\'est ce que le' + movement.fields.name
-									}
-								]
-							})
-						})
+							this.createMovementRichcard(movement, action, responseMessages)
+							// responseMessages.push({
+							// 	type: 1,
+							// 	title: movement.fields.name,
+							// 	subtitle: movement.fields.startYear + " - " + movement.endYear,
+							// 	imageUrl: "https:" + movement.fields.image.file.url
+							// 	buttons: [
+							// 		{
+							// 			type: 'postback',
+							// 			title: 'dis m\'en plus',
+							// 			payload: 'Qu\'est ce que le' + movement.fields.name
+							// 		}
+							// 	]
+							// })
+						}).bind(this)
 
 						break;
 					default:
@@ -565,7 +566,7 @@ class Bernie {
 			buttons: [
 				{
 					type: 'postback',
-					title: 'Qu\'est-ce ?',
+					title: 'Dis m\'en plus',
 					payload: 'Qu\'est ce que ' + title
 				}
 			]
@@ -591,7 +592,7 @@ class Bernie {
 			buttons: [
 				{
 					type: 'postback',
-					title: 'C\' koa ?',
+					title: 'C\'est quoi ?',
 					payload: 'Qu\'est ce que ' + name
 				}
 			]
