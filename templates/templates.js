@@ -80,7 +80,7 @@ module.exports = {
 				'title',
 				'dimensions'
 			],
-			templates; [
+			templates: [
 				'{{ dimensions }}',
 				"{{ title }} fait {{ dimensions }} très exactement 🤓"
 			]
