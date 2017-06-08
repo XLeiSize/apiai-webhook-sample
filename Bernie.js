@@ -348,20 +348,21 @@ class Bernie {
 			.then((result) => {
 				this.entity = result.fields;
 				switch( params ){
-					case 'image':
-						if( this.entity.images.length > 1 ){
-							this.entity.images.forEach( function( image ){
+					case 'image': // PORTRAIT OR IMAGE
+						let images = this.entity.images ? this.entity.images : this.entity.portrait
+						if( images.length > 1 ){
+							images.forEach( function( image ){
 								responseMessages.push({
 									type: 1,
 									title: image.fields.title,
 									imageUrl: "https:" + image.fields.file.url
 								})
-							})
+							}
 						} else {
-							let image = this.entity.images[0]
+							let image = images[0]
 							responseMessages.push({
 								type: 3,
-								imageUrl: "https:" + this.entity.images[0].fields.file.url
+								imageUrl: "https:" + image.fields.file.url
 							})
 						}
 						break;
