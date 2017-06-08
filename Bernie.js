@@ -359,7 +359,6 @@ class Bernie {
 								})
 							})
 						} else {
-							if(  )
 							let image = Array.isArray( images ) ? images[0] : images
 							responseMessages.push({
 								type: 3,
