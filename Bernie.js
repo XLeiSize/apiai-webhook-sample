@@ -348,13 +348,22 @@ class Bernie {
 			.then((result) => {
 				this.entity = result.fields;
 				switch( params ){
-					case 'dimensions':
-						responseMessages = this.generateResponse( this.entity, action, responseMessages )
-						console.log( "DATE %%%%%%%%%%%%%%%%%%", responseMessages );
-						break;
-					case 'date':
-						responseMessages = this.generateResponse( this.entity, action, responseMessages )
-						console.log( "DATE %%%%%%%%%%%%%%%%%%", responseMessages );
+					case 'image':
+						if( this.entity.images.length > 1 ){
+							this.entity.images.forEach( function( image ) ){
+								responseMessages.push({
+									type: 1,
+									title: image.fields.title,
+									imageUrl: "https:" + image.fields.file.url
+								})
+							}
+						} else {
+							let image = this.entity.images[0]
+							responseMessages.push({
+								type: 3,
+								imageUrl: "https:" + this.entity.images[0].fields.file.url
+							})
+						}
 						break;
 					case 'artistName':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -395,6 +404,11 @@ class Bernie {
 							}
 						} )
 						break;
+					default:
+						responseMessages = this.generateResponse( this.entity, action, responseMessages )
+						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
+						break;
+
 				}
 
 				console.log(responseMessages);
