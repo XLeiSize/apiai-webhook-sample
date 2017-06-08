@@ -94,7 +94,7 @@ module.exports = {
 				'movements'
 			],
 			templates: [
-				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux mouvements {{ else }} au mouvement {{/ifCond}} {{#movements}} {{{ fields.name }}} {{{ @index }}}   {{/movements}}"
+				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux mouvements {{ else }} au mouvement {{/ifCond}} {{#movements}} {{{ fields.name }}} {{#ifCond movements.length '>' @index }}, {{ /ifCond }}  {{/movements}}"
 			]
 		}
 	],
