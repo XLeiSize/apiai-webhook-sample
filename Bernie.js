@@ -164,7 +164,7 @@ class Bernie {
 							}
 						})
 						.catch(e => {
-							// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART
+							// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART 
 							console.log("IF CAN'T FIND IN CONTENTFUL -> GO WIKIART");
 							switch ( keyword ) {
 								case 'artist': {
