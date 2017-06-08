@@ -35,8 +35,10 @@ restService.post('/hook', function (req, res) {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
                     let richcardPromises = []
+                    //NEED TO PREVENT SENDING TWICE
                     messages.forEach( ( msg ) => {
-                        console.log(msg);
+
+                        console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
                         if( msg.speech && msg.speech !== "" ){
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
