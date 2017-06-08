@@ -146,7 +146,7 @@ class Bernie {
 					let keywords = action.split('_');
 					console.log(keywords);
 
-					if( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) {
+					if( keywords[0] == 'search' && [1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
 						let keyword = keywords[1]
