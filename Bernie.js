@@ -408,23 +408,10 @@ class Bernie {
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
-
-						this.entity.movements.forEach( function( movement ){
-							this.createMovementRichcard(movement, action, responseMessages)
-							// responseMessages.push({
-							// 	type: 1,
-							// 	title: movement.fields.name,
-							// 	subtitle: movement.fields.startYear + " - " + movement.endYear,
-							// 	imageUrl: "https:" + movement.fields.image.file.url
-							// 	buttons: [
-							// 		{
-							// 			type: 'postback',
-							// 			title: 'dis m\'en plus',
-							// 			payload: 'Qu\'est ce que le' + movement.fields.name
-							// 		}
-							// 	]
-							// })
-						}).bind(this)
+						let movements = this.entity.movements
+						for( let i = 0; i < movements.length; i++ ){
+							this.createMovementRichcard(movements[i], action, responseMessages)
+						}
 
 						break;
 					default:
