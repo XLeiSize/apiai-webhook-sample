@@ -33,51 +33,59 @@ restService.post('/hook', function (req, res) {
 
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
+
+                    return res.json({
+                        speech: speech,
+                        displayText: speech,
+                        messages: messages,
+                        source: 'berniewebhook'
+                    });
+
                     console.log('result: ', speech);
                     let richcardPromises = []
                     //NEED TO PREVENT SENDING TWICE
-                    messages.forEach( ( msg ) => {
+                    // messages.forEach( ( msg ) => {
+                    //
+                    //     console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
+                    //     if( msg.speech && msg.speech !== "" ){
+                    //         richcardPromises.push( new Promise( ( resolve, reject ) => {
+                    //             bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                    // 				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                    //                 //put this response after previous one
+                    //                 if( Array.isArray( response ) ){
+                    //                     messages = messages.concat( response )
+                    //                 } else {
+                    //                     messages.push( response )
+                    //                 }
+                    //                 console.log("messages", messages);
+                    //                 resolve( messages )
+                    //
+                    // 			}).catch( error => {
+                    //                 console.log( error );
+                    //                 reject( error )
+                    //             } )
+                    //         } ) )
+                    //     }
+                    // } )
 
-                        console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
-                        if( msg.speech && msg.speech !== "" ){
-                            richcardPromises.push( new Promise( ( resolve, reject ) => {
-                                bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                    				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
-                                    //put this response after previous one
-                                    if( Array.isArray( response ) ){
-                                        messages = messages.concat( response )
-                                    } else {
-                                        messages.push( response )
-                                    }
-                                    console.log("messages", messages);
-                                    resolve( messages )
-
-                    			}).catch( error => {
-                                    console.log( error );
-                                    reject( error )
-                                } )
-                            } ) )
-                        }
-                    } )
-
-                    Promise.all(richcardPromises)
-                    .then( response => {
-                        console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-                        return res.json({
-                            speech: speech,
-                            displayText: speech,
-                            messages: messages,
-                            source: 'berniewebhook'
-                        });
-                    }).catch( error => {
-                        console.log( error );
-                        return res.json({
-                            speech: speech,
-                            displayText: speech,
-                            messages: messages,
-                            source: 'berniewebhook'
-                        });
-                    } )
+                    // Promise.all(richcardPromises)
+                    // .then( response => {
+                    //     console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                    //     return res.json({
+                    //         speech: speech,
+                    //         displayText: speech,
+                    //         messages: messages,
+                    //         source: 'berniewebhook'
+                    //     });
+                    // }).catch( error => {
+                    //     console.log( error );
+                    //     return res.json({
+                    //         speech: speech,
+                    //         displayText: speech,
+                    //         messages: messages,
+                    //         source: 'berniewebhook'
+                    //     });
+                    // } )
 
 
 
