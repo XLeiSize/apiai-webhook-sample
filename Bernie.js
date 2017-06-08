@@ -146,7 +146,7 @@ class Bernie {
 					let keywords = action.split('_');
 					console.log(keywords);
 
-					if( keywords[0] == 'search' && [1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) {
+					if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
 						let keyword = keywords[1]
@@ -164,7 +164,7 @@ class Bernie {
 							}
 						})
 						.catch(e => {
-							// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART 
+							// IF CAN'T FIND IN CONTENTFUL -> GO WIKIART
 							console.log("IF CAN'T FIND IN CONTENTFUL -> GO WIKIART");
 							switch ( keyword ) {
 								case 'artist': {
