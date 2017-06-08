@@ -369,16 +369,8 @@ class Bernie {
 						},{
 							content_type: "text",
 							title: "mmmh nope 😓",
-							payload: "Qui est " + artistName
+							payload: "Qui est " + this.entity.author.fields.firstName + " " + this.entity.author.fields.lastName
 						}];
-
-						if( movement ){
-							moreInfoOpening.quick_replies.push( {
-								content_type: "text",
-								title: "le mouvement 💫",
-								payload: "Qu'est ce que " + movement
-							} )
-						}
 						responseMessages.push(moreInfoOpening);
 						break;
 					case 'context':
