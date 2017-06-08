@@ -348,6 +348,10 @@ class Bernie {
 			.then((result) => {
 				this.entity = result.fields;
 				switch( params ){
+					case 'dimensions':
+						responseMessages = this.generateResponse( this.entity, action, responseMessages )
+						console.log( "DATE %%%%%%%%%%%%%%%%%%", responseMessages );
+						break;
 					case 'date':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						console.log( "DATE %%%%%%%%%%%%%%%%%%", responseMessages );
