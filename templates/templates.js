@@ -84,5 +84,6 @@ module.exports = {
 				'{{ dimensions }}',
 				"{{ title }} fait {{ dimensions }} très exactement 🤓"
 			]
-
-};
+		}
+	],
+}
