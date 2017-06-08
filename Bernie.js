@@ -350,13 +350,13 @@ class Bernie {
 				switch( params ){
 					case 'image':
 						if( this.entity.images.length > 1 ){
-							this.entity.images.forEach( function( image ) ){
+							this.entity.images.forEach( function( image ){
 								responseMessages.push({
 									type: 1,
 									title: image.fields.title,
 									imageUrl: "https:" + image.fields.file.url
 								})
-							}
+							})
 						} else {
 							let image = this.entity.images[0]
 							responseMessages.push({
