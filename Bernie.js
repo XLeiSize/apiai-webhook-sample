@@ -359,7 +359,8 @@ class Bernie {
 								})
 							})
 						} else {
-							let image = images[0]
+							if(  )
+							let image = Array.isArray( images ) ? images[0] : images
 							responseMessages.push({
 								type: 3,
 								imageUrl: "https:" + image.fields.file.url
