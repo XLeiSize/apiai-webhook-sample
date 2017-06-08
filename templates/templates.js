@@ -52,8 +52,37 @@ module.exports = {
 				'author'
 			],
 			templates: [
-				"{{title}} a été réalisé par {{#author}}{{{ fields.firstName }}} {{{ fields.lastName }}}{{/author}}"
+				"{{title}} a été réalisé par {{#author}}{{{ fields.firstName }}} {{{ fields.lastName }}}{{/author}}",
+				"{{title}} a été fait par {{#author}}{{{ fields.firstName }}} {{{ fields.lastName }}}{{/author}}",
+				"C'est {{#author}}{{{ fields.firstName }}} {{{ fields.lastName }}}{{/author}} 😎",
 			]
 		}
-	]
+	],
+	'artwork_date': [
+		{
+			id: 1,
+			params: [
+				'title'
+				'startYear',
+				'endYear'
+			],
+			templates: [
+				"{{title}} a été commencé en {{startYear}} et terminé {{endYear}}",
+				"{{title}} a été réalisé en {{endYear}}",
+				"{{title}} a été fait en {{endYear}}"
+			]
+		}
+	],
+	'artwork_dimensions': [
+		{
+			id: 1,
+			params: [
+				'title'
+				'dimensions'
+			],
+			templates; [
+				'{{ dimensions }}',
+				"{{ title }} fait {{ dimensions }} très exactement 🤓"
+			]
+
 };

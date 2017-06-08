@@ -348,9 +348,34 @@ class Bernie {
 			.then((result) => {
 				this.entity = result.fields;
 				switch( params ){
+					case 'date':
+						responseMessages = this.generateResponse( this.entity, action, responseMessages )
+						console.log( "DATE %%%%%%%%%%%%%%%%%%", responseMessages );
+						break;
 					case 'artistName':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						console.log( "ARTISTNAME %%%%%%%%%%%%%%%%%%", responseMessages );
+						let moreInfoOpening = {};
+						moreInfoOpening.type = 2;
+						moreInfoOpening.text = 'Tu vois qui c\'est ?';
+						moreInfoOpening.quick_replies = [{
+							content_type: "text",
+							title: "Bien sûr 💁",
+							payload: "Bien sûr que je sais"
+						},{
+							content_type: "text",
+							title: "mmmh nope 😓",
+							payload: "Qui est " + artistName
+						}];
+
+						if( movement ){
+							moreInfoOpening.quick_replies.push( {
+								content_type: "text",
+								title: "le mouvement 💫",
+								payload: "Qu'est ce que " + movement
+							} )
+						}
+						responseMessages.push(moreInfoOpening);
 						break;
 					case 'context':
 						this.entity.content.forEach( function( content ) {
