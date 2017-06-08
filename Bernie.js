@@ -407,11 +407,12 @@ class Bernie {
 						break;
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
-						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
 						let movements = this.entity.movements
 						for( let i = 0; i < movements.length; i++ ){
 							this.createMovementRichcard(movements[i], action, responseMessages)
 						}
+						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
+
 
 						break;
 					default:
