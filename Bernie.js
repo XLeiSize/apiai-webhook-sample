@@ -405,6 +405,27 @@ class Bernie {
 							}
 						} )
 						break;
+					case 'movement':
+						responseMessages = this.generateResponse( this.entity, action, responseMessages )
+						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
+
+						this.entity.movements.forEach( function( movement ){
+							responseMessages.push({
+								type: 1,
+								title: movement.fields.name,
+								subtitle: movement.fields.startYear + " - " + movement.endYear,
+								imageUrl: "https:" + movement.fields.image.file.url
+								buttons: [
+									{
+										type: 'postback',
+										title: 'dis m\'en plus',
+										payload: 'Qu\'est ce que le' + movement.fields.name
+									}
+								]
+							})
+						})
+
+						break;
 					default:
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
@@ -566,11 +587,11 @@ class Bernie {
 			type: 1,
 			title: name,
 			subtitle: movement.startYear + " - " + movement.endYear,
-			imageUrl: "http://www.maison-du-mouvement.com/wp-content/uploads/2015/11/Final-logo.png",
+			imageUrl: "https:" + movement.image.file.url,
 			buttons: [
 				{
 					type: 'postback',
-					title: 'Qu\'est-ce ?',
+					title: 'C\' koa ?',
 					payload: 'Qu\'est ce que ' + name
 				}
 			]

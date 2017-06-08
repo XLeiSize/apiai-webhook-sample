@@ -85,5 +85,16 @@ module.exports = {
 				"{{ title }} fait {{ dimensions }} très exactement 🤓"
 			]
 		}
+	],'artwork_movement': [
+		{
+			id: 1,
+			params: [
+				'title',
+				'movements'
+			],
+			templates: [
+				"{{ title }} appartient {{#ifCond movements.length > 1}}aux mouvements {{ else }} au mouvement {{/ifCond}} {{#movements}} {{{ fields.name }}} {{{ @index }}}   {{/movements}}"
+			]
+		}
 	],
 }
