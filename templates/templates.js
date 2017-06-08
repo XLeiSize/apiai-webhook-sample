@@ -77,7 +77,7 @@ module.exports = {
 		{
 			id: 1,
 			params: [
-				'title'
+				'title',
 				'dimensions'
 			],
 			templates; [
