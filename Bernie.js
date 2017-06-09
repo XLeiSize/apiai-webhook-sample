@@ -567,6 +567,7 @@ class Bernie {
 	}
 
 	createMovementRichcard( movement, action, responseMessages) {
+		console.log(movement);
 		if( typeof movement.fields == "object" ){
 			movement = movement.fields
 		}
