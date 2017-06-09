@@ -604,7 +604,7 @@ class Bernie {
 
 		responseMessages.push(newMsg);
 
-		if(entity.movements && template.template && template.template.params.indexOf('movements') > -1) {
+		if( action == "search_artist" && entity.movements && template.template && template.template.params.indexOf('movements') > -1) {
 			let moreInfoOpening = {};
 
 			moreInfoOpening.text = 'Tu sais ce que c\'est ?';
