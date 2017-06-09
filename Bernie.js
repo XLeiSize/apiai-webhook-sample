@@ -605,6 +605,7 @@ class Bernie {
 		responseMessages.push(newMsg);
 
 		if( action == "search_artist" && entity.movements && template.template && template.template.params.indexOf('movements') > -1) {
+			console.log("MOVEMENTS search_artist MORE");
 			let moreInfoOpening = {};
 
 			moreInfoOpening.text = 'Tu sais ce que c\'est ?';
@@ -622,6 +623,8 @@ class Bernie {
 			responseMessages.push(moreInfoOpening);
 		}
 		else if(Array.isArray(entity.content) && entity.content.length > 1 ) {
+			console.log("entity.content");
+			console.log(entity.content);
 			const contents = entity.content;
 			for (let i = 0; i < contents.length; i++) {
 				const cont = contents[i];
