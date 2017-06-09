@@ -573,6 +573,8 @@ class Bernie {
 		}
 		const name = movement.name;
 
+		const endYear = movement.endYear ? movement.endYear : 'Actuel'
+
 		const newMsg = {
 			type: 1,
 			title: name,
