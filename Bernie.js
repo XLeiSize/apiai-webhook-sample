@@ -621,18 +621,16 @@ class Bernie {
 
 			responseMessages.push(moreInfoOpening);
 		}
-		else {
-			if(Array.isArray(entity.content) && entity.content.length > 1 ) {
-				const contents = entity.content;
-				for (let i = 0; i < contents.length; i++) {
-					const cont = contents[i];
-					if( cont.fields.type == "additionalContents" ){
-						if(cont.content[0].fields.body) {
-							responseMessages.push({ type: 0, speech: cont.content[0].fields.body });
-						}
-						if(cont.url) {
-							responseMessages.push({ type: 3, imageUrl: cont.url });
-						}
+		else if(Array.isArray(entity.content) && entity.content.length > 1 ) {
+			const contents = entity.content;
+			for (let i = 0; i < contents.length; i++) {
+				const cont = contents[i];
+				if( cont.fields.type == "additionalContents" ){
+					if(cont.content[0].fields.body) {
+						responseMessages.push({ type: 0, speech: cont.content[0].fields.body });
+					}
+					if(cont.url) {
+						responseMessages.push({ type: 3, imageUrl: 'https:' + cont.url });
 					}
 				}
 			}
