@@ -103,10 +103,18 @@ class Template {
 			}
 		});
 
-		Hb.registerHelper("position", function(value, options)
-		{
-		    return parseInt(value) + 1;
-		});
+		Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+
+    return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+    }[operator];
+});
 	}
 
 }
