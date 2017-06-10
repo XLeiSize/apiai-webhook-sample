@@ -103,18 +103,24 @@ class Template {
 			}
 		});
 
-		Hb.registerHelper("math", function(lvalue, operator, rvalue, options) {
-    lvalue = parseFloat(lvalue);
-    rvalue = parseFloat(rvalue);
+		Hb.registerHelper("month", function(month, options) {
+	    month = parseFloat(month);
 
-    return {
-        "+": lvalue + rvalue,
-        "-": lvalue - rvalue,
-        "*": lvalue * rvalue,
-        "/": lvalue / rvalue,
-        "%": lvalue % rvalue
-    }[operator];
-});
+	    return {
+	        1: 'Janvier',
+	        2: 'Février',
+	        3: 'Mars',
+	        4: 'Avril',
+	        5: 'Mai',
+	        6: 'Juin',
+	        7: 'Juillet',
+	        8: 'Août',
+	        9: 'Septembre',
+	        10: 'Octobre',
+	        11: 'Novembre',
+	        12: 'Décembre'
+	    }[month];
+		});
 	}
 
 }

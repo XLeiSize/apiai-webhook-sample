@@ -44,6 +44,21 @@ module.exports = {
 			]
 		}
 	],
+	'artist_birth': [
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'dayOfBirth',
+				'monthOfBirth',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{#month monthOfBirth}} {{yearOfBirth}}",
+			]
+		}
+	],
 	'artwork_artistName': [
 		{
 			id: 1,
