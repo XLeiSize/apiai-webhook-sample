@@ -94,7 +94,7 @@ module.exports = {
 				'movements'
 			],
 			templates: [
-				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}} {{{ fields.name }}} {{#ifCond movements.length '>' @position }}{{#ifCond  movements.length '==' 2}} et {{else}}, {{/ifCond}}{{/ifCond}}{{/movements}}"
+				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}} {{{ fields.name }}} {{{@position}}}/{{{ movements.length }}}  {{#ifCond movements.length '>' @position }}{{#ifCond  movements.length '==' 2}} et {{else}}, {{/ifCond}}{{/ifCond}}{{/movements}}"
 			]
 		}
 	],
