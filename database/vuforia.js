@@ -125,7 +125,7 @@ class Vuforia {
           name = results[0].results[0].target_data.name;
           resolve(name);
         } else {
-          resolve('');
+          reject('error');
         }
       });
     });

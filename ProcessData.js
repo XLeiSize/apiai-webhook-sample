@@ -88,26 +88,27 @@ class ProcessData {
               if ( entity != null ) {
                 resolve( { source: 'custom', painting: entity } );
               }
-            })
-            // wikiart.getPaintingById(name).then( ( painting ) => {
-            //   resolve( { source: 'wikiart', painting: painting } );
-            // } ).catch( err => reject(err))
+            }).catch( err =>{
+              reject('NOPE CUSTOM DB/VUFORIA')
+            } )
 
           } else {
-            visionClient.detectLogos( tempImg, {verbose: true}, function( err, logos, apiResponse ) {
-              //get response from api.ai
-              //send user's text to api.ai service
-              if( logos && logos[0] && logos[0].desc ){
-
-                wikiart.getPaintingByName( logos[0].desc ).then( (painting ) => {
-                    resolve( { source: 'wikiart', painting: painting } );
-                })
-              } else {
-                reject( 'NOPE' );
-              }
-            });
+            reject('NOPE VUFORIA')
           }
-        });
+        }).catch( err => {
+          visionClient.detectLogos( tempImg, {verbose: true}, function( err, logos, apiResponse ) {
+            //get response from api.ai
+            //send user's text to api.ai service
+            if( logos && logos[0] && logos[0].desc ){
+
+              wikiart.getPaintingByName( logos[0].desc ).then( (painting ) => {
+                  resolve( { source: 'wikiart', painting: painting } );
+              })
+            } else {
+              reject( 'NOPE CLOUD VISION' );
+            }
+          } );
+        } );
       });
     });
   }
