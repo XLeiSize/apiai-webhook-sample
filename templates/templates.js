@@ -93,7 +93,7 @@ module.exports = {
 			]
 		},
 		{
-			id: 1,
+			id: 3,
 			params: [
 				'firstName',
 				'lastName',
@@ -106,7 +106,7 @@ module.exports = {
 			]
 		},
 		{
-			id: 2,
+			id: 4,
 			params: [
 				'lastName',
 				'cityOfBirth',
@@ -117,7 +117,7 @@ module.exports = {
 			]
 		},
 		{
-			id: 3,
+			id: 5,
 			params: [
 				'lastName',
 				'countryOfBirth'
