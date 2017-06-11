@@ -316,7 +316,7 @@ module.exports = {
 			],
 			templates: [
 				"{{firstName}} {{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }} {{#ifCond @first'==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @last '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		},
 		{
@@ -327,7 +327,7 @@ module.exports = {
 			],
 			templates: [
 				"{{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }} {{#ifCond @first'==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @last '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		},
 		{ // If is dead, then PAST
@@ -339,7 +339,7 @@ module.exports = {
 			],
 			templates: [
 				"{{lastName}} travaillait surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaillait surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaillait surtout dans les domaines de{{#field}}{{#ifCond @last '==' true }} {{#ifCond @first'==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @last '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		}
 	],
