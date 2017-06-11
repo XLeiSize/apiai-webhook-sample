@@ -420,7 +420,6 @@ class Bernie {
 					case 'contemporary':
 					case 'influencers':
 						let artists = [];
-						let artistsPromises = [];
 						hasPromise = true
 						if( params === 'contemporary' ){
 							//GET main artists of movements which this one is associated with
@@ -432,26 +431,17 @@ class Bernie {
 							artists = this.entity[params]
 						}
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
-						for( let i = 0; i < artists.length; i++ ){
-							if(artists[i] !== query){
-								artistsPromises.push(
-									this.custom.getEntityByName('artist', artists[i])
-								)
-							}
-						}
-
-						Promise.all(artistsPromises)
-						.then( results => {
-							let richcardPromises = [];
-							for (let j = 0; j < results.length; j++) {
-								const entity = results[j]
-								this.createArtistRichcard( entity, action, responseMessages )
-							}
-							console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
-							resolve( responseMessages );
-						}).catch( err => {
-							console.log("ERRRRRROOOOOOROROROROROROROROR contemporary/mainartists/influencers/", err)
-						})
+						createRichcardsList( artists, 'artists', query, action, responseMessages )
+						.then( responseMessages => resolve(responseMessages) )
+						.catch( error => reject(error) );
+						break;
+					case 'mainArtworks':
+						let artworks = this.entity[params];
+						hasPromise = true
+						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artists);
+						createRichcardsList( artworks, 'artwork', query, action, responseMessages )
+						.then( responseMessages => resolve(responseMessages) )
+						.catch( error => reject(error) );
 						break;
 					default:
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -466,6 +456,32 @@ class Bernie {
 			})
 		} )
 
+	}
+
+	createRichcardsList( list, type, query, action, responseMessages ) {
+		let promises = [];
+		for( let i = 0; i < list.length; i++ ){
+			if(list[i] !== query){
+				promises.push(
+					this.custom.getEntityByName(type, list[i])
+				)
+			}
+		}
+		return new Promise( (resolve, reject) => {
+			Promise.all(promises)
+			.then( results => {
+				let richcardPromises = [];
+				for (let j = 0; j < results.length; j++) {
+					const entity = results[j]
+					this.createArtworkRichcard( entity, action, responseMessages )
+				}
+				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
+				resolve( responseMessages );
+			}).catch( err => {
+				console.log("ERRRRRROOOOOOROROROROROROROROR artworks/", err)
+				reject(err);
+			})
+		})
 	}
 
 	createImageRequestResponse( source, image, responseMessages ) {
