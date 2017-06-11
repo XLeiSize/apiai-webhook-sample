@@ -52,11 +52,13 @@ module.exports = {
 				'lastName',
 				'dayOfBirth',
 				'monthOfBirth',
-				'yearOfBirth'
+				'yearOfBirth',
+				'cityOfBirth',
+				'countryOfBirth'
 			],
 			templates: [
-				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}",
-				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}",
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}} à {{cityOfBirth}}, {{countryOfBirth}}",
+				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}"
 			]
 		}
 	],
