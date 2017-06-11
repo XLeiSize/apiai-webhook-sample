@@ -573,7 +573,7 @@ class Bernie {
 		}
 		const name = movement.name;
 
-		const endYear = movement.endYear ? movement.endYear : 'Actuel'
+		const endYear = ( movement.endYear !== undefined ) ? movement.endYear : 'Actuel'
 
 		const newMsg = {
 			type: 1,
