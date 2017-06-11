@@ -438,7 +438,7 @@ class Bernie {
 					case 'mainArtworks':
 						let artworks = this.entity[params];
 						hasPromise = true
-						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artists);
+						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artworks);
 						createRichcardsList( artworks, 'artwork', query, action, responseMessages )
 						.then( responseMessages => resolve(responseMessages) )
 						.catch( error => reject(error) );
@@ -473,7 +473,14 @@ class Bernie {
 				let richcardPromises = [];
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
-					this.createArtworkRichcard( entity, action, responseMessages )
+					switch( type ){
+						case 'artwork':
+							this.createArtworkRichcard( entity, action, responseMessages )
+							break;
+						case 'artist':
+							this.createArtistRichcard( entity, action, responseMessages )
+							break;
+					}
 				}
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
