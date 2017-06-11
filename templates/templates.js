@@ -459,7 +459,7 @@ module.exports = {
 				'startYear'
 			],
 			templates: [
-				"Le mouvement {{name}} a débuté {{#ifCond displayAsCentury '==' false }}en {{startYear}} {{else}}au {{centurify startYear}}{{/ifCond}}"
+				"Le mouvement {{name}} a débuté {{#ifCond displayAsCentury '==' false }}en {{startYear}} {{else}}au {{centurify startYear}}{{/ifCond}} {{#ifCond startYear '<' 1900 }}👴🏼{{ else }}👦🏻 {{/ifCond}} "
 			]
 		}
 	],
@@ -484,7 +484,7 @@ module.exports = {
 			],
 			templates: [
 				"Le mouvement {{name}} s'est finit aux alentours {{#ifCond displayAsCentury '==' false }}de {{startYear}} {{else}}du {{centurify startYear}}{{/ifCond}}",
-				"{{#ifCond displayAsCentury '==' false }} mmmh ... Aux environ de {{startYear}} je dirais 🤔 {{else}}C'est difficile de donner une date de fin à un concept ... 🤔 Mais on peut à peu près la situer approximativement autour du {{centurify startYear}} {{/ifCond}}"
+				"{{#ifCond displayAsCentury '==' false }} mmmh ... Aux environ de {{startYear}} je dirais 🤔 {{else}}C'est difficile de donner une date de fin à un concept ... 🤔 Mais on peut à peu près la situer approximativement autour du {{centurify startYear}} 🤓 {{/ifCond}}"
 			]
 		},
 	]
