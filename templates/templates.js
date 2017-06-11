@@ -463,5 +463,27 @@ module.exports = {
 				"Le mouvement {{name}} a débuté {{#ifCond displayAsCentury '==' false }}en {{startYear}} {{else}}au {{centurify startYear}}{{/ifCond}}"
 			]
 		}
+	],
+	'movement_end': [
+		{
+			id: 1,
+			params: [
+				'name'
+			],
+			templates: [
+				"On ne peut pas encore determiner la fin du mouvement, étant donnée que c'est assez récent 👶"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'name',
+				'startYear'
+			],
+			templates: [
+				"Le mouvement {{name}} s'est finit aux alentours {{#ifCond displayAsCentury '==' false }}de {{startYear}} {{else}}du {{centurify startYear}}{{/ifCond}}",
+				"{{#ifCond displayAsCentury '==' false }} mmmh ... Aux environ de {{startYear}} je dirais 🤔 {{else}}C'est difficile de donner une date de fin à un concept ... 🤔 Mais on peut à peu près la situer approximativement autour du {{centurify startYear}} {{/ifCond}}"
+			]
+		},
 	]
 }
