@@ -100,7 +100,7 @@ class ProcessData {
             //get response from api.ai
             //send user's text to api.ai service
             if( logos && logos[0] && logos[0].desc ){
-
+              console.log( "###############################CLOUDVISION_LOGOS", logos );
               wikiart.getPaintingByName( logos[0].desc ).then( (painting ) => {
                   resolve( { source: 'wikiart', painting: painting } );
               })
