@@ -480,7 +480,7 @@ module.exports = {
 			id: 2,
 			params: [
 				'name',
-				'startYear'
+				'endYear'
 			],
 			templates: [
 				"Le mouvement {{name}} s'est finit aux alentours {{#ifCond displayAsCentury '==' false }}de {{startYear}} {{else}}du {{centurify startYear}}{{/ifCond}}",
