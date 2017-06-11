@@ -431,7 +431,7 @@ class Bernie {
 							artists = this.entity[params]
 						}
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
-						createRichcardsList( artists, 'artists', query, action, responseMessages )
+						this.createRichcardsList( artists, 'artists', query, action, responseMessages )
 						.then( responseMessages => resolve(responseMessages) )
 						.catch( error => reject(error) );
 						break;
@@ -439,7 +439,7 @@ class Bernie {
 						let artworks = this.entity[params];
 						hasPromise = true
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artworks);
-						createRichcardsList( artworks, 'artwork', query, action, responseMessages )
+						this.createRichcardsList( artworks, 'artwork', query, action, responseMessages )
 						.then( responseMessages => resolve(responseMessages) )
 						.catch( error => reject(error) );
 						break;
