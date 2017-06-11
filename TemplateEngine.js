@@ -121,6 +121,18 @@ class Template {
 	        12: 'Décembre'
 	    }[month];
 		});
+
+		Hb.registerHelper("preposition", function(country, options) {
+	    switch( country ) {
+				case 'USA':
+				case 'Etats-Unis':
+					country = "aux " + country
+					break;
+				default:
+					country = "en " + country
+			}
+			return country
+		});
 	}
 
 }

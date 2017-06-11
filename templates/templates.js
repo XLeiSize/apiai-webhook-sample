@@ -44,9 +44,45 @@ module.exports = {
 			]
 		}
 	],
-	'artist_birth': [
+	'artist_birthplace': [
 		{
 			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'cityOfBirth',
+				'countryOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}",
+				"il est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'cityOfBirth',
+				'countryOfBirth'
+			],
+			templates: [
+				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
+			]
+		},
+		{
+			id: 3,
+			params: [
+				'lastName',
+				'countryOfBirth'
+			],
+			templates: [
+				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} {{preposition countryOfBirth}}"
+			]
+		},
+	],
+	'artist_birthdate': [
+		{
+			id: 0,
 			params: [
 				'firstName',
 				'lastName',
@@ -57,8 +93,131 @@ module.exports = {
 				'countryOfBirth'
 			],
 			templates: [
-				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}} à {{cityOfBirth}}, {{countryOfBirth}}",
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}} à {{cityOfBirth }}, {{countryOfBirth}}"
+			]
+		},
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'dayOfBirth',
+				'monthOfBirth',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'dayOfBirth',
+				'monthOfBirth',
+				'yearOfBirth'
+			],
+			templates: [
 				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}"
+			]
+		},
+		{
+			id: 3,
+			params: [
+				'firstName',
+				'lastName',
+				'monthOfBirth',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{month monthOfBirth}} {{yearOfBirth}}"
+			]
+		},
+		{
+			id:4,
+			params: [
+				'firstName',
+				'lastName',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{yearOfBirth}}"
+			]
+		}
+	],
+	'artist_death': [
+		{
+			id: 0,
+			params: [
+				'firstName',
+				'lastName'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} n'est pas mort ...",
+				"il est encore en vie 😐"
+			]
+		},
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'dayOfDeath',
+				'monthOfDeath',
+				'yearOfDeath'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfDeath}} {{month monthOfDeath}} {{yearOfDeath}}, RIP 🙏"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'dayOfDeath',
+				'monthOfDeath',
+				'yearOfDeath'
+			],
+			templates: [
+				"{{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfDeath}} {{month monthOfDeath}} {{yearOfDeath}}, Rest in Piece 🌹"
+			]
+		},
+		{
+			id: 3,
+			params: [
+				'firstName',
+				'lastName',
+				'monthOfDeath',
+				'yearOfDeath'
+			],
+			templates: [
+				"{{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{month monthOfDeath}} {{yearOfDeath}}. Paix à son âme 🙏"
+			]
+		},
+		{
+			id:4,
+			params: [
+				'firstName',
+				'lastName',
+				'yearOfDeath'
+			],
+			templates: [
+				"{{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{yearOfDeath}}. Paix à son âme 🙏"
+			]
+		},
+		{
+			id: 5,
+			params: [
+				'firstName',
+				'lastName',
+				'dayOfDeath',
+				'monthOfDeath',
+				'yearOfDeath',
+				'cityOfDeath',
+				'countryOfDeath'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfDeath}} {{month monthOfDeath}} {{yearOfDeath}}, à {{cityOfDeath}}, {{countryOfDeath}}. Paix à son âme 🙏"
 			]
 		}
 	],
