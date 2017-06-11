@@ -158,6 +158,16 @@ module.exports = {
 			]
 		},
 		{
+			id: 0,
+			params: [
+				'lastName'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} n'est pas mort ...",
+				"il est encore en vie 😐"
+			]
+		},
+		{
 			id: 1,
 			params: [
 				'firstName',
