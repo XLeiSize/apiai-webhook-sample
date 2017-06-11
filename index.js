@@ -44,11 +44,14 @@ restService.post('/hook', function (req, res) {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                     				console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
                                     //put this response after previous one
+
                                     if( Array.isArray( response ) ){
                                         messages = messages.concat( response )
                                     } else {
                                         messages.push( response )
                                     }
+                                    for ( var key in obj )
+                                        things.thing.push(obj[key]);
                                     console.log("1111111111111messages111111111111111", messages);
                                     resolve( messages )
 
@@ -127,3 +130,7 @@ restService.post('/hook', function (req, res) {
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
+
+function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
+}

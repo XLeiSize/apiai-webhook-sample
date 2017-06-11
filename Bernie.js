@@ -16,13 +16,13 @@ const Utils = require('./helpers/utils.js');
 const WikiAPI = require('wikijs');
 const wiki = WikiAPI.default();
 
-const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'ede1c18802a34ed68e8ca30aa2a69122';
+const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'e2b37bad2f464a64a42e095ab5528e39';
 const APIAI_LANG = process.env.APIAI_LANG || 'fr';
 
 
 class Bernie {
 	constructor( options ) {
-		this.processData = new ProcessData(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "fb"});
+		this.processData = new ProcessData(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "webhook"});
 		this.sessionIds = new Map();
 
 		this.wikiart = new Wikiart();
