@@ -423,7 +423,7 @@ class Bernie {
 							//GET main artists of movements which this one is associated with
 							this.entity.movements
 							for (let i = 0; i < this.entity.movements.length; i++) {
-								artists.concat( this.entity.movements[i].mainArtists )
+								artists.concat( this.entity.movements[i].fields.mainArtists )
 							}
 						} else {
 							artists = this.entity[params]
