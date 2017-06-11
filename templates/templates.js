@@ -278,6 +278,74 @@ module.exports = {
 	// *****************************************************************************************************************************
 	// *****************************************************************************************************************************
 	// *****************************************************************************************************************************
+	'artist_nationality': [
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'nationality'
+			],
+			templates: [
+				"{{ lastName }} est de nationalité {{emoji nationality }}e",
+				"{{firstName}} {{ lastName }} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'nationality'
+			],
+			templates: [
+				"{{ lastName }} est de nationalité {{emoji nationality }}e",
+				"{{ lastName }} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}"
+			]
+		}
+	],
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	'artist_technique': [
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'field'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'field'
+			],
+			templates: [
+				"{{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+			]
+		},
+		{ // If is dead, then PAST
+			id: 3,
+			params: [
+				'lastName',
+				'field',
+				'yearOfDeath'
+			],
+			templates: [
+				"{{lastName}} travaillait surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaillait surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}"
+			]
+		}
+	],
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
 	'artwork_artistName': [
 		{
 			id: 1,

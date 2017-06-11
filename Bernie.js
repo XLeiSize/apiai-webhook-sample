@@ -573,12 +573,12 @@ class Bernie {
 		}
 		const name = movement.name;
 
-		const endYear = ( movement.endYear !== undefined ) ? movement.endYear : 'Actuel'
+		const endYear = movement.endYear ? movement.endYear : 'Actuel'
 
 		const newMsg = {
 			type: 1,
 			title: name,
-			subtitle: movement.startYear + " - " + movement.endYear,
+			subtitle: movement.startYear + " - " + endYear,
 			imageUrl: "https:" + movement.image.fields.file.url,
 			buttons: [
 				{

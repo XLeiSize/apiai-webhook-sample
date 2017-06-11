@@ -133,6 +133,19 @@ class Template {
 			}
 			return country
 		});
+
+		Hb.registerHelper("emoji", function(nationality, options) {
+
+	    return nationality + " " +  {
+	        'Chinois': '🇨🇳',
+	        'Français': '🇫🇷',
+	        'Américain': '🇺🇸',
+	        'Anglais': '🇬🇧',
+	        'Japonais': '🇯🇵',
+	        'Allemand': '🇩🇪'
+
+	    }[nationality] ;
+		});
 	}
 
 }
