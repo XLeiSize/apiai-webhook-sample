@@ -121,7 +121,7 @@ class Vuforia {
         if (err) reject(err);
         // results is an array consisting of messages collected during execution
         console.log('results: %j', results);
-        if( results[0].results.length > 0) {
+        if( results && results[0].results.length > 0) {
           name = results[0].results[0].target_data.name;
           resolve(name);
         } else {
