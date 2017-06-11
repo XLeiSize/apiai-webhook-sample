@@ -457,8 +457,7 @@ module.exports = {
 			id: 1,
 			params: [
 				'name',
-				'startYear',
-				'displayAs'
+				'startYear'
 			],
 			templates: [
 				"Le mouvement {{name}} a débuté {{#ifCond displayAs '==' false }}en {{startYear}} {{else}}au {{centurify startYear}}{{/ifCond}}"
