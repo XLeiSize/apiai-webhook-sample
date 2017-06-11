@@ -423,21 +423,18 @@ class Bernie {
 							//GET main artists of movements which this one is associated with
 							this.entity.movements
 							for (let i = 0; i < this.entity.movements.length; i++) {
-								console.log(this.entity.movements[i].fields.mainArtists);
 								artists = artists.concat( this.entity.movements[i].fields.mainArtists )
 							}
 						} else {
 							artists = this.entity[params]
 						}
-
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
-
-						// for( let i = 0; i < movements.length; i++ ){
-						// 	this.createMovementRichcard(movements[i], action, responseMessages)
-						// }
-						//console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
-
-
+						for( let i = 0; i < artists.length; i++ ){
+							this.custom.getEntityByName('artist', artists[i])
+							.then((result) => {
+								this.createArtistsRichcard(result, action, responseMessages)
+							}.catch( err => console.log("ERRRRRROOOOOOROROROROROROROROR contemporary/mainartists/influencers/", err);)
+						}
 						break;
 					default:
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
