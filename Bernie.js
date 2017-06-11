@@ -607,10 +607,12 @@ class Bernie {
 		}
 		title = artwork.title
 
+		const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
+
 		const newMsg = {
 			type: 1,
 			title: title,
-			subtitle: date,
+			subtitle: date + ' - ' + author,
 			imageUrl: url,
 			buttons: [
 				{

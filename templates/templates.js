@@ -448,5 +448,21 @@ module.exports = {
 				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}}{{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/movements}}"
 			]
 		}
+	],
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	'movement_start': [
+		{
+			id: 1,
+			params: [
+				'name',
+				'startYear',
+				'displayAs'
+			],
+			templates: [
+				"Le mouvement {{name}} a débuté {{#ifCond displayAs '==' false }}en {{startYear}} {{else}}au {{centurify startYear}}{{/ifCond}}"
+			]
+		}
 	]
 }
