@@ -343,6 +343,7 @@ class Bernie {
 
 	handleEntityWithParams( query, keyword, params, action, responseMessages ) {
 		console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", params);
+		let hasPromise = false;
 		return new Promise( (resolve, reject) => {
 			this.custom.getEntityByName(keyword, query)
 			.then((result) => {
@@ -419,6 +420,7 @@ class Bernie {
 					case 'contemporary':
 					case 'influencers':
 						let artists = [];
+						hasPromise = true
 						if( params === 'contemporary' ){
 							//GET main artists of movements which this one is associated with
 							this.entity.movements
@@ -432,7 +434,9 @@ class Bernie {
 						for( let i = 0; i < artists.length; i++ ){
 							this.custom.getEntityByName('artist', artists[i])
 							.then((result) => {
-								this.createArtistRichcard(result, action, responseMessages)
+								this.createArtistRichcard(result, action, responseMessages);
+								console.log(responseMessages);
+								resolve( responseMessages );
 							}).catch( err => {
 								console.log("ERRRRRROOOOOOROROROROROROROROR contemporary/mainartists/influencers/", err)
 							})
@@ -444,10 +448,10 @@ class Bernie {
 						break;
 
 				}
-
-				console.log(responseMessages);
-				resolve( responseMessages );
-
+				if( !hasPromise ) {
+					console.log(responseMessages);
+					resolve( responseMessages );
+				}
 			})
 		} )
 
