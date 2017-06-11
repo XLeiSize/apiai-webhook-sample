@@ -355,7 +355,7 @@ module.exports = {
 				'field'
 			],
 			templates: [
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}}{{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ technique fields.name }}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}}{{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ technique fields.name }}}{{/field}}. {{#ifCond field.length '>' 2 }} Un artiste couteau-suisse 😏 {{/ifCond}}  "
 			]
 		},
 		{
