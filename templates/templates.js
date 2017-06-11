@@ -355,8 +355,7 @@ module.exports = {
 				'field'
 			],
 			templates: [
-				"{{firstName}} {{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}}{{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}}{{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ technique fields.name }}}{{/field}}"
 			]
 		},
 		{

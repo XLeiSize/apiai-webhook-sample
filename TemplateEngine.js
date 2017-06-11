@@ -147,6 +147,20 @@ class Template {
 	    }[nationality] ;
 		});
 
+		Hb.registerHelper("technique", function(technique, options) {
+			return {
+	        'Architecture': 'l\'architecture',
+	        'Graphic Design': 'le design graphique',
+	        'Installation': 'les installations',
+	        'Object Design': 'le design d\'objet',
+	        'Painting': 'la peinture',
+	        'Performance': 'la performance',
+	        'Photography': 'la photographie',
+	        'Sculpture': 'la scuplture',
+	        'Video': 'la video'
+	    }[technique];
+		});
+
 		Hb.registerHelper("centurify", function(year, options) {
 			year = parseFloat(year);
 	    year = Math.floor(year/100) + 1
