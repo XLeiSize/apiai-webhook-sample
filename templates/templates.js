@@ -271,7 +271,7 @@ module.exports = {
 				'movements'
 			],
 			templates: [
-				"{{ lastName }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/movements}}"
+				"{{ lastName }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/movements}}"
 			]
 		}
 	],
@@ -316,7 +316,7 @@ module.exports = {
 			],
 			templates: [
 				"{{firstName}} {{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }} {{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		},
 		{
@@ -327,7 +327,7 @@ module.exports = {
 			],
 			templates: [
 				"{{lastName}} travaille surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }} {{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaille surtout dans les domaines de {{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		},
 		{ // If is dead, then PAST
@@ -339,7 +339,7 @@ module.exports = {
 			],
 			templates: [
 				"{{lastName}} travaillait surtout dans les domaines de {{#field}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/field}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaillait surtout dans les domaines de{{#field}}{{#ifCond @last '==' true }} {{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} travaillait surtout dans les domaines de{{#field}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/field}}"
 			]
 		}
 	],
@@ -405,7 +405,7 @@ module.exports = {
 				'movements'
 			],
 			templates: [
-				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/movements}}"
+				"{{ title }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{#ifCond @last '==' true }}{{#ifCond @first '==' true}} {{else}} et {{/ifCond}} {{else}} {{#ifCond @first '==' true }} {{else}}, {{/ifCond}} {{/ifCond}}{{{ fields.name }}}{{/movements}}"
 			]
 		}
 	],
