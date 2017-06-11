@@ -118,7 +118,7 @@ class Vuforia {
 
     return new Promise((resolve, reject) => {
       PythonShell.run('cloud_query.py', pythonOptions, function (err, results) {
-        if (err) reject(error);
+        if (err) reject((err);
         // results is an array consisting of messages collected during execution
         console.log('results: %j', results);
         if( results[0].results.length > 0) {
