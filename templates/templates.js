@@ -168,7 +168,8 @@ module.exports = {
 				'lastName'
 			],
 			templates: [
-				"{{firstName}} {{lastName}} n'est pas mort ...",
+				"Non, {{firstName}} {{lastName}} n'est pas mort ...",
+				"Voyons, {{firstName}} {{lastName}} n'est pas mort ...",
 				"il est encore en vie 😐"
 			]
 		},
