@@ -55,6 +55,44 @@ module.exports = {
 	// *****************************************************************************************************************************
 	'artist_birthplace': [
 		{
+			id: 0,
+			params: [
+				'firstName',
+				'lastName',
+				'monthOfBirth',
+				'yearOfBirth',
+				'dayOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} quelques part sur terre le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}} ... 😅",
+				"Je sais pas où est-ce qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}}, mais je sais qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfBirth}} {{month monthOfBirth}} {{yearOfBirth}}, au cas où ça t'intéresse ... héhé 😅 "
+			]
+		},
+		{
+			id: 1,
+			params: [
+				'lastName',
+				'monthOfBirth',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} quelques part sur terre en {{month monthOfBirth}} {{yearOfBirth}} ... 😅",
+				"Je sais pas où est-ce qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}}, mais je sais qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{month monthOfBirth}} {{yearOfBirth}}, au cas où ça t'intéresse ... héhé 😅 "
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'yearOfBirth'
+			],
+			templates: [
+				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} quelque part sur terre en {{yearOfBirth}} ... 😅",
+				"Je sais pas où est-ce qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}}, mais je sais qu'{{#ifCond gender '==' 'female'}}elle{{else}}il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} en {{yearOfBirth}}, au cas où ça t'intéresse ... héhé 😅 ",
+				"Quelque part sur cette 🌎, en l'an {{yearOfBirth}} 🌚"
+			]
+		},
+		{
 			id: 1,
 			params: [
 				'firstName',
@@ -64,7 +102,7 @@ module.exports = {
 			],
 			templates: [
 				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}",
-				"il est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}}  est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
 			]
 		},
 		{
@@ -169,7 +207,7 @@ module.exports = {
 			],
 			templates: [
 				"Non, {{firstName}} {{lastName}} n'est pas mort ...",
-				"Voyons, {{firstName}} {{lastName}} n'est pas mort ...",
+				"Voyons, {{firstName}} {{lastName}} n'est pas mort ... （￣ー￣；）",
 				"il est encore en vie 😐",
 				"Je sais pas, je prédis pas le futur 🤷 "
 			]
