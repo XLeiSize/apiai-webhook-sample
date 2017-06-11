@@ -432,7 +432,7 @@ class Bernie {
 						for( let i = 0; i < artists.length; i++ ){
 							this.custom.getEntityByName('artist', artists[i])
 							.then((result) => {
-								this.createArtistsRichcard(result, action, responseMessages)
+								this.createArtistRichcard(result, action, responseMessages)
 							}).catch( err => {
 								console.log("ERRRRRROOOOOOROROROROROROROROR contemporary/mainartists/influencers/", err)
 							})
