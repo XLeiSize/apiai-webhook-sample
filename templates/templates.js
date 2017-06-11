@@ -170,7 +170,8 @@ module.exports = {
 			templates: [
 				"Non, {{firstName}} {{lastName}} n'est pas mort ...",
 				"Voyons, {{firstName}} {{lastName}} n'est pas mort ...",
-				"il est encore en vie 😐"
+				"il est encore en vie 😐",
+				"Je sais pas, je prédis pas le futur 🤷 "
 			]
 		},
 		{
@@ -179,8 +180,9 @@ module.exports = {
 				'lastName'
 			],
 			templates: [
-				"{{firstName}} {{lastName}} n'est pas mort ...",
-				"il est encore en vie 😐"
+				"Voyons, {{lastName}} n'est pas mort ...",
+				"il est encore en vie 😐",
+				"Je sais pas, je prédis pas le futur 🤷 "
 			]
 		},
 		{
@@ -244,6 +246,32 @@ module.exports = {
 			],
 			templates: [
 				"{{firstName}} {{lastName}} est mort{{#ifCond gender '==' 'female'}}e{{/ifCond}} le {{dayOfDeath}} {{month monthOfDeath}} {{yearOfDeath}}, à {{cityOfDeath}}, {{countryOfDeath}}. Paix à son âme 🙏"
+			]
+		}
+	],
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	// *****************************************************************************************************************************
+	'artist_movement': [
+		{
+			id: 1,
+			params: [
+				'firstName',
+				'lastName',
+				'movements'
+			],
+			templates: [
+				"{{ lastName }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/movements}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'lastName',
+				'movements'
+			],
+			templates: [
+				"{{ lastName }} appartient {{#ifCond movements.length '>' 1}}aux courants artistiques {{else}} au courant artistique {{/ifCond}} {{#movements}}{{{ fields.name }}}{{#ifCond @last '==' true }} {{else}}, {{/ifCond}}{{/movements}}"
 			]
 		}
 	],
