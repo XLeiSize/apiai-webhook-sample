@@ -614,6 +614,7 @@ class Bernie {
 			title: title,
 			subtitle: birthdate,
 			data: { 'yolo': 'yolo', 'yaka': true },
+			description: ' Lorem lorem lorem',
 			imageUrl: imageUrl,
 			buttons: [
 				{
