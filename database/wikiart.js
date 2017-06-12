@@ -81,7 +81,7 @@ class Wikiart {
             } catch (e) {
               reject('not json');
             }
-            resolve( res ) );
+            resolve( res );
         });
     });
   }
