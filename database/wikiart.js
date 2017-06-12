@@ -23,10 +23,14 @@ class Wikiart {
             }
             console.log(response.body);
             let artist = Utils.parseJSON(response.body)
-            if( !artist ) reject('undefined');
-            console.log("wikiart url", url);
-            console.log("@#@#@#@######@@@##@#@@@####@##", artist);
-            resolve(this.sanitize(artist));
+            if( !artist ) {
+              reject('undefined');
+            } else {
+              console.log("wikiart url", url);
+              console.log("@#@#@#@######@@@##@#@@@####@##", artist);
+              resolve(this.sanitize(artist));
+            }
+
         });
     });
   }
@@ -44,13 +48,16 @@ class Wikiart {
                 reject(new Error(response.body.error));
             }
             let paintings = Utils.parseJSON(response.body)
-            if( !paintings ) reject('undefined');
-            let similarityScore = [];
-            for( let i = 0; i < paintings.length; i++ ){
-                similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
+            if( !paintings ) {
+              reject('undefined');
+            } else {
+              let similarityScore = [];
+              for( let i = 0; i < paintings.length; i++ ){
+                  similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
+              }
+              let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
+              resolve( painting );
             }
-            let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
-            resolve( painting );
 
 
         });
@@ -70,8 +77,11 @@ class Wikiart {
                 reject(new Error(response.body.error));
             }
             let res = Utils.parseJSON(response.body)
-            if( !res ) reject('undefined');
-            resolve( res )
+            if( !res ) {
+              reject('undefined');
+            } else {
+              resolve( res )
+            }
 
         });
     });
