@@ -137,12 +137,12 @@ class Template {
 		Hb.registerHelper("emoji", function(nationality, options) {
 
 	    return nationality + " " +  {
-	        'Chinois': '🇨🇳',
-	        'Français': '🇫🇷',
-	        'Américain': '🇺🇸',
-	        'Anglais': '🇬🇧',
-	        'Japonais': '🇯🇵',
-	        'Allemand': '🇩🇪'
+	        'Chinoise': '🇨🇳',
+	        'Française': '🇫🇷',
+	        'Américaine': '🇺🇸',
+	        'Anglaise': '🇬🇧',
+	        'Japonaise': '🇯🇵',
+	        'Allemande': '🇩🇪'
 
 	    }[nationality] ;
 		});
