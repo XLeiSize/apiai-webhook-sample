@@ -516,6 +516,7 @@ class Bernie {
 								}
 								break;
 							}
+							console.log(responseMessages);
 							resolve( responseMessages );
 						} else {
 							reject();
@@ -523,7 +524,7 @@ class Bernie {
 					}
 				})
 				.catch( err => { reject(err) } );
-				console.log("ERRRRRROOOOOOROROROROROROROROR artworks/", err)
+				console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err)
 				reject(err);
 			})
 		})
