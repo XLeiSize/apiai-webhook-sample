@@ -102,7 +102,7 @@ module.exports = {
 			],
 			templates: [
 				"{{firstName}} {{lastName}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}}  est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est né{{#ifCond gender '==' 'female'}}e{{/ifCond}} à {{cityOfBirth}}, {{countryOfBirth}}"
 			]
 		},
 		{
@@ -218,8 +218,9 @@ module.exports = {
 				'lastName'
 			],
 			templates: [
-				"Voyons, {{lastName}} n'est pas mort ...",
-				"il est encore en vie 😐",
+				"Voyons, {{lastName}} n'est pas mort...",
+				"Voyons, {{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} n'est pas mort...",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est encore en vie 😐",
 				"Je sais pas, je prédis pas le futur 🤷 "
 			]
 		},
@@ -325,9 +326,9 @@ module.exports = {
 				'nationality'
 			],
 			templates: [
-				"{{ lastName }} est de nationalité {{emoji nationality }}e",
-				"{{firstName}} {{ lastName }} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}",
+				"{{ lastName }} est de nationalité {{emoji nationality }}",
+				"{{firstName}} {{ lastName }} est de nationalité {{emoji nationality }}",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est de nationalité {{emoji nationality }}",
 			]
 		},
 		{
