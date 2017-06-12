@@ -516,12 +516,12 @@ class Bernie {
 								}
 								break;
 							}
-							console.log(responseMessages);
-							resolve( responseMessages );
 						} else {
 							reject();
 						}
 					}
+					console.log(responseMessages);
+					resolve( responseMessages );
 				})
 				.catch( err => { reject(err) } );
 				console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err)
