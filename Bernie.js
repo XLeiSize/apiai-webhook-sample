@@ -494,7 +494,7 @@ class Bernie {
 				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
 				// WIKIART
 				let wikiartPromises = [];
-				for( let i = 0; i < list.length; i++ ) {
+				for( let i = 0; i < list.length / 2; i++ ) {
 					if (list[i] !== query) {
 						switch ( type ) {
 							case 'artist':
