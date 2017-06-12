@@ -24,7 +24,7 @@ class Wikiart {
             }
             let artist = Utils.parseJSON(response.body)
             if( !artist ) reject('undefined');
-
+            console.log(artist);
             resolve(this.sanitize(artist));
         });
     });
