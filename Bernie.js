@@ -608,7 +608,7 @@ class Bernie {
 				birthdate = artist.birthDayAsString
 			}
 			if(artist.deathDayAsString) {
-				birthdate = artist.deathDayAsString
+				deathdate = artist.deathDayAsString
 			}
 			imageUrl = artist.image
 		}
