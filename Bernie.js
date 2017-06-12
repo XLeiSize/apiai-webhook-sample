@@ -600,6 +600,15 @@ class Bernie {
 					}
 				}
 			}
+			if(artist.yearOfDeath) {
+				birthdate = artist.yearOfDeath;
+				if(artist.monthOfDeath) {
+					birthdate = artist.monthOfDeath + '/' + birthdate;
+					if(artist.dayOfDeath) {
+						birthdate = artist.dayOfDeath + '/' + birthdate;
+					}
+				}
+			}
 			imageUrl = "https:" + artist.portrait.fields.file.url;
 		} else {
 			title = artist.artistName;
