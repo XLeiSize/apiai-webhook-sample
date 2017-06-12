@@ -12,6 +12,7 @@ class Wikiart {
 
   getArtistByName( name ) {
     let url = this.baseURL + Utils.slugify( name ) + '?json=2';
+    console.log("wikiart url", url);
     return new Promise((resolve, reject) => {
         request(url, (error, response) => {
             if (error) {
@@ -22,6 +23,7 @@ class Wikiart {
                 reject(new Error(response.body.error));
             }
             const artist = JSON.parse(response.body);
+            console.log(artist);
             resolve(this.sanitize(artist));
         });
     });
