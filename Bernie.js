@@ -491,11 +491,11 @@ class Bernie {
 					if (list[i] !== query) {
 						switch ( type ) {
 							case 'artist': {
-								wikiartPromises.push(this.wikiart.getArtistByName( query ))
+								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
 							}
 							break;
 							case 'artwork': {
-								wikiartPromises.push(this.wikiart.getArtworkByName( query ))
+								wikiartPromises.push(this.wikiart.getArtworkByName( list[i] ))
 							}
 							break;
 						}
