@@ -601,11 +601,11 @@ class Bernie {
 				}
 			}
 			if(artist.yearOfDeath) {
-				birthdate = artist.yearOfDeath;
+				deathdate = artist.yearOfDeath;
 				if(artist.monthOfDeath) {
-					birthdate = artist.monthOfDeath + '/' + birthdate;
+					deathdate = artist.monthOfDeath + '/' + birthdate;
 					if(artist.dayOfDeath) {
-						birthdate = artist.dayOfDeath + '/' + birthdate;
+						deathdate = artist.dayOfDeath + '/' + birthdate;
 					}
 				}
 			}
