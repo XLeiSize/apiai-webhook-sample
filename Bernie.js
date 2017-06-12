@@ -270,7 +270,7 @@ class Bernie {
 													case 'artwork':
 														this.wikiart.getArtworkByName( name ).then(( artwork ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createArtistRichcard( artwork , action, responseMessages);
+																responseMessages = this.createArtworkRichcard( artwork , action, responseMessages);
 															}
 															reso('success Wikiart');
 														})
@@ -279,7 +279,7 @@ class Bernie {
 													case 'movement':
 														this.wikiart.getMovementByName( name ).then(( movement ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createArtistRichcard( movement , action, responseMessages );
+																responseMessages = this.createMovementRichcard( movement , action, responseMessages );
 															}
 															reso('success Wikiart');
 														})
@@ -485,6 +485,40 @@ class Bernie {
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
 			}).catch( err => {
+				promises = [];
+				for( let i = 0; i < list.length; i++ ) {
+					if (list[i] !== query) {
+						switch ( type ) {
+							case 'artist': {
+								promises.push(this.wikiart.getArtistByName( query ))
+							}
+							break;
+							case 'artwork': {
+								promises.push(this.wikiart.getArtworkByName( query ))
+							}
+							break;
+						}
+					}
+				}
+				Promise.all(promises)
+				.then((result) => {
+					if ( typeof result == "object" ) {
+						switch ( type ) {
+							case 'artist': {
+								this.createArtistRichcard( result, action, responseMessages )
+							}
+							break;
+							case 'artwork': {
+								this.createArtworkRichcard( result, action, responseMessages )
+							}
+							break;
+						}
+						resolve( responseMessages );
+					} else {
+						reject();
+					}
+				})
+				.catch( err => { reject(err) } );
 				console.log("ERRRRRROOOOOOROROROROROROROROR artworks/", err)
 				reject(err);
 			})
@@ -579,6 +613,7 @@ class Bernie {
 			type: 1,
 			title: title,
 			subtitle: birthdate,
+			data: { 'yolo': 'yolo', 'yaka': true },
 			imageUrl: imageUrl,
 			buttons: [
 				{
