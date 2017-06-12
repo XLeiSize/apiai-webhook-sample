@@ -502,22 +502,24 @@ class Bernie {
 					}
 				}
 				Promise.all(wikiartPromises)
-				.then((result) => {
-					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", result);
-					if ( typeof result == "object" ) {
-						switch ( type ) {
-							case 'artist': {
-								this.createArtistRichcard( result, action, responseMessages )
+				.then((results) => {
+					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", results);
+					for (let j = 0; j < results.length; j++) {
+						if ( typeof results[i] == "object" ) {
+							switch ( type ) {
+								case 'artist': {
+									this.createArtistRichcard( results[i], action, responseMessages )
+								}
+								break;
+								case 'artwork': {
+									this.createArtworkRichcard( results[i], action, responseMessages )
+								}
+								break;
 							}
-							break;
-							case 'artwork': {
-								this.createArtworkRichcard( result, action, responseMessages )
-							}
-							break;
+							resolve( responseMessages );
+						} else {
+							reject();
 						}
-						resolve( responseMessages );
-					} else {
-						reject();
 					}
 				})
 				.catch( err => { reject(err) } );
