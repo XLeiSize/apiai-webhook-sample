@@ -13,7 +13,13 @@ class Wikiart {
   getArtistByName( name ) {
     let url = this.baseURL + Utils.slugify( name ) + '?json=2';
     return new Promise((resolve, reject) => {
-        request(url, (error, response) => {
+        const options = {
+          url: url,
+          headers: {
+            'User-Agent': 'node.js'
+          }
+        };
+        request(options, (error, response) => {
             if (error) {
                 console.log('Error sending message: ', error);
                 reject(error);
