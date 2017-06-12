@@ -523,16 +523,14 @@ class Bernie {
 								}
 								break;
 							}
-						} else {
-							reject();
-						}
+						} 
 					}
 					console.log(responseMessages);
 					resolve( responseMessages );
 				})
 				.catch( err => { reject(err) } );
-				console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err)
-				reject(err);
+					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err)
+					reject(err);
 			})
 		})
 	}
