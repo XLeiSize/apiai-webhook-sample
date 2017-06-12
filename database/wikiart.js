@@ -21,6 +21,7 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
+            console.log(response.body);
             let artist = Utils.parseJSON(response.body)
             if( !artist ) reject('undefined');
             console.log("wikiart url", url);
