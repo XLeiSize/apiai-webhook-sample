@@ -6,7 +6,7 @@ class Wikiart {
 
   constructor() {
     const url = 'http://www.wikiart.org/';
-    const lang = 'en'
+    const lang = 'fr'
     this.baseURL = url + lang + '/'
   }
 
