@@ -585,6 +585,7 @@ class Bernie {
 	createArtistRichcard(artist, action, responseMessages) {
 		let imageUrl, title;
 		let birthdate = '';
+		let deathdate = '';
 
 		if( typeof artist.fields == "object" ){
 			artist = artist.fields
@@ -603,14 +604,11 @@ class Bernie {
 		} else {
 			title = artist.artistName;
 
-			if(artist.year_of_birth) {
-				birthdate = artist.year_of_birth;
-				if(artist.month_of_birth) {
-					birthdate = artist.month_of_birth + '/' + birthdate;
-					if(artist.day_of_birth) {
-						birthdate = artist.day_of_birth + '/' + birthdate;
-					}
-				}
+			if(artist.birthDayAsString) {
+				birthdate = artist.birthDayAsString
+			}
+			if(artist.deathDayAsString) {
+				birthdate = artist.deathDayAsString
 			}
 			imageUrl = artist.image
 		}
@@ -619,7 +617,7 @@ class Bernie {
 		const newMsg = {
 			type: 1,
 			title: title,
-			subtitle: birthdate,
+			subtitle: birthdate + ' - ' + deathdate,
 			data: { 'yolo': 'yolo', 'yaka': true },
 			description: ' Lorem lorem lorem',
 			imageUrl: imageUrl,
