@@ -603,9 +603,9 @@ class Bernie {
 			if(artist.yearOfDeath) {
 				deathdate = artist.yearOfDeath;
 				if(artist.monthOfDeath) {
-					deathdate = artist.monthOfDeath + '/' + birthdate;
+					deathdate = artist.monthOfDeath + '/' + deathdate;
 					if(artist.dayOfDeath) {
-						deathdate = artist.dayOfDeath + '/' + birthdate;
+						deathdate = artist.dayOfDeath + '/' + deathdate;
 					}
 				}
 			}
