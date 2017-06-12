@@ -485,23 +485,25 @@ class Bernie {
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
 			}).catch( err => {
-				promises = [];
+				console.log(err);
+				let wikiartPromises = [];
 				for( let i = 0; i < list.length; i++ ) {
 					if (list[i] !== query) {
 						switch ( type ) {
 							case 'artist': {
-								promises.push(this.wikiart.getArtistByName( query ))
+								wikiartPromises.push(this.wikiart.getArtistByName( query ))
 							}
 							break;
 							case 'artwork': {
-								promises.push(this.wikiart.getArtworkByName( query ))
+								wikiartPromises.push(this.wikiart.getArtworkByName( query ))
 							}
 							break;
 						}
 					}
 				}
-				Promise.all(promises)
+				Promise.all(wikiartPromises)
 				.then((result) => {
+					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", result);
 					if ( typeof result == "object" ) {
 						switch ( type ) {
 							case 'artist': {
