@@ -431,7 +431,7 @@ class Bernie {
 							artists = this.entity[params]
 						}
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
-						this.createRichcardsList( artists, 'artists', query, action, responseMessages )
+						this.createRichcardsList( artists, 'artist', query, action, responseMessages )
 						.then( responseMessages => resolve(responseMessages) )
 						.catch( error => reject(error) );
 						break;
