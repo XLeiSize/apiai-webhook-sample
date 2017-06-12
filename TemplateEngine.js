@@ -131,7 +131,7 @@ class Template {
 				default:
 					country = "en " + country
 			}
-			return country
+			return country.toLowerCase()
 		});
 
 		Hb.registerHelper("emoji", function(nationality, options) {

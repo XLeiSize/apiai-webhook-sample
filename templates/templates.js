@@ -338,9 +338,9 @@ module.exports = {
 				'nationality'
 			],
 			templates: [
-				"{{ lastName }} est de nationalité {{emoji nationality }}e",
-				"{{ lastName }} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}",
-				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est {{emoji nationality }}{{#ifCond gender '==' 'female'}}e{{/ifCond}}"
+				"{{ lastName }} est de nationalité {{emoji nationality }}",
+				"{{ lastName }} est de nationalité {{emoji nationality }}",
+				"{{#ifCond gender '==' 'female'}}Elle{{else}}Il{{/ifCond}} est de nationalité {{emoji nationality }}"
 			]
 		}
 	],
