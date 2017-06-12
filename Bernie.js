@@ -497,15 +497,13 @@ class Bernie {
 				for( let i = 0; i < list.length; i++ ) {
 					if (list[i] !== query) {
 						switch ( type ) {
-							case 'artist': {
+							case 'artist':
 								console.log(list[i]);
 								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
-							}
-							break;
-							case 'artwork': {
+								break;
+							case 'artwork':
 								wikiartPromises.push(this.wikiart.getArtworkByName( list[i] ))
-							}
-							break;
+								break;
 						}
 					}
 				}
@@ -515,14 +513,12 @@ class Bernie {
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" && result[j] ) {
 							switch ( type ) {
-								case 'artist': {
+								case 'artist':
 									this.createArtistRichcard( results[j], action, responseMessages )
-								}
-								break;
-								case 'artwork': {
+									break;
+								case 'artwork':
 									this.createArtworkRichcard( results[j], action, responseMessages )
-								}
-								break;
+									break;
 							}
 						}
 					}
