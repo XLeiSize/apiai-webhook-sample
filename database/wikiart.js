@@ -21,12 +21,12 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            console.log(response.body);
+            console.log("wikiart url", url);
+
             let artist = Utils.parseJSON(response.body)
             if( !artist ) {
               reject('undefined');
             } else {
-              console.log("wikiart url", url);
               console.log("@#@#@#@######@@@##@#@@@####@##", artist);
               resolve(this.sanitize(artist));
             }
