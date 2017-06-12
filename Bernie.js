@@ -432,7 +432,10 @@ class Bernie {
 						}
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
 						this.createRichcardsList( artists, 'artist', query, action, responseMessages )
-						.then( responseMessages => resolve(responseMessages) )
+						.then( responseMessages => {
+							console.log("ééééééééééééééééé", responseMessages);
+							resolve(responseMessages)
+						} )
 						.catch( error => reject(error) );
 						break;
 					case 'mainArtworks':
@@ -440,7 +443,10 @@ class Bernie {
 						hasPromise = true
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artworks);
 						this.createRichcardsList( artworks, 'artwork', query, action, responseMessages )
-						.then( responseMessages => resolve(responseMessages) )
+						.then( responseMessages => {
+							console.log("ééééééééééééééééé", responseMessages);
+							resolve(responseMessages)
+						} )
 						.catch( error => reject(error) );
 						break;
 					default:
@@ -486,6 +492,7 @@ class Bernie {
 				resolve( responseMessages );
 			}).catch( err => {
 				console.log(err);
+				// WIKIART
 				let wikiartPromises = [];
 				for( let i = 0; i < list.length; i++ ) {
 					if (list[i] !== query) {
