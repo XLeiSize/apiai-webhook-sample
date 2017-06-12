@@ -15,6 +15,7 @@ class Wikiart {
     console.log("wikiart url", url);
     return new Promise((resolve, reject) => {
         request(url, (error, response) => {
+          let artist;
             if (error) {
                 console.log('Error sending message: ', error);
                 reject(error);
@@ -22,7 +23,12 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            const artist = JSON.parse(response.body);
+            try {
+              artist = JSON.parse(response.body);
+            } catch (e) {
+              reject('not json');
+            }
+
             console.log(artist);
             resolve(this.sanitize(artist));
         });
@@ -41,7 +47,12 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            let paintings = JSON.parse( response.body );
+            paintings;
+            try {
+              paintings  = JSON.parse( response.body );
+            } catch (e) {
+              reject('not json');
+            }
             let similarityScore = [];
             for( let i = 0; i < paintings.length; i++ ){
                 similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
@@ -57,6 +68,7 @@ class Wikiart {
     console.log(url);
     return new Promise((resolve, reject) => {
         request(url, (error, response) => {
+          let res;
             if (error) {
                 console.log('Error sending message: ', error);
                 reject(error);
@@ -64,7 +76,12 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            resolve( JSON.parse( response.body ) );
+            try {
+              res = JSON.parse( response.body );
+            } catch (e) {
+              reject('not json');
+            }
+            resolve( res ) );
         });
     });
   }

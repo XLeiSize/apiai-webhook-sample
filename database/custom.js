@@ -11,6 +11,7 @@ class Custom {
   getEntityByName( type, name ) {
     let url = this.host + '/search/' + type + '/' + Utils.slugify( name );
     return new Promise((resolve, reject) => {
+        let res;
         request(url, (error, response) => {
             if (error) {
                 console.log('Error sending message: ', error);
@@ -22,13 +23,13 @@ class Custom {
             console.log(" Custom promise url", url);
             console.log(" Custom promise response", response.body);
             try {
-              const res = JSON.parse(response.body);
-              resolve(res);
+              res = JSON.parse(response.body);
             }
             catch(e) {
               console.log('Error in Custom promise', e);
               reject(e);
             }
+            resolve(res);
         });
     });
   }
