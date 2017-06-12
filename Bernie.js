@@ -511,7 +511,7 @@ class Bernie {
 				.then((results) => {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", results);
 					for (let j = 0; j < results.length; j++) {
-						if ( typeof results[j] == "object" && result[j] ) {
+						if ( typeof results[j] == "object" ) {
 							switch ( type ) {
 								case 'artist':
 									this.createArtistRichcard( results[j], action, responseMessages )
