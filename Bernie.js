@@ -491,7 +491,7 @@ class Bernie {
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
 			}).catch( err => {
-				console.log(err);
+				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
 				// WIKIART
 				let wikiartPromises = [];
 				for( let i = 0; i < list.length; i++ ) {
@@ -523,7 +523,7 @@ class Bernie {
 								}
 								break;
 							}
-						} 
+						}
 					}
 					console.log(responseMessages);
 					resolve( responseMessages );
