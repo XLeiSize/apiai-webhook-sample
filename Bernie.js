@@ -505,14 +505,14 @@ class Bernie {
 				.then((results) => {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", results);
 					for (let j = 0; j < results.length; j++) {
-						if ( typeof results[i] == "object" ) {
+						if ( typeof results[j] == "object" ) {
 							switch ( type ) {
 								case 'artist': {
-									this.createArtistRichcard( results[i], action, responseMessages )
+									this.createArtistRichcard( results[j], action, responseMessages )
 								}
 								break;
 								case 'artwork': {
-									this.createArtworkRichcard( results[i], action, responseMessages )
+									this.createArtworkRichcard( results[j], action, responseMessages )
 								}
 								break;
 							}
