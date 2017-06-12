@@ -498,6 +498,7 @@ class Bernie {
 					if (list[i] !== query) {
 						switch ( type ) {
 							case 'artist': {
+								console.log(list[i]);
 								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
 							}
 							break;
@@ -512,7 +513,7 @@ class Bernie {
 				.then((results) => {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", results);
 					for (let j = 0; j < results.length; j++) {
-						if ( typeof results[j] == "object" ) {
+						if ( typeof results[j] == "object" && result[j] ) {
 							switch ( type ) {
 								case 'artist': {
 									this.createArtistRichcard( results[j], action, responseMessages )
@@ -528,9 +529,9 @@ class Bernie {
 					console.log(responseMessages);
 					resolve( responseMessages );
 				})
-				.catch( err => { reject(err) } );
-					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err)
-					reject(err);
+				.catch( error => { reject(error) } );
+					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
+					reject(error);
 			})
 		})
 	}
