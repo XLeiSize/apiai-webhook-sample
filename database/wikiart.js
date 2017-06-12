@@ -25,12 +25,10 @@ class Wikiart {
             }
             try {
               artist = JSON.parse(response.body);
+              resolve(this.sanitize(artist));
             } catch (e) {
               reject('not json');
             }
-
-            console.log(artist);
-            resolve(this.sanitize(artist));
         });
     });
   }
@@ -50,15 +48,16 @@ class Wikiart {
             paintings;
             try {
               paintings  = JSON.parse( response.body );
+              let similarityScore = [];
+              for( let i = 0; i < paintings.length; i++ ){
+                  similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
+              }
+              let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
+              resolve( painting );
             } catch (e) {
               reject('not json');
             }
-            let similarityScore = [];
-            for( let i = 0; i < paintings.length; i++ ){
-                similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
-            }
-            let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
-            resolve( painting );
+
         });
     });
   }
@@ -78,10 +77,11 @@ class Wikiart {
             }
             try {
               res = JSON.parse( response.body );
+              resolve( res );
             } catch (e) {
               reject('not json');
             }
-            resolve( res );
+
         });
     });
   }

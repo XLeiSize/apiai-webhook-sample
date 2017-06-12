@@ -24,12 +24,13 @@ class Custom {
             console.log(" Custom promise response", response.body);
             try {
               res = JSON.parse(response.body);
+              resolve(res);
             }
             catch(e) {
               console.log('Error in Custom promise', e);
               reject(e);
             }
-            resolve(res);
+
         });
     });
   }
