@@ -63,6 +63,19 @@ class Utils {
     return costs[s2.length];
   }
 
+  parseJSON (json) {
+    let parsed
+
+    try {
+      parsed = JSON.parse(json)
+    } catch (e) {
+      // Oh well, but whatever...
+      return undefined
+    }
+
+    return parsed // Could be undefined!
+  }
+
 }
 
 module.exports = new Utils();

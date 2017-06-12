@@ -15,7 +15,6 @@ class Wikiart {
     console.log("wikiart url", url);
     return new Promise((resolve, reject) => {
         request(url, (error, response) => {
-          let artist;
             if (error) {
                 console.log('Error sending message: ', error);
                 reject(error);
@@ -23,12 +22,10 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            try {
-              artist = JSON.parse(response.body);
-              resolve(this.sanitize(artist));
-            } catch (e) {
-              reject('not json');
-            }
+            let artist = Utils.parseJSON(response.body)
+            if( !artist ) reject('undefined');
+
+            resolve(this.sanitize(artist));
         });
     });
   }
@@ -45,18 +42,15 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            paintings;
-            try {
-              paintings  = JSON.parse( response.body );
-              let similarityScore = [];
-              for( let i = 0; i < paintings.length; i++ ){
-                  similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
-              }
-              let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
-              resolve( painting );
-            } catch (e) {
-              reject('not json');
+            let paintings = Utils.parseJSON(response.body)
+            if( !paintings ) reject('undefined');
+            let similarityScore = [];
+            for( let i = 0; i < paintings.length; i++ ){
+                similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
             }
+            let painting = paintings[ similarityScore.indexOf( Math.max.apply( Math, similarityScore )) ];
+            resolve( painting );
+
 
         });
     });
@@ -67,7 +61,6 @@ class Wikiart {
     console.log(url);
     return new Promise((resolve, reject) => {
         request(url, (error, response) => {
-          let res;
             if (error) {
                 console.log('Error sending message: ', error);
                 reject(error);
@@ -75,12 +68,9 @@ class Wikiart {
                 console.log('Error: ', response.body.error);
                 reject(new Error(response.body.error));
             }
-            try {
-              res = JSON.parse( response.body );
-              resolve( res );
-            } catch (e) {
-              reject('not json');
-            }
+            let res = Utils.parseJSON(response.body)
+            if( !res ) reject('undefined');
+            resolve( res )
 
         });
     });

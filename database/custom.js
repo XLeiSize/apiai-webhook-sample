@@ -22,14 +22,9 @@ class Custom {
             }
             console.log(" Custom promise url", url);
             console.log(" Custom promise response", response.body);
-            try {
-              res = JSON.parse(response.body);
-              resolve(res);
-            }
-            catch(e) {
-              console.log('Error in Custom promise', e);
-              reject(e);
-            }
+            let res = Utils.parseJSON(response.body)
+            if( !res ) reject('undefined');
+            resolve( res )
 
         });
     });
