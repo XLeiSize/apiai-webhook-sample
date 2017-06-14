@@ -726,7 +726,8 @@ class Bernie {
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
 			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
 			entity.content.forEach( function( content ) {
-				 if ( content.fields == "AdditionalContent" ) {
+
+				 if ( content.fields.type == "AdditionalContent" ) {
 					 	let moreInfoOpening = {};
 						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 						console.log(name);
