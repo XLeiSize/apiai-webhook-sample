@@ -50,9 +50,7 @@ restService.post('/hook', function (req, res) {
                                     } else {
                                         messages.push( response )
                                     }
-                                    for ( var key in obj ) {
-                                      things.thing.push(obj[key]);
-                                    }
+
                                     console.log("1111111111111messages111111111111111", messages);
                                     resolve( messages )
 
