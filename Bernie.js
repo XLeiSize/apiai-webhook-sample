@@ -386,27 +386,7 @@ class Bernie {
 						responseMessages.push(moreInfoOpening);
 						break;
 					case 'context':
-						this.entity.content.forEach( function( content ) {
-							content  = content.fields
-							// THIS ONLY OCCUR IN ARTWORK
-							if ( content.type === 'Description' ) {
-								content.content.forEach( function( description ) {
-									description = description.fields
-									if( description.body ) {
-										responseMessages.push( {
-											type: 0,
-											speech: description.body
-										} )
-									}
-									if( description.media ) {
-										responseMessages.push( {
-											type: 3,
-											imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
-										} )
-									}
-								} )
-							}
-						} )
+						responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
 						break;
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -744,32 +724,34 @@ class Bernie {
 			responseMessages.push(moreInfoOpening);
 		}
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
-			console.log("entity.content");
-			console.log(entity.content);
-			const contents = entity.content;
-			for (let i = 0; i < contents.length; i++) {
-				const cont = contents[i];
-
-				if( cont.fields.type == "Description" ){
-					console.log("true shit");
-					let content = cont.fields.content
-					console.log(content);
-					if( content.body ) {
-						responseMessages.push( {
-							type: 0,
-							speech: content.body
-						} )
-					}
-					if( content.media ) {
-						responseMessages.push( {
-							type: 3,
-							imageUrl: "https:" + content.media[Math.floor(content.media.length * Math.random())].fields.file.url
-						} )
-					}
-				}
-			}
+			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
 		}
 		return responseMessages;
+	}
+
+	entityContentResponse(content, keyword, responseMessages) {
+		content.forEach( function( content ) {
+			content = content.fields
+			if ( content.type === keyword ) {
+				content.content.forEach( function( description ) {
+					description = description.fields
+					if( description.body ) {
+						responseMessages.push( {
+							type: 0,
+							speech: description.body
+						} )
+					}
+					if( description.media ) {
+						responseMessages.push( {
+							type: 3,
+							imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
+						} )
+					}
+				} )
+			}
+		} )
+
+		return responseMessages
 	}
 
 	isDefined(obj) {
