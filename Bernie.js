@@ -718,10 +718,8 @@ class Bernie {
 	generateResponse( entity, action, responseMessages ) {
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
-		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template, entity.content);
-		console.log(Array.isArray(entity.content));
-		console.log(entity.content.length > 0);
-		console.log(!template.message);
+		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
+
 
 		let newMsg = { type: 0, speech: template.message };
 
@@ -745,7 +743,7 @@ class Bernie {
 
 			responseMessages.push(moreInfoOpening);
 		}
-		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 1 ) {
+		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
 			console.log("entity.content");
 			console.log(entity.content);
 			const contents = entity.content;
