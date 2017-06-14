@@ -32,7 +32,7 @@ module.exports = {
 				'content'
 			],
 			templates: [
-				"{{#content}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/content}}"
+				"{{#content}} {{#ifCond fields.type '==' 'Description' }} {{#fields.content}} {{{ fields.body }}} {{/fields.content}} {{/ifCond}}{{/content}}"
 			]
 		}
 	],

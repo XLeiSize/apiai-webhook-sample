@@ -741,7 +741,6 @@ class Bernie {
 			}];
 
 			responseMessages.push(moreInfoOpening);
-			responseMessages.push({type: 0, speech: "ceci est un message après les quick replies" })
 		}
 		else if(Array.isArray(entity.content) && entity.content.length > 1 ) {
 			console.log("entity.content");
