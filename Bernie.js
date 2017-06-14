@@ -729,6 +729,7 @@ class Bernie {
 		return responseMessages;
 	}
 
+	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(content, keyword, responseMessages) {
 		content.forEach( function( content ) {
 			content = content.fields
