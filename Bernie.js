@@ -767,9 +767,6 @@ class Bernie {
 		return responseMessages;
 	}
 
-		return responseMessages;
-	}
-
 	isDefined(obj) {
 		if (typeof obj == 'undefined') {
 			return false;
