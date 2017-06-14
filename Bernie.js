@@ -753,6 +753,7 @@ class Bernie {
 				if( cont.fields.type == "Description" ){
 					console.log("true shit");
 					let content = cont.fields.content
+					console.log(content);
 					if( content.body ) {
 						responseMessages.push( {
 							type: 0,
