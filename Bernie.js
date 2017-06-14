@@ -718,7 +718,7 @@ class Bernie {
 	generateResponse( entity, action, responseMessages ) {
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
-		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
+		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template, entity);
 
 		let newMsg = { type: 0, speech: template.message };
 
