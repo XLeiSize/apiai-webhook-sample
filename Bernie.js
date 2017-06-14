@@ -158,19 +158,21 @@ class Bernie {
 						.then((result) => {
 
 							this.entity = result.fields;
-
+							let hasDescription = false;
 							if ( this.entity != null ) {
 								if( this.entity.content ) {
-									responseMessages = this.generateResponse( this.entity, action, responseMessages);
-
 									for( let i = 0; i < this.entity.content.length; i++ ) {
 										let content = this.entity.content[i]
 										if( content.fields.type == "Description" ){
-											responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+											hasDescription = true
 											break;
 										}
 									}
-
+									if( !hasDescription ) {
+										responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									} else {
+										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+									}
 									resolve( {type: 'richContent', messages: responseMessages} );
 
 								}
