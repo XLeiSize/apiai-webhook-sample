@@ -749,8 +749,8 @@ class Bernie {
 			const contents = entity.content;
 			for (let i = 0; i < contents.length; i++) {
 				const cont = contents[i];
-				console.log(cont.fields);
-				if( cont.type == "Description" ){
+				console.log("true shit");
+				if( cont.fields.type == "Description" ){
 					let content = cont.fields
 					if( content.body ) {
 						responseMessages.push( {
