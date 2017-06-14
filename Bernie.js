@@ -750,17 +750,18 @@ class Bernie {
 			for (let i = 0; i < contents.length; i++) {
 				const cont = contents[i];
 				console.log(cont.fields);
-				if( cont.fields.type == "Description" ){
-					if( cont.body ) {
+				if( cont.type == "Description" ){
+					let content = cont.fields
+					if( content.body ) {
 						responseMessages.push( {
 							type: 0,
-							speech: cont.body
+							speech: content.body
 						} )
 					}
-					if( cont.media ) {
+					if( content.media ) {
 						responseMessages.push( {
 							type: 3,
-							imageUrl: "https:" + cont.media[Math.floor(cont.media.length * Math.random())].fields.file.url
+							imageUrl: "https:" + content.media[Math.floor(content.media.length * Math.random())].fields.file.url
 						} )
 					}
 				}
