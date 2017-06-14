@@ -160,8 +160,18 @@ class Bernie {
 							this.entity = result.fields;
 
 							if ( this.entity != null ) {
-								responseMessages = this.generateResponse( this.entity, action, responseMessages);
-								resolve( {type: 'richContent', messages: responseMessages} );
+								if( this.entity.content )
+								for( let i = 0; i < this.entity.content.length; i++ ) {
+									let content = this.entity.content[i]
+									if( content.fields.type == "Description" ){
+										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+									}else{
+										responseMessages = this.generateResponse( this.entity, action, responseMessages);
+										resolve( {type: 'richContent', messages: responseMessages} );
+										break;
+									}
+								}
+
 							}
 						})
 						.catch(e => {
