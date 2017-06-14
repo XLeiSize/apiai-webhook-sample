@@ -725,7 +725,9 @@ class Bernie {
 		}
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
 			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
+			console.log(responseMessages);
 			content.forEach( function( content ) {
+				console.log(content);
 				 if ( content.fields == "AdditionalContent" ) {
 					 	let moreInfoOpening = {};
 						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
@@ -747,7 +749,6 @@ class Bernie {
 
 			} )
 		}
-
 
 		return responseMessages;
 	}
