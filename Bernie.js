@@ -728,7 +728,7 @@ class Bernie {
 			content.forEach( function( content ) {
 				 if ( content.content.fields == "AdditionalContent" ) {
 					 	let moreInfoOpening = {};
-						const name =  ( entity.name ) ? entity.name : ( entity.title ) ? entity.title :( entity.lastName ) ? entity.firstName + " " + entity.lastName
+						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title 
 						console.log(name);
 			 			moreInfoOpening.text = 'Veux-tu en savoir plus ? 😏';
 			 			moreInfoOpening.type = 2;
