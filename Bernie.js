@@ -174,7 +174,6 @@ class Bernie {
 										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
 									}
 									resolve( {type: 'richContent', messages: responseMessages} );
-
 								}
 
 							}

@@ -64,7 +64,6 @@ class Utils {
   }
 
   parseJSON (json) {
-    console.log("parseJSON",json);
     let parsed
 
     try {
