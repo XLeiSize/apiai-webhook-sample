@@ -1,7 +1,7 @@
 module.exports = {
 	'search_artist': [
 		{
-			id: 3,
+			id: 1,
 			params: [
 				"lastName",
 				"yearOfBirth",
@@ -12,7 +12,7 @@ module.exports = {
 			]
 		},
 		{
-			id: 4,
+			id: 2,
 			params: [
 				"OriginalArtistName",
 				"year_of_birth"
@@ -413,6 +413,17 @@ module.exports = {
 			],
 			templates: [
 				"{{title}} a été commencé en {{startYear}} et terminé {{endYear}}",
+				"{{title}} a été réalisé de {{startYear}} à {{endYear}}",
+				"{{title}} a été fait de {{startYear}} à {{endYear}}"
+			]
+		},
+		{
+			id: 2,
+			params: [
+				'title',
+				'endYear'
+			],
+			templates: [
 				"{{title}} a été réalisé en {{endYear}}",
 				"{{title}} a été fait en {{endYear}}"
 			]
@@ -429,7 +440,8 @@ module.exports = {
 				'dimensions'
 			],
 			templates: [
-				'{{ dimensions }}',
+				'{{ dimensions }}, précisemment',
+				'{{title}} fait {{ dimensions }}, précisemment',
 				"{{ title }} fait {{ dimensions }} très exactement 🤓"
 			]
 		}
