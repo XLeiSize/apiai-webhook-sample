@@ -122,7 +122,6 @@ class Bernie {
 					resolve( {sender: sender, response: responseMessages } );
 			}).catch( e => { reject(e) } );
 		});
-		console.log("promisespromisespromisespromisespromisespromises", promises);
 	}
 
 
@@ -137,6 +136,8 @@ class Bernie {
 				let responseMessages = response.result.fulfillment.messages;
 				let speech = responseMessages[responseMessages.length - 1 ].speech + " "
 
+				console.log("999999999999999999999999999999999999999999999999999999");
+				console.log(responseMessages);
 
 				let action = response.result.action;
 
@@ -387,7 +388,7 @@ class Bernie {
 					case 'context':
 						this.entity.content.forEach( function( content ) {
 							content  = content.fields
-							if ( content.type === 'Description' ){
+							if ( content.type === 'AdditionalContent' ){
 								content.content.forEach( function( description ) {
 									description = description.fields
 									if( description.body ) {
@@ -559,9 +560,13 @@ class Bernie {
 		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
 		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
 
+		const openingText = [
+			'Tu veux en savoir plus sur quoi ?',
+			'Qu\'est-ce qui t\'intéresse ?'
+		]
 		let moreInfoOpening = {};
 		moreInfoOpening.type = 2;
-		moreInfoOpening.text = 'Tu veux en savoir plus sur quoi ?';
+		moreInfoOpening.text = openingText[Math.floor(openingText.length * Math.random())];
 		moreInfoOpening.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",
@@ -710,14 +715,11 @@ class Bernie {
 	}
 
 	generateResponse( entity, action, responseMessages ) {
-		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%entity", entity);
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
 
 		let newMsg = { type: 0, speech: template.message };
-		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%newMsg", newMsg);
-
 
 		responseMessages.push(newMsg);
 
@@ -745,12 +747,18 @@ class Bernie {
 			const contents = entity.content;
 			for (let i = 0; i < contents.length; i++) {
 				const cont = contents[i];
-				if( cont.fields.type == "additionalContents" ){
-					if(cont.content[0].fields.body) {
-						responseMessages.push({ type: 0, speech: cont.content[0].fields.body });
+				if( cont.fields.type == "Description" ){
+					if( cont.body ) {
+						responseMessages.push( {
+							type: 0,
+							speech: cont.body
+						} )
 					}
-					if(cont.url) {
-						responseMessages.push({ type: 3, imageUrl: 'https:' + cont.url });
+					if( cont.media ) {
+						responseMessages.push( {
+							type: 3,
+							imageUrl: "https:" + cont.media[Math.floor(cont.media.length * Math.random())].fields.file.url
+						} )
 					}
 				}
 			}
