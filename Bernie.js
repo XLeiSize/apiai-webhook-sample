@@ -720,7 +720,7 @@ class Bernie {
 		const template = new Template(action, entity);
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template, entity.content);
 		console.log(Array.isArray(entity.content));
-		console.log(entity.content.length > 1);
+		console.log(entity.content.length > 0);
 		console.log(!template.message);
 
 		let newMsg = { type: 0, speech: template.message };
