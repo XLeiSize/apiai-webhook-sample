@@ -748,6 +748,7 @@ class Bernie {
 			const contents = entity.content;
 			for (let i = 0; i < contents.length; i++) {
 				const cont = contents[i];
+				console.log(cont.fields);
 				if( cont.fields.type == "Description" ){
 					if( cont.body ) {
 						responseMessages.push( {
