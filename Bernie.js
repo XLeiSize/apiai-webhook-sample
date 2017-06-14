@@ -726,9 +726,9 @@ class Bernie {
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
 			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
 			content.forEach( function( content ) {
-				 if ( content.content.fields == "AdditionalContent" ) {
+				 if ( content.fields == "AdditionalContent" ) {
 					 	let moreInfoOpening = {};
-						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title 
+						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 						console.log(name);
 			 			moreInfoOpening.text = 'Veux-tu en savoir plus ? 😏';
 			 			moreInfoOpening.type = 2;
