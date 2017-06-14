@@ -388,7 +388,8 @@ class Bernie {
 					case 'context':
 						this.entity.content.forEach( function( content ) {
 							content  = content.fields
-							if ( content.type === 'AdditionalContent' ){
+							// THIS ONLY OCCUR IN ARTWORK
+							if ( content.type === 'Description' ) {
 								content.content.forEach( function( description ) {
 									description = description.fields
 									if( description.body ) {
@@ -765,49 +766,6 @@ class Bernie {
 		}
 		return responseMessages;
 	}
-
-	createMovementResponseMessage(movement, action, responseMessages) {
-
-		const template = new Template(action, movement);
-		let newMsg = { type: 0, speech: template.message };
-		responseMessages.push(newMsg);
-
-		if(Array.isArray(movement.additional_contents)) {
-			const contents = movement.additional_contents;
-
-			for (let i = 0; i < contents.length; i++) {
-				const cont = contents[i];
-				if(cont.text) {
-					responseMessages.push({ type: 0, speech: cont.text });
-				}
-				if(cont.url) {
-					responseMessages.push({ type: 3, imageUrl: cont.url });
-				}
-			}
-		}
-
-		return responseMessages;
-	}
-
-	createArtworkResponseMessage(artwork, action, responseMessages) {
-
-		const template = new Template(action, artwork);
-		let newMsg = { type: 0, speech: template.message };
-		responseMessages.push(newMsg);
-
-		if(Array.isArray(artwork.additional_contents)) {
-			const contents = artwork.additional_contents;
-
-			for (let i = 0; i < contents.length; i++) {
-				const cont = contents[i];
-				if(cont.text) {
-					responseMessages.push({ type: 0, speech: cont.text });
-				}
-				if(cont.url) {
-					responseMessages.push({ type: 3, imageUrl: cont.url });
-				}
-			}
-		}
 
 		return responseMessages;
 	}
