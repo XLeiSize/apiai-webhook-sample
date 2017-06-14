@@ -388,6 +388,9 @@ class Bernie {
 					case 'context':
 						responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
 						break;
+					case 'additionalContent':
+						responseMessages = this.entityContentResponse(this.entity.content, "AdditionalContent", responseMessages)
+						break;
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						let movements = this.entity.movements
@@ -746,7 +749,6 @@ class Bernie {
 			 			responseMessages.push(moreInfoOpening);
 						break;
 				 }
-
 			}
 		}
 
