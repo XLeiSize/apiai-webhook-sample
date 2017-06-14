@@ -725,7 +725,30 @@ class Bernie {
 		}
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
 			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
+			content.forEach( function( content ) {
+				 if ( content.content.fields == "AdditionalContent" ) {
+					 	let moreInfoOpening = {};
+						const name =  ( entity.name ) ? entity.name : ( entity.title ) ? entity.title :( entity.lastName ) ? entity.firstName + " " + entity.lastName
+						console.log(name);
+			 			moreInfoOpening.text = 'Veux-tu en savoir plus ? 😏';
+			 			moreInfoOpening.type = 2;
+			 			moreInfoOpening.quick_replies = [{
+			 				content_type: "text",
+			 				title: "Aller 👍",
+			 				payload: "Dis m'en plus sur " + name
+			 			},{
+			 				content_type: "text",
+			 				title: "Ça ira ✋",
+			 				payload: "ça ira mon coco"
+			 			}];
+
+			 			responseMessages.push(moreInfoOpening);
+				 }
+
+			} )
 		}
+
+
 		return responseMessages;
 	}
 
