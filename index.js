@@ -68,8 +68,8 @@ restService.post('/hook', function (req, res) {
                                       withRichcardsMessages.push( response )
                                   }
 
-                                  console.log("1111111111111messages111111111111111", withRichcardsMessages);
-                                  resolve( "richcard" )
+                                  console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
+                                  resolve( withRichcardsMessages )
 
             			           }).catch( error => {
                                   console.log( error );
@@ -80,11 +80,11 @@ restService.post('/hook', function (req, res) {
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
                     Promise.all(richcardPromises)
-                    .then( response => {
-                      console.log(response);
+                    .then( responses => {
+                      console.log(responses);
 
-                        for(let i = 0; i < response.length; i++ ){
-                          if( response[i] == "richcard" ){
+                        for(let i = 0; i < responses.length; i++ ){
+                          if( responses[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
                             return res.json({
                                 speech: speech,
@@ -95,7 +95,6 @@ restService.post('/hook', function (req, res) {
                           }
                         }
                         console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-
                         return res.json({
                             speech: speech,
                             displayText: speech,
