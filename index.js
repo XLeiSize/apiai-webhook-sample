@@ -68,28 +68,28 @@ restService.post('/hook', function (req, res) {
                     Promise.all(richcardPromises)
                     .then( responses => {
                       console.log(responses);
+                      let  answerOpt = {
+                          speech: speech,
+                          displayText: speech,
+                          messages: messages,
+                          source: 'berniewebhook'
+                      }
 
                         for(let i = 0; i < responses.length; i++ ){
                           if( responses[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-                            return res.json({
-                                speech: speech,
-                                displayText: speech,
-                                messages: withRichcardsMessages,
-                                source: 'berniewebhook'
-                            });
+                            answerOpt.messages = withRichcardsMessages;
+                          } else {
+                            console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+
                           }
                         }
 
+                        return res.json(answerOpt);
+
                     }).catch( error => {
                         console.log( error );
-                        console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-                        return res.json({
-                            speech: speech,
-                            displayText: speech,
-                            messages: messages,
-                            source: 'berniewebhook'
-                        });
+
                     } )
 
 
