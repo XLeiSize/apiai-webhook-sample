@@ -64,14 +64,13 @@ class Utils {
   }
 
   reflect(promise){
-    console.log("Reflecting promises");
     return promise
       .then(data => {
-        console.log(data);
+        console.log("Reflecting promises DATA", data);
         return {data: data, status: "resolved"}
       })
       .catch(error => {
-        console.log(error);
+        console.log("Reflecting promises ERROR", error);
         return {error: error, status: "rejected"}
       });
   }
