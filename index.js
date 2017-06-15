@@ -34,29 +34,12 @@ restService.post('/hook', function (req, res) {
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
-                    let richcardPromises = []
+                    let hasRichcard = []
                     let withRichcardsMessages = messages;
                     //NEED TO PREVENT SENDING TWICE
                     messages.forEach( ( msg ) => {
                         console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
                         if( msg.speech && msg.speech !== "" ){
-                            // richcardPromises.push( new Promise( ( resolve, reject ) => {
-                            //     bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                            //         //put this response after previous one
-                            //
-                            //         if( Array.isArray( response ) ){
-                            //             messages = messages.concat( response )
-                            //         } else {
-                            //             messages.push( response )
-                            //         }
-                            //
-                            //         console.log("1111111111111messages111111111111111", messages);
-                            //         resolve( messages )
-                            //
-                      			// }).catch( error => {
-                            //           console.log( error );
-                            //           reject( error )
-                            //       } )
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                 				          console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
@@ -69,11 +52,11 @@ restService.post('/hook', function (req, res) {
                                   }
 
                                   console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
-                                  resolve( withRichcardsMessages )
+                                  resolve( withRichcardsMessages );
 
             			           }).catch( error => {
                                   console.log( error );
-                                  resolve( "nope" )
+                                  reject( false );
                               } )
                             } ) )
                         }
@@ -94,6 +77,9 @@ restService.post('/hook', function (req, res) {
                             });
                           }
                         }
+
+                    }).catch( error => {
+                        console.log( error );
                         console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
                         return res.json({
                             speech: speech,
@@ -101,8 +87,6 @@ restService.post('/hook', function (req, res) {
                             messages: messages,
                             source: 'berniewebhook'
                         });
-                    }).catch( error => {
-                        console.log( error );
                     } )
 
 
