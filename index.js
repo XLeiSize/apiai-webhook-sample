@@ -65,15 +65,15 @@ restService.post('/hook', function (req, res) {
                                   if( Array.isArray( response ) ){
                                       withRichcardsMessages = withRichcardsMessages.concat( response )
                                   } else {
-                                      withRichcardsMessages.push( response )
+                                      ‹withRichcardsMessages›.push( response )
                                   }
 
-                                  console.log("1111111111111messages111111111111111", messages);
-                                  resolve( true )
+                                  console.log("1111111111111messages111111111111111", ‹withRichcardsMessages›);
+                                  resolve( "richcard" )
 
             			           }).catch( error => {
                                   console.log( error );
-                                  resolve( false )
+                                  resolve( "nope" )
                               } )
                             } ) )
                         }
@@ -84,9 +84,8 @@ restService.post('/hook', function (req, res) {
                       console.log(response);
 
                         for(let i = 0; i < response.length; i++ ){
-                          if( response[i] ){
+                          if( response[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-
                             return res.json({
                                 speech: speech,
                                 displayText: speech,
