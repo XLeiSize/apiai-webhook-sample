@@ -385,27 +385,7 @@ class Bernie {
 				this.entity = result.fields;
 				switch( params ){
 					case 'image': // PORTRAIT OR IMAGE
-						let images = this.entity.images ? this.entity.images : this.entity.portrait
-						console.log("QWERDRYITFUOYILYFDJFKHDFJHFDFJHDFHJ", images);
-						if( images.length > 1 ) {
-							images.forEach( function( image ){
-								responseMessages.push(
-									new ResponseMessage( 1, {
-									title: image.fields.title,
-									imageUrl: "https:" + image.fields.file.url
-								} ))
-							})
-						} else {
-							let image = Array.isArray( images ) ? images[0] : images
-							responseMessages.push({
-								type: 3,
-								imageUrl: "https:" + image.fields.file.url
-							})
-							responseMessages.push(
-								new ResponseMessage( 3, {
-								imageUrl: "https:" + image.fields.file.url
-							} ))
-						}
+						responseMessages = entityImageResponse( this.entity, responseMessages )
 						break;
 					case 'artistName':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -693,12 +673,33 @@ class Bernie {
 					}
 				} )
 			}
-
 			// si Description et est une collection, montrer les images
-
-			//if( content.type === "Description" && entity.)
+			if( keyword === "Description" && entity.isACollection ){
+				response = entityImageResponse( entity, responseMessages )
+			}
 		} )
 
+		return responseMessages
+	}
+
+
+	entityImageResponse( entity, responseMessages ) {
+		let images = entity.images ? entity.images : entity.portrait
+		if( images.length > 1 ) {
+			images.forEach( function( image ){
+				responseMessages.push(
+					new ResponseMessage( 1, {
+					title: image.fields.title,
+					imageUrl: "https:" + image.fields.file.url
+				} ))
+			})
+		} else {
+			let image = Array.isArray( images ) ? images[0] : images
+			responseMessages.push(
+				new ResponseMessage( 3, {
+				imageUrl: "https:" + image.fields.file.url
+			} ))
+		}
 		return responseMessages
 	}
 
