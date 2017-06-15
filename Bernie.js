@@ -11,6 +11,7 @@ const Custom = require('./database/custom.js');
 const TemplateEngine = require('./TemplateEngine.js');
 
 const ProcessData = require('./ProcessData.js');
+const ResponseMessage = require('./ResponseMessage.js');
 const Utils = require('./helpers/utils.js');
 
 const WikiAPI = require('wikijs');
@@ -148,22 +149,23 @@ class Bernie {
 					console.log(keywords);
 
 					if(action === "input.welcome"){
-						let moreInfoOpening = {};
-						moreInfoOpening.text = "Tu as besoin de moi ? 💁";
-			 			moreInfoOpening.type = 2;
-			 			moreInfoOpening.quick_replies = [{
-			 				content_type: "text",
-			 				title: "Oui aide-moi 🙏",
-			 				payload: "aide-moi"
-			 			},{
-			 				content_type: "text",
-			 				title: "Non.",
-			 				payload: "HELL NO"
-			 			}];
-						responseMessages.push(moreInfoOpening)
+						let newResponse = new ResponseMessage( 2, {
+							text: "Tu as besoin de moi ? 💁",
+							quick_replies: [{
+				 				content_type: "text",
+				 				title: "Oui aide-moi 🙏",
+				 				payload: "aide-moi"
+				 			},{
+				 				content_type: "text",
+				 				title: "Non.",
+				 				payload: "HELL NO"
+				 			}]
+						})
+						console.log(newResponse);
+						responseMessages.push(newResponse);
 						resolve( {type: 'richContent', messages: responseMessages} );
 					} else if(action === "hellno"){
-						
+
 						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/Ph8OWoJA2M3eM/giphy.gif"})
 						resolve( {type: 'richContent', messages: responseMessages} );
 
