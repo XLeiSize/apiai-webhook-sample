@@ -168,11 +168,12 @@ class Bernie {
 											break;
 										}
 									}
-									if( !hasDescription ) {
-										responseMessages = this.generateResponse(this.entity, action, responseMessages)
-									} else {
-										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
-									}
+									responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									// if( !hasDescription ) {
+									// 	responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									// } else {
+									// 	responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+									// }
 									resolve( {type: 'richContent', messages: responseMessages} );
 								}
 
@@ -749,15 +750,28 @@ class Bernie {
 					 	let moreInfoOpening = {};
 						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 						console.log(name);
-			 			moreInfoOpening.text = 'Veux-tu en savoir plus ? 😏';
+						const openingText = [
+							'Veux-tu en savoir plus ? 😏',
+							'Je continue ?',
+							'Ça va ou tu veux en savoir plus ? '
+						]
+						const acceptText = [
+							'Dis m\'en plus !',
+							'Aller 👍'
+						]
+						const declineText = [
+							'C’était clair 👌',
+							'Ça ira ✋'
+						]
+						moreInfoOpening.text = openingText[Math.floor(openingText.length * Math.random())];
 			 			moreInfoOpening.type = 2;
 			 			moreInfoOpening.quick_replies = [{
 			 				content_type: "text",
-			 				title: "Aller 👍",
+			 				title: acceptText[Math.floor(acceptText.length * Math.random())],
 			 				payload: "Dis m'en plus sur " + name
 			 			},{
 			 				content_type: "text",
-			 				title: "Ça ira ✋",
+			 				title: declineText[Math.floor(declineText.length * Math.random())],
 			 				payload: "ça ira mon coco"
 			 			}];
 
