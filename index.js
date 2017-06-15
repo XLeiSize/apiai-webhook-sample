@@ -48,13 +48,12 @@ restService.post('/hook', function (req, res) {
                                   } else {
                                       withRichcardsMessages.push( response )
                                   }
-
                                   console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
                                   resolve( withRichcardsMessages );
 
             			           }).catch( error => {
                                   console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                  reject( new Error(error) );
+                                  reject( error );
                               } )
                             } ) )
                         }
