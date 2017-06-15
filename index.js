@@ -103,27 +103,6 @@ restService.post('/hook', function (req, res) {
         }
 
 
-        // "fulfillment": {
-        //     "speech": " action: search_artist",
-        //     "source": "berniewebhook",
-        //     "displayText": " action: search_artist",
-        //     "messages": [
-        //     {
-        //       "type": 0,
-        //       "speech": " action: search_artist"
-        //     },
-        //     {
-        //       "type": 1,
-        //       "speech": " MDR"
-        //     }
-        //     ],
-        //     "data": {
-        //     "hologramme": "lol",
-        //     "shit": true
-        //     }
-        // }
-
-
     } catch (err) {
         console.error("Can't process request", err);
 
