@@ -60,10 +60,9 @@ restService.post('/hook', function (req, res) {
                             } ) )
                         }
                     } )
-                    console.log("YEAH ALRIGHT", richcardPromises);
-                    console.log([true, Promise.resolve(3), Promise.reject(new Error('error'))]);
-                    settle([true, Promise.resolve(3), Promise.reject(new Error('error'))])
+                    settle(richcardPromises)
                     .then(function (results) {
+                      console.log(results);
                       results.forEach(function (result) {
                         if (result.isFulfilled()) {
                           console.log('Promise is fulfilled', result.value());
