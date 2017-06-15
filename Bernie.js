@@ -386,6 +386,7 @@ class Bernie {
 				switch( params ){
 					case 'image': // PORTRAIT OR IMAGE
 						responseMessages = entityImageResponse( this.entity, responseMessages )
+						console.log( "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", responseMessages);
 						break;
 					case 'artistName':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -658,7 +659,6 @@ class Bernie {
 
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(entity, keyword, responseMessages) {
-		console.log("*************************************************************", entity);
 		const content = entity.content
 		for( let i = 0; i < content.length; i++ ){
 			content = content[i].fields
@@ -673,10 +673,10 @@ class Bernie {
 					}
 				} )
 			}
-			// si Description et est une collection, montrer les images
-			if( keyword === "Description" && entity.isACollection ){
-				response = this.entityImageResponse( entity, responseMessages )
-			}
+		}
+		// si Description et est une collection, montrer les images
+		if( keyword === "Description" && entity.isACollection ){
+			response = this.entityImageResponse( entity, responseMessages )
 		}
 
 		return responseMessages
