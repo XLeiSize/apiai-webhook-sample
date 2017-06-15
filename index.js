@@ -55,8 +55,8 @@ restService.post('/hook', function (req, res) {
                                   resolve( withRichcardsMessages )
 
             			           }).catch( error => {
-                                  console.log( error );
-                                  resolve( "nope" )
+                                  console.log( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", error );
+                                  reject( "nope" )
                               } )
                             } ) )
                         }
@@ -77,6 +77,9 @@ restService.post('/hook', function (req, res) {
                             });
                           }
                         }
+
+                    }).catch( error => {
+                        console.log( error );
                         console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
                         return res.json({
                             speech: speech,
@@ -84,8 +87,6 @@ restService.post('/hook', function (req, res) {
                             messages: messages,
                             source: 'berniewebhook'
                         });
-                    }).catch( error => {
-                        console.log( error );
                     } )
 
 
