@@ -3,7 +3,7 @@
 const uuid = require('node-uuid');
 const request = require('request');
 
-const Template = require('./TemplateEngine.js');
+const Template = require('./answers/TemplateEngine.js');
 
 const Wikiart = require('./database/wikiart.js');
 const Custom = require('./database/custom.js');
