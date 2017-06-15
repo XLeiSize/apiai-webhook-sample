@@ -58,16 +58,15 @@ restService.post('/hook', function (req, res) {
 
             			           }).catch( error => {
                                   console.log( error );
-                                  reject( false );
+                                  reject( new Error(error) );
                               } )
                             } ) )
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises.map(Utils.reflect))
+                    Promise.all(richcardPromises.map(p => p.catch(e => e)))
                     .then( responses => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-
                         for(let i = 0; i < responses.length; i++ ){
                           if( responses[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
