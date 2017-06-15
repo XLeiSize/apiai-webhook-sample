@@ -162,6 +162,9 @@ class Bernie {
 			 			}];
 						responseMessages.push(moreInfoOpening)
 						resolve( {type: 'richContent', messages: responseMessages} );
+					} else if(action === "HELLNO"){
+						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/Ph8OWoJA2M3eM/giphy.gif"})
+						resolve( {type: 'richContent', messages: responseMessages} );
 					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
