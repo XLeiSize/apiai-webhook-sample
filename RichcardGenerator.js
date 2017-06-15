@@ -8,6 +8,7 @@ class RichcardGenerator {
   }
 
   richcard( entity, category ) {
+    this.category = category
     switch( category ) {
       case "artist":
         return this.artistRichcard(entity)
@@ -105,6 +106,7 @@ class RichcardGenerator {
     return new ResponseMessage(1, {
 			title: title,
 			subtitle: subtitle,
+			category: this.category
 			data: { 'yolo': 'yolo', 'yaka': true },
 			description: ' Lorem lorem lorem',
 			imageUrl: imageUrl,
