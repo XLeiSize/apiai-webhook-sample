@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Bernie = require('./Bernie.js');
-const settle = require('promise-settle');
+const Utils = require('./helpers/utils.js');
 
 let bernie = new Bernie();
 
@@ -43,28 +43,28 @@ restService.post('/hook', function (req, res) {
                   messages.forEach( ( msg ) => {
                       if( msg.speech && msg.speech !== "" ) {
                           console.log("MY message", msg);
-                          richcardPromises.push( new Promise( ( resolve, reject ) => {
-                              bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                                //put this response after previous one
-                                if( Array.isArray( response ) ){
-                                    withRichcardsMessages = withRichcardsMessages.concat( response )
-                                } else {
-                                    withRichcardsMessages.push( response )
-                                }
-                                console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
-                                resolve( withRichcardsMessages );
-
-          			           }).catch( error => {
-                                console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                //reject( "TELL ME WHY" );
-                            } )
-                          } ) )
-
+                          // richcardPromises.push( new Promise( ( resolve, reject ) => {
+                          //     bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                          //       //put this response after previous one
+                          //       if( Array.isArray( response ) ){
+                          //           withRichcardsMessages = withRichcardsMessages.concat( response )
+                          //       } else {
+                          //           withRichcardsMessages.push( response )
+                          //       }
+                          //       console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
+                          //       resolve( withRichcardsMessages );
+                          //
+          			          //  }).catch( error => {
+                          //       console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
+                          //       //reject( "TELL ME WHY" );
+                          //   } )
+                          // } ) )
+                          richcardPromises.push(  bernie.parseSentMessages( msg ) )
                           console.log("my richcards", richcardPromises);
                       }
                   } )
 
-                  Promise.all(richcardPromises)
+                  Promise.all(richcardPromises.map(Utils.reflect))
                   .then( values => {
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
 
