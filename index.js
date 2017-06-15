@@ -52,7 +52,7 @@ restService.post('/hook', function (req, res) {
 
             			           }).catch( error => {
                                   console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                  reject( error );
+                                  resolve( error );
                               } )
                             } ) )
                         }
