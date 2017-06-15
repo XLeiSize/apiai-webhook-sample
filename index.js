@@ -33,20 +33,16 @@ restService.post('/hook', function (req, res) {
                 }
 
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
-					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
-                    console.log('result: ', speech);
+					          console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     let hasRichcard = []
                     let richcardPromises = []
                     let withRichcardsMessages = messages;
                     //NEED TO PREVENT SENDING TWICE
                     messages.forEach( ( msg ) => {
-                        console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
                         if( msg.speech && msg.speech !== "" ){
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                				          console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
                                   //put this response after previous one
-
                                   if( Array.isArray( response ) ){
                                       withRichcardsMessages = withRichcardsMessages.concat( response )
                                   } else {
@@ -57,7 +53,7 @@ restService.post('/hook', function (req, res) {
                                   resolve( withRichcardsMessages );
 
             			           }).catch( error => {
-                                  console.log( error );
+                                  console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
                                   reject( new Error(error) );
                               } )
                             } ) )
@@ -90,7 +86,7 @@ restService.post('/hook', function (req, res) {
                         });
 
                     }).catch( error => {
-                        console.log( error );
+                        console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
 
                     } )
 
@@ -98,7 +94,6 @@ restService.post('/hook', function (req, res) {
 
 				}).catch( err => {
                     console.log("errr", err);
-                    reject(err);
                 });;
 
             }
