@@ -12,6 +12,7 @@ class ResponseMessage {
 
   constructor( type, options ) {
     this.type = type
+    this.data = options.data
     switch(this.type) {
       case 0: this.textResponse(options)
         break;
@@ -29,8 +30,10 @@ class ResponseMessage {
   }
 
   richcardResponse(options) {
+    this.category = options.category
     this.title = options.title
     this.subtitle = options.subtitle
+    this.description = options.description
     this.imageUrl = options.imageUrl
     this.buttons = options.buttons
   }

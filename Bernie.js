@@ -12,6 +12,7 @@ const TemplateEngine = require('./TemplateEngine.js');
 
 const ProcessData = require('./ProcessData.js');
 const ResponseMessage = require('./ResponseMessage.js');
+const RichcardGenerator = require('./RichcardGenerator.js');
 const Utils = require('./helpers/utils.js');
 
 const WikiAPI = require('wikijs');
@@ -562,7 +563,6 @@ class Bernie {
 	}
 
 	createImageRequestResponse( source, image, responseMessages ) {
-		console.log("immmmmmmmaaaaaaageeeeeeeee", image);
 		let title, artistName, year, movement;
 
 		if( source === 'wikiart' ) {
@@ -585,7 +585,9 @@ class Bernie {
 		}
 
 		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
+
 		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
+		responseMessages.push( new ResponseMessage(3, {imageUrl: "https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif"} ) );
 
 		const openingText = [
 			'Tu veux en savoir plus sur quoi ?',
@@ -615,130 +617,25 @@ class Bernie {
 		return responseMessages;
 	}
 
-	createArtistRichcard(artist, action, responseMessages) {
-		let imageUrl, title;
-		let birthdate = '';
-		let deathdate = '';
-
-		if( typeof artist.fields == "object" ){
-			artist = artist.fields
-			title = artist.firstName ? artist.firstName + ' ' + artist.lastName : artist.lastName;
-
-			if(artist.yearOfBirth) {
-				birthdate = artist.yearOfBirth;
-				if(artist.monthOfBirth) {
-					birthdate = artist.monthOfBirth + '/' + birthdate;
-					if(artist.dayOfBirth) {
-						birthdate = artist.dayOfBirth + '/' + birthdate;
-					}
-				}
-			}
-			if(artist.yearOfDeath) {
-				deathdate = artist.yearOfDeath;
-				if(artist.monthOfDeath) {
-					deathdate = artist.monthOfDeath + '/' + deathdate;
-					if(artist.dayOfDeath) {
-						deathdate = artist.dayOfDeath + '/' + deathdate;
-					}
-				}
-			}
-			imageUrl = "https:" + artist.portrait.fields.file.url;
-		} else {
-			title = artist.artistName;
-
-			if(artist.birthDayAsString) {
-				birthdate = artist.birthDayAsString
-			}
-			if(artist.deathDayAsString) {
-				deathdate = artist.deathDayAsString
-			}
-			imageUrl = artist.image
-		}
-
-
-		const newMsg = {
-			type: 1,
-			title: title,
-			subtitle: birthdate + ' - ' + deathdate,
-			data: { 'yolo': 'yolo', 'yaka': true },
-			description: ' Lorem lorem lorem',
-			imageUrl: imageUrl,
-			buttons: [
-				{
-					type: 'postback',
-					title: 'Qui est-ce ?',
-					payload: 'Qui est ' + title
-				}
-			]
-		};
-
-		if(newMsg.title && (newMsg.subtitle || newMsg.imageUrl))
-			responseMessages.push(newMsg);
-
-		return responseMessages;
+	createRichcard(entity, category, responseMessages) {
+		console.log(RichcardGenerator.richcard(entity, category));
+		return responseMessages.push(RichcardGenerator.richcard(entity, category));
 	}
 
+	createArtistRichcard(artist, action, responseMessages) {
+		console.log(RichcardGenerator.artistRichcard());
+		return responseMessages.push(RichcardGenerator.artistRichcard());
+	}
+
+
 	createArtworkRichcard(artwork, action, responseMessages) {
-		let date, url, title
-		if( typeof artwork.fields == "object" ){
-			artwork = artwork.fields
-			date = artwork.endYear
-			url = 'https:' + artwork.images[0].fields.file.url
-		} else {
-			date = artwork.year
-			url = artwork.image
-		}
-		title = artwork.title
-
-		const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
-
-		const newMsg = {
-			type: 1,
-			title: title,
-			subtitle: date + ' - ' + author,
-			imageUrl: url,
-			buttons: [
-				{
-					type: 'postback',
-					title: 'Dis m\'en plus',
-					payload: 'Qu\'est ce que ' + title
-				}
-			]
-		};
-
-		if( newMsg.title && ( newMsg.subtitle || newMsg.imageUrl ) )
-			responseMessages.push(newMsg);
-
-		return responseMessages;
+		console.log(RichcardGenerator.artworkRichcard());
+		return responseMessages.push(RichcardGenerator.artworkRichcard());
 	}
 
 	createMovementRichcard( movement, action, responseMessages) {
-		console.log(movement);
-		if( typeof movement.fields == "object" ){
-			movement = movement.fields
-		}
-		const name = movement.name;
-
-		const endYear = movement.endYear ? movement.endYear : 'Actuel'
-
-		const newMsg = {
-			type: 1,
-			title: name,
-			subtitle: movement.startYear + " - " + endYear,
-			imageUrl: "https:" + movement.image.fields.file.url,
-			buttons: [
-				{
-					type: 'postback',
-					title: 'C\'est quoi ?',
-					payload: 'Qu\'est ce que ' + name
-				}
-			]
-		};
-
-		if(newMsg.title && (newMsg.subtitle || newMsg.imageUrl))
-			responseMessages.push(newMsg);
-
-		return responseMessages;
+		console.log(RichcardGenerator.movementRichcard());
+		return responseMessages.push(RichcardGenerator.movementRichcard());
 	}
 
 	generateResponse( entity, action, responseMessages ) {
@@ -747,25 +644,24 @@ class Bernie {
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
 
 
-		let newMsg = { type: 0, speech: template.message };
+		let newMsg = new ResponseMessage(0, {speech: template.message});
 
 		responseMessages.push(newMsg);
 
 		if( action == "search_artist" && entity.movements && template.template && template.template.params.indexOf('movements') > -1) {
 			console.log("MOVEMENTS search_artist MORE");
-			let moreInfoOpening = {};
-
-			moreInfoOpening.text = 'Tu sais ce que c\'est ?';
-			moreInfoOpening.type = 2;
-			moreInfoOpening.quick_replies = [{
-				content_type: "text",
-				title: "Carrément 🎓",
-				payload: "Bien sûr que je sais"
-			},{
-				content_type: "text",
-				title: "Pas vraiment 🤔",
-				payload: "Qu'est-ce que le " + entity.movements[0].fields.name
-			}];
+			let moreInfoOpening = new ResponseMessage( 2,
+				{ text : 'Tu sais ce que c\'est ?',
+					quick_replies : [{
+						content_type: "text",
+						title: "Carrément 🎓",
+						payload: "Bien sûr que je sais"
+					},{
+						content_type: "text",
+						title: "Pas vraiment 🤔",
+						payload: "Qu'est-ce que le " + entity.movements[0].fields.name
+					}]
+				});
 
 			responseMessages.push(moreInfoOpening);
 		}
@@ -775,7 +671,6 @@ class Bernie {
 				let content = entity.content[i]
 				console.log("§#§#§#§#§#§#§#§#§#§#§#", content);
 				 if ( content.fields.type == "AdditionalContent" ) {
-					 	let moreInfoOpening = {};
 						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 						console.log(name);
 						const openingText = [
@@ -791,17 +686,19 @@ class Bernie {
 							'C’était clair 👌',
 							'Ça ira ✋'
 						]
-						moreInfoOpening.text = openingText[Math.floor(openingText.length * Math.random())];
-			 			moreInfoOpening.type = 2;
-			 			moreInfoOpening.quick_replies = [{
-			 				content_type: "text",
-			 				title: acceptText[Math.floor(acceptText.length * Math.random())],
-			 				payload: "Dis m'en plus sur " + name
-			 			},{
-			 				content_type: "text",
-			 				title: declineText[Math.floor(declineText.length * Math.random())],
-			 				payload: "ça ira mon coco"
-			 			}];
+
+						let moreInfoOpening = new ResponseMessage( 2,
+							{ text : openingText[Math.floor(openingText.length * Math.random())],
+								quick_replies : [{
+					 				content_type: "text",
+					 				title: acceptText[Math.floor(acceptText.length * Math.random())],
+					 				payload: "Dis m'en plus sur " + name
+					 			},{
+					 				content_type: "text",
+					 				title: declineText[Math.floor(declineText.length * Math.random())],
+					 				payload: "ça ira mon coco"
+					 			}]
+							});
 
 			 			responseMessages.push(moreInfoOpening);
 						break;
@@ -820,16 +717,10 @@ class Bernie {
 				content.content.forEach( function( description ) {
 					description = description.fields
 					if( description.body ) {
-						responseMessages.push( {
-							type: 0,
-							speech: description.body
-						} )
+						responseMessages.push( new ResponseMessage(0, {speech: description.body} ) );
 					}
 					if( description.media ) {
-						responseMessages.push( {
-							type: 3,
-							imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url
-						} )
+						responseMessages.push( new ResponseMessage(3, {imageUrl: "https:" + description.media[Math.floor(description.media.length * Math.random())].fields.file.url} ) );
 					}
 				} )
 			}
