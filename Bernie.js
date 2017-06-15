@@ -660,8 +660,8 @@ class Bernie {
 	entityContentResponse(entity, keyword, responseMessages) {
 		console.log("*************************************************************", entity);
 		const content = entity.content
-		content.forEach( function( content ) {
-			content = content.fields
+		for( let i = 0; i < content.length; i++ ){
+			content = content[i].fields
 			if ( content.type === keyword ) {
 				content.content.forEach( function( description ) {
 					description = description.fields
@@ -675,9 +675,9 @@ class Bernie {
 			}
 			// si Description et est une collection, montrer les images
 			if( keyword === "Description" && entity.isACollection ){
-				response = entityImageResponse( entity, responseMessages )
+				response = this.entityImageResponse( entity, responseMessages )
 			}
-		} )
+		}
 
 		return responseMessages
 	}
