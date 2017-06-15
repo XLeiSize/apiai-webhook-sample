@@ -64,7 +64,7 @@ restService.post('/hook', function (req, res) {
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises.map(Utils.reflect)))
+                    Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
                       let success = responses.filter(x => x.status === "resolved");
