@@ -625,20 +625,26 @@ class Bernie {
 	createArtistRichcard(artist, action, responseMessages) {
 		const msg = RichcardGenerator.artistRichcard(artist);
 		console.log("@@@@@@", msg);
-		return responseMessages.push(msg);
+		responseMessages.push(msg);
+
+		return responseMessages;
 	}
 
 
 	createArtworkRichcard(artwork, action, responseMessages) {
 		const msg = RichcardGenerator.artworkRichcard(artwork);
 		console.log("@@@@@@", msg);
-		return responseMessages.push(msg);
+		responseMessages.push(msg);
+
+		return responseMessages;
 	}
 
 	createMovementRichcard( movement, action, responseMessages) {
 		const msg = RichcardGenerator.movementRichcard(movement);
 		console.log("@@@@@@", msg);
-		return responseMessages.push(msg);
+		responseMessages.push(msg);
+
+		return responseMessages;
 	}
 
 	generateResponse( entity, action, responseMessages ) {
