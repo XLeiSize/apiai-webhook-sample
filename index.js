@@ -64,7 +64,7 @@ restService.post('/hook', function (req, res) {
                       }
                   } )
 
-                  Promise.all(richcardPromises.map(Utils.reflect))
+                  Promise.all(richcardPromises)
                   .then( values => {
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
 
