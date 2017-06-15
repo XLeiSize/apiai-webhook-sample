@@ -149,7 +149,7 @@ class Bernie {
 
 					if(action === "input.welcome"){
 						let moreInfoOpening = {};
-						moreInfoOpening.text = "Tu as besoin de moi ?";
+						moreInfoOpening.text = "Tu as besoin de moi ? 💁";
 			 			moreInfoOpening.type = 2;
 			 			moreInfoOpening.quick_replies = [{
 			 				content_type: "text",
@@ -162,9 +162,17 @@ class Bernie {
 			 			}];
 						responseMessages.push(moreInfoOpening)
 						resolve( {type: 'richContent', messages: responseMessages} );
-					} else if(action === "HELLNO"){
+					} else if(action === "hellno"){
+						
 						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/Ph8OWoJA2M3eM/giphy.gif"})
 						resolve( {type: 'richContent', messages: responseMessages} );
+
+
+					} else if(action === "ofcourse"){
+
+						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/P0RWkdsRpK7ss/giphy.gif"})
+						resolve( {type: 'richContent', messages: responseMessages} );
+
 					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
