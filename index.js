@@ -65,10 +65,10 @@ restService.post('/hook', function (req, res) {
                                   if( Array.isArray( response ) ){
                                       withRichcardsMessages = withRichcardsMessages.concat( response )
                                   } else {
-                                      ‹withRichcardsMessages›.push( response )
+                                      withRichcardsMessages.push( response )
                                   }
 
-                                  console.log("1111111111111messages111111111111111", ‹withRichcardsMessages›);
+                                  console.log("1111111111111messages111111111111111", withRichcardsMessages);
                                   resolve( "richcard" )
 
             			           }).catch( error => {
