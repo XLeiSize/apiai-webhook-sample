@@ -37,7 +37,6 @@ restService.post('/hook', function (req, res) {
                     let hasRichcard = []
                     let richcardPromises = []
                     let withRichcardsMessages = messages;
-                    //NEED TO PREVENT SENDING TWICE
                     messages.forEach( ( msg ) => {
                         if( msg.speech && msg.speech !== "" ){
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
@@ -60,13 +59,13 @@ restService.post('/hook', function (req, res) {
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
                     Promise.all(richcardPromises.map(Utils.reflect))
-                    .then( responses => {
+                    .then( values => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-                      let resolved = responses.filter(value => value.status === 'resolved');
-                      let rejected = responses.filter(value => value.status === 'rejected');
-                      console.log(resolved, rejected);
-                        for(let i = 0; i < responses.length; i++ ){
-                          if( responses[i] == "richcard" ){
+                      let resolved = values.filter(value => value.status === 'resolved');
+                      let rejected = values.filter(value => value.status === 'rejected');
+                      console.log(resolved);
+                        for(let i = 0; i < values.length; i++ ){
+                          if( values[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
                             return res.json({
                                 speech: speech,
