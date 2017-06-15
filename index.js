@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Bernie = require('./Bernie.js');
+const Utils = require('./helpers/utils.js');
 let bernie = new Bernie();
 
 
@@ -57,7 +58,7 @@ restService.post('/hook', function (req, res) {
 
             			           }).catch( error => {
                                   console.log( error );
-                                  resolve( false );
+                                  reject( false );
                               } )
                             } ) )
                         }
