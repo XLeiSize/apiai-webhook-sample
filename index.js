@@ -42,29 +42,40 @@ restService.post('/hook', function (req, res) {
                     messages.forEach( ( msg ) => {
                         console.log("MSGMSGMSGMSGMSGMSGMSG", msg);
                         if( msg.speech && msg.speech !== "" ){
-                            richcardPromises.push( new Promise( ( resolve, reject ) => {
-                                bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                				          console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
-                                  //put this response after previous one
+                            richcardPromises.push( bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                              console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                              //put this response after previous one
 
-                                  if( Array.isArray( response ) ){
-                                      withRichcardsMessages = withRichcardsMessages.concat( response )
-                                  } else {
-                                      withRichcardsMessages.push( response )
-                                  }
+                              if( Array.isArray( response ) ){
+                                  withRichcardsMessages = withRichcardsMessages.concat( response )
+                              } else {
+                                  withRichcardsMessages.push( response )
+                              }
 
-                                  console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
-                                  resolve( withRichcardsMessages );
+                              console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
+                              //resolve( withRichcardsMessages );
 
-            			           }).catch( error => {
-                                  console.log( error );
-                                  reject( new Error(error) );
-                              } )
-                            } ) )
+                         }) )
+                            // richcardPromises.push( new Promise( ( resolve, reject ) => {
+                            //     bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                				    //       console.log( "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHIT", sender, response );
+                            //       //put this response after previous one
+                            //
+                            //       if( Array.isArray( response ) ){
+                            //           withRichcardsMessages = withRichcardsMessages.concat( response )
+                            //       } else {
+                            //           withRichcardsMessages.push( response )
+                            //       }
+                            //
+                            //       console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
+                            //       resolve( withRichcardsMessages );
+                            //
+            			          //  })
+                            // } ) )
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises.map(p => p.catch(e => e)))
+                    Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
                         for(let i = 0; i < responses.length; i++ ){
