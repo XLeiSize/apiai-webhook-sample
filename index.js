@@ -57,6 +57,9 @@ restService.post('/hook', function (req, res) {
             			           }).catch( error => {
                                   console.log( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", error );
                                   resolve( "nope" )
+                                  if( !msg ){
+                                    reject('OH HEEEEELL NO');
+                                  }
                               } )
                             } ) )
                         }
