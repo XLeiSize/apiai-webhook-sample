@@ -676,7 +676,7 @@ class Bernie {
 		}
 		// si Description et est une collection, montrer les images
 		if( keyword === "Description" && entity.isACollection ){
-			response = this.entityImageResponse( entity, responseMessages )
+			responseMessages = this.entityImageResponse( entity, responseMessages )
 		}
 
 		return responseMessages
