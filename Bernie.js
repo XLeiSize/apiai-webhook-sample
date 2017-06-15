@@ -147,7 +147,22 @@ class Bernie {
 					let keywords = action.split('_');
 					console.log(keywords);
 
-					if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
+					if(action === "input.welcome"){
+						let moreInfoOpening = {};
+						moreInfoOpening.text = "";
+			 			moreInfoOpening.type = 2;
+			 			moreInfoOpening.quick_replies = [{
+			 				content_type: "text",
+			 				title: "Oui aide-moi 🙏",
+			 				payload: "aide-moi"
+			 			},{
+			 				content_type: "text",
+			 				title: "Non.",
+			 				payload: "HELL NO"
+			 			}];
+						responseMessages.push(moreInfoOpening)
+						resolve( {type: 'richContent', messages: responseMessages} );
+					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
 						let keyword = keywords[1]
