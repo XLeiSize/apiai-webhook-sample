@@ -52,7 +52,7 @@ restService.post('/hook', function (req, res) {
                                   }
 
                                   console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
-                                  resolve( withRichcardsMessages )
+                                  resolve( "richcard" )
 
             			           }).catch( error => {
                                   console.log( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", error );
