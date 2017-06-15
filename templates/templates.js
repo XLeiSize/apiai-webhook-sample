@@ -46,7 +46,7 @@ module.exports = {
 				'content'
 			],
 			templates: [
-				"{{#content}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/content}}"
+				""
 			]
 		}
 	],
