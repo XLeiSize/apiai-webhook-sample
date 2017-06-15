@@ -8,9 +8,6 @@ const TemplateEngine = require('./TemplateEngine.js');
 const ProcessData = require('./ProcessData.js');
 const Utils = require('./helpers/utils.js');
 
-const WikiAPI = require('wikijs');
-const wiki = WikiAPI.default();
-
 class ResponseMessage {
 
   constructor( type, options ) {
