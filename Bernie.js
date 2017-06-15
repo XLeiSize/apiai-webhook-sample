@@ -149,7 +149,7 @@ class Bernie {
 
 					if(action === "input.welcome"){
 						let moreInfoOpening = {};
-						moreInfoOpening.text = "";
+						moreInfoOpening.text = "Tu as besoin de moi ?";
 			 			moreInfoOpening.type = 2;
 			 			moreInfoOpening.quick_replies = [{
 			 				content_type: "text",
