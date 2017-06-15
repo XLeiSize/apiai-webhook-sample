@@ -3,8 +3,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Bernie = require('./Bernie.js');
-const Utils = require('./helpers/utils.js');
+const settle = require('promise-settle');
+
 let bernie = new Bernie();
+
+
 
 
 const restService = express();
@@ -58,36 +61,47 @@ restService.post('/hook', function (req, res) {
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises)
-                    .then( values => {
-                      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-                      let resolved = values.filter(value => value.status === 'resolved');
-                      let rejected = values.filter(value => value.status === 'rejected');
-                      console.log(resolved);
-                        for(let i = 0; i < values.length; i++ ){
-                          if( values[i] == "richcard" ){
-                            console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-                            return res.json({
-                                speech: speech,
-                                displayText: speech,
-                                messages: withRichcardsMessages,
-                                source: 'berniewebhook'
-                            });
-                          }
+
+                    settle(richcardPromises)
+                    .then(function (results) {
+                      results.forEach(function (result) {
+                        if (result.isFulfilled()) {
+                          console.log('Promise is fulfilled', result.value());
+                        } else {
+                          console.log('Promise is rejected', result.reason());
                         }
-
-                        console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-                        return res.json({
-                            speech: speech,
-                            displayText: speech,
-                            messages: messages,
-                            source: 'berniewebhook'
-                        });
-
-                    }).catch( error => {
-                        console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
-
-                    } )
+                      })
+                    });
+                    // Promise.all(richcardPromises)
+                    // .then( values => {
+                    //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
+                    //   let resolved = values.filter(value => value.status === 'resolved');
+                    //   let rejected = values.filter(value => value.status === 'rejected');
+                    //   console.log(resolved);
+                    //     for(let i = 0; i < values.length; i++ ){
+                    //       if( values[i] == "richcard" ){
+                    //         console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                    //         return res.json({
+                    //             speech: speech,
+                    //             displayText: speech,
+                    //             messages: withRichcardsMessages,
+                    //             source: 'berniewebhook'
+                    //         });
+                    //       }
+                    //     }
+                    //
+                    //     console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+                    //     return res.json({
+                    //         speech: speech,
+                    //         displayText: speech,
+                    //         messages: messages,
+                    //         source: 'berniewebhook'
+                    //     });
+                    //
+                    // }).catch( error => {
+                    //     console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
+                    //
+                    // } )
 
 
 
