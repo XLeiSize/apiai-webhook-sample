@@ -1,12 +1,12 @@
 const Template = require('./TemplateEngine.js');
 
-const Wikiart = require('./database/wikiart.js');
-const Custom = require('./database/custom.js');
+const Wikiart = require('../database/wikiart.js');
+const Custom = require('../database/custom.js');
 
 const TemplateEngine = require('./TemplateEngine.js');
 
-const ProcessData = require('./ProcessData.js');
-const Utils = require('./helpers/utils.js');
+const ProcessData = require('../ProcessData.js');
+const Utils = require('../helpers/utils.js');
 
 class ResponseMessage {
 

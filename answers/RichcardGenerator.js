@@ -1,4 +1,4 @@
-const Utils = require('./helpers/utils.js');
+const Utils = require('../helpers/utils.js');
 const ResponseMessage = require('./ResponseMessage.js');
 
 class RichcardGenerator {
