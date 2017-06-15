@@ -659,7 +659,7 @@ class Bernie {
 
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(entity, keyword, responseMessages) {
-		const content = entity.content
+		let content = entity.content
 		for( let i = 0; i < content.length; i++ ){
 			content = content[i].fields
 			if ( content.type === keyword ) {
