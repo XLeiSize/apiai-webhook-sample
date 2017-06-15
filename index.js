@@ -56,7 +56,7 @@ restService.post('/hook', function (req, res) {
 
           			           }).catch( error => {
                                 console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                reject( "TELL ME WHY" );
+                                //reject( "TELL ME WHY" );
                             } )
                           } ) )
 
@@ -90,6 +90,12 @@ restService.post('/hook', function (req, res) {
 
                   }).catch( error => {
                       console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
+                      return res.json({
+                          speech: speech,
+                          displayText: speech,
+                          messages: messages,
+                          source: 'berniewebhook'
+                      });
                   } )
 
 		            }).catch( err => {
