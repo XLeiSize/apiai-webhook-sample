@@ -36,69 +36,65 @@ restService.post('/hook', function (req, res) {
                 }
 
                 bernie.processAPIAIResult(requestBody).then(( {type, messages} ) => {
-					          console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
-                    let hasRichcard = []
-                    let richcardPromises = []
-                    let withRichcardsMessages = messages;
-                    messages.forEach( ( msg ) => {
-                        if( msg.speech && msg.speech !== "" ) {
-                            console.log("MY message", msg);
-                            richcardPromises.push( new Promise( ( resolve, reject ) => {
-                                bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
-                                  //put this response after previous one
-                                  if( Array.isArray( response ) ){
-                                      withRichcardsMessages = withRichcardsMessages.concat( response )
-                                  } else {
-                                      withRichcardsMessages.push( response )
-                                  }
-                                  console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
-                                  resolve( withRichcardsMessages );
+				          console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
+                  let hasRichcard = []
+                  let richcardPromises = []
+                  let withRichcardsMessages = messages;
+                  messages.forEach( ( msg ) => {
+                      if( msg.speech && msg.speech !== "" ) {
+                          console.log("MY message", msg);
+                          richcardPromises.push( new Promise( ( resolve, reject ) => {
+                              bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
+                                //put this response after previous one
+                                if( Array.isArray( response ) ){
+                                    withRichcardsMessages = withRichcardsMessages.concat( response )
+                                } else {
+                                    withRichcardsMessages.push( response )
+                                }
+                                console.log("&&&&&&&&&&& messages &&&&&&&&&&&&&", withRichcardsMessages);
+                                resolve( withRichcardsMessages );
 
-            			           }).catch( error => {
-                                  console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                  //resolve( error );
-                              } )
-                            } ) )
+          			           }).catch( error => {
+                                console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
+                                resolve( "YES" );
+                            } )
+                          } ) )
 
-                            console.log("my richcards", richcardPromises);
+                          console.log("my richcards", richcardPromises);
+                      }
+                  } )
+
+                  Promise.all(richcardPromises)
+                  .then( values => {
+                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
+
+                      for(let i = 0; i < values.length; i++ ){
+                        if( values[i] == "richcard" ){
+                          console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                          return res.json({
+                              speech: speech,
+                              displayText: speech,
+                              messages: withRichcardsMessages,
+                              source: 'berniewebhook'
+                          });
                         }
-                    } )
+                      }
 
-                    Promise.all(richcardPromises)
-                    .then( values => {
-                      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
+                      console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+                      return res.json({
+                          speech: speech,
+                          displayText: speech,
+                          messages: messages,
+                          source: 'berniewebhook'
+                      });
 
-                        for(let i = 0; i < values.length; i++ ){
-                          if( values[i] == "richcard" ){
-                            console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-                            return res.json({
-                                speech: speech,
-                                displayText: speech,
-                                messages: withRichcardsMessages,
-                                source: 'berniewebhook'
-                            });
-                          }
-                        }
+                  }).catch( error => {
+                      console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
+                  } )
 
-                        console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-                        return res.json({
-                            speech: speech,
-                            displayText: speech,
-                            messages: messages,
-                            source: 'berniewebhook'
-                        });
-
-                    }).catch( error => {
-                        console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
-
-                    } )
-
-
-
-				}).catch( err => {
-                    console.log("errr", err);
-                });;
-
+		            }).catch( err => {
+                  console.log("errr", err);
+                });
             }
         }
 
