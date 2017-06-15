@@ -62,8 +62,9 @@ restService.post('/hook', function (req, res) {
                     Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-                      let success = responses.filter(x => x.status === "resolved");
-                      console.log(success);
+                      let resolved = responses.filter(value => value.status === 'resolved');
+                      let rejected = responses.filter(value => value.status === 'rejected');
+                      console.log(resolved, rejected);
                         for(let i = 0; i < responses.length; i++ ){
                           if( responses[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
