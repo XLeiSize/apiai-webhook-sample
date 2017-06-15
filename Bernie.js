@@ -463,7 +463,6 @@ class Bernie {
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
 						this.createRichcardsList( artists, 'artist', query, action, responseMessages )
 						.then( responseMessages => {
-							console.log("ééééééééééééééééé", responseMessages);
 							resolve(responseMessages)
 						} )
 						.catch( error => reject(error) );
@@ -474,7 +473,6 @@ class Bernie {
 						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artworks);
 						this.createRichcardsList( artworks, 'artwork', query, action, responseMessages )
 						.then( responseMessages => {
-							console.log("ééééééééééééééééé", responseMessages);
 							resolve(responseMessages)
 						} )
 						.catch( error => reject(error) );
@@ -510,6 +508,7 @@ class Bernie {
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
 					this.createRichcard(entity, type, responseMessages)
+					console.log("3####3#3#####3#3333##3###333##3###333#33##333######333333##", responseMessages);
 					// switch( type ){
 					// 	case 'artwork':
 					// 		this.createArtworkRichcard( entity, action, responseMessages )
