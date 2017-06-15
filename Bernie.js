@@ -277,19 +277,20 @@ class Bernie {
 										if (typeof entity == 'object') {
 											richcardPromises.push(new Promise( reso => {
 												console.log('key[i]', key[i]);
-												switch(key[i]) {
-													case 'artist':
-														responseMessages = this.createArtistRichcard(entity, action, responseMessages);
-														break;
-													case 'artwork':
-														responseMessages = this.createArtworkRichcard(entity, action, responseMessages);
-														break;
-													case 'movement':
-														responseMessages = this.createMovementRichcard(entity, action, responseMessages);
-														break;
-													default:
-														break;
-												}
+												this.createRichcard(entity, key[i], responseMessages)
+												// switch(key[i]) {
+												// 	case 'artist':
+												// 		responseMessages = this.createArtistRichcard(entity, action, responseMessages);
+												// 		break;
+												// 	case 'artwork':
+												// 		responseMessages = this.createArtworkRichcard(entity, action, responseMessages);
+												// 		break;
+												// 	case 'movement':
+												// 		responseMessages = this.createMovementRichcard(entity, action, responseMessages);
+												// 		break;
+												// 	default:
+												// 		break;
+												// }
 												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
 												reso('success Custom');
 
@@ -306,7 +307,7 @@ class Bernie {
 													case 'artist':
 														this.wikiart.getArtistByName( name ).then((artist) => {
 															if (typeof artist == "object") {
-																responseMessages = this.createArtistRichcard(artist, action, responseMessages);
+																responseMessages = this.createRichcard(artist, key[i], responseMessages);
 															}
 															reso('success Wikiart');
 														})
@@ -315,7 +316,7 @@ class Bernie {
 													case 'artwork':
 														this.wikiart.getArtworkByName( name ).then(( artwork ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createArtworkRichcard( artwork , action, responseMessages);
+																responseMessages = this.createRichcard(artwork, key[i], responseMessages);
 															}
 															reso('success Wikiart');
 														})
@@ -324,7 +325,7 @@ class Bernie {
 													case 'movement':
 														this.wikiart.getMovementByName( name ).then(( movement ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createMovementRichcard( movement , action, responseMessages );
+																responseMessages = this.createRichcard(movement, key[i], responseMessages);
 															}
 															reso('success Wikiart');
 														})
@@ -508,14 +509,15 @@ class Bernie {
 				let richcardPromises = [];
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
-					switch( type ){
-						case 'artwork':
-							this.createArtworkRichcard( entity, action, responseMessages )
-							break;
-						case 'artist':
-							this.createArtistRichcard( entity, action, responseMessages )
-							break;
-					}
+					this.createRichcard(entity, type, responseMessages)
+					// switch( type ){
+					// 	case 'artwork':
+					// 		this.createArtworkRichcard( entity, action, responseMessages )
+					// 		break;
+					// 	case 'artist':
+					// 		this.createArtistRichcard( entity, action, responseMessages )
+					// 		break;
+					// }
 				}
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
@@ -539,17 +541,19 @@ class Bernie {
 				}
 				Promise.all(wikiartPromises)
 				.then((results) => {
-					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&", results);
+					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" ) {
-							switch ( type ) {
-								case 'artist':
-									this.createArtistRichcard( results[j], action, responseMessages )
-									break;
-								case 'artwork':
-									this.createArtworkRichcard( results[j], action, responseMessages )
-									break;
-							}
+							this.createRichcard(results[j], type, responseMessages)
+
+							// switch ( type ) {
+							// 	case 'artist':
+							// 		this.createArtistRichcard( results[j], action, responseMessages )
+							// 		break;
+							// 	case 'artwork':
+							// 		this.createArtworkRichcard( results[j], action, responseMessages )
+							// 		break;
+							// }
 						}
 					}
 					console.log(responseMessages);
@@ -618,8 +622,11 @@ class Bernie {
 	}
 
 	createRichcard(entity, category, responseMessages) {
-		console.log(RichcardGenerator.richcard(entity, category));
-		return responseMessages.push(RichcardGenerator.richcard(entity, category));
+		const msg = RichcardGenerator.richcard(entity, category);
+		console.log("@@@@@@", msg);
+		responseMessages.push(msg);
+
+		return responseMessages;
 	}
 
 	createArtistRichcard(artist, action, responseMessages) {
