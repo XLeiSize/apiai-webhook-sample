@@ -106,7 +106,7 @@ class RichcardGenerator {
     return new ResponseMessage(1, {
 			title: title,
 			subtitle: subtitle,
-			category: this.category
+			category: this.category,
 			data: { 'yolo': 'yolo', 'yaka': true },
 			description: ' Lorem lorem lorem',
 			imageUrl: imageUrl,
