@@ -103,7 +103,7 @@ class Bernie {
 		let responseMessages = [];
 		let options = {
 			'sender': 'apiai',
-			'text':  message.speech,
+			'text':  message.speech ? message.speech : "rien",
 			'event': 'event'
 		}
 		this.sender = options.sender;

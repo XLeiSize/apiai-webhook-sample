@@ -38,7 +38,7 @@ restService.post('/hook', function (req, res) {
                     let richcardPromises = []
                     let withRichcardsMessages = messages;
                     messages.forEach( ( msg ) => {
-                        if( msg.speech && msg.speech !== "" ){
+                        if( msg.speech && msg.speech !== "" ) {
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                                   //put this response after previous one
