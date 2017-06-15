@@ -63,9 +63,9 @@ restService.post('/hook', function (req, res) {
                                   //put this response after previous one
 
                                   if( Array.isArray( response ) ){
-                                      withRichcardsMessage = withRichcardsMessage.concat( response )
+                                      withRichcardsMessages = withRichcardsMessages.concat( response )
                                   } else {
-                                      withRichcardsMessage.push( response )
+                                      withRichcardsMessages.push( response )
                                   }
 
                                   console.log("1111111111111messages111111111111111", messages);
@@ -96,7 +96,7 @@ restService.post('/hook', function (req, res) {
                         return res.json({
                             speech: speech,
                             displayText: speech,
-                            messages: withRichcardsMessage,
+                            messages: withRichcardsMessages,
                             source: 'berniewebhook'
                         });
                     }).catch( error => {
