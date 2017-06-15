@@ -81,22 +81,26 @@ restService.post('/hook', function (req, res) {
                     console.log("YEAH ALRIGHT", richcardPromises);
                     Promise.all(richcardPromises)
                     .then( response => {
+                      console.log(response);
+
                         for(let i = 0; i < response.length; i++ ){
-                          if( !response[i]  ){
-                            console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+                          if( response[i] ){
+                            console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+
                             return res.json({
                                 speech: speech,
                                 displayText: speech,
-                                messages: messages,
+                                messages: withRichcardsMessages,
                                 source: 'berniewebhook'
                             });
                           }
                         }
-                        console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                        console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+
                         return res.json({
                             speech: speech,
                             displayText: speech,
-                            messages: withRichcardsMessages,
+                            messages: messages,
                             source: 'berniewebhook'
                         });
                     }).catch( error => {
