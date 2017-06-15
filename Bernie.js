@@ -8,11 +8,11 @@ const Template = require('./TemplateEngine.js');
 const Wikiart = require('./database/wikiart.js');
 const Custom = require('./database/custom.js');
 
-const TemplateEngine = require('./TemplateEngine.js');
+const TemplateEngine = require('./answers/TemplateEngine.js');
 
 const ProcessData = require('./ProcessData.js');
-const ResponseMessage = require('./ResponseMessage.js');
-const RichcardGenerator = require('./RichcardGenerator.js');
+const ResponseMessage = require('./answers/ResponseMessage.js');
+const RichcardGenerator = require('./answers/RichcardGenerator.js');
 const Utils = require('./helpers/utils.js');
 
 const WikiAPI = require('wikijs');
@@ -279,18 +279,7 @@ class Bernie {
 												console.log('key[i]', key[i]);
 												this.createRichcard(entity, key[i], responseMessages)
 												// switch(key[i]) {
-												// 	case 'artist':
-												// 		responseMessages = this.createArtistRichcard(entity, action, responseMessages);
-												// 		break;
-												// 	case 'artwork':
-												// 		responseMessages = this.createArtworkRichcard(entity, action, responseMessages);
-												// 		break;
-												// 	case 'movement':
-												// 		responseMessages = this.createMovementRichcard(entity, action, responseMessages);
-												// 		break;
-												// 	default:
-												// 		break;
-												// }
+
 												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
 												reso('success Custom');
 
@@ -397,13 +386,14 @@ class Bernie {
 				switch( params ){
 					case 'image': // PORTRAIT OR IMAGE
 						let images = this.entity.images ? this.entity.images : this.entity.portrait
+						console.log("QWERDRYITFUOYILYFDJFKHDFJHFDFJHDFHJ", images);
 						if( images.length > 1 ) {
 							images.forEach( function( image ){
-								responseMessages.push({
-									type: 1,
+								responseMessages.push(
+									new ResponseMessage( 1, {
 									title: image.fields.title,
 									imageUrl: "https:" + image.fields.file.url
-								})
+								} ))
 							})
 						} else {
 							let image = Array.isArray( images ) ? images[0] : images
@@ -411,6 +401,10 @@ class Bernie {
 								type: 3,
 								imageUrl: "https:" + image.fields.file.url
 							})
+							responseMessages.push(
+								new ResponseMessage( 3, {
+								imageUrl: "https:" + image.fields.file.url
+							} ))
 						}
 						break;
 					case 'artistName':
@@ -509,14 +503,6 @@ class Bernie {
 					const entity = results[j]
 					this.createRichcard(entity, type, responseMessages)
 					console.log("3####3#3#####3#3333##3###333##3###333#33##333######333333##", responseMessages);
-					// switch( type ){
-					// 	case 'artwork':
-					// 		this.createArtworkRichcard( entity, action, responseMessages )
-					// 		break;
-					// 	case 'artist':
-					// 		this.createArtistRichcard( entity, action, responseMessages )
-					// 		break;
-					// }
 				}
 				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( responseMessages );
@@ -544,15 +530,6 @@ class Bernie {
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" ) {
 							this.createRichcard(results[j], type, responseMessages)
-
-							// switch ( type ) {
-							// 	case 'artist':
-							// 		this.createArtistRichcard( results[j], action, responseMessages )
-							// 		break;
-							// 	case 'artwork':
-							// 		this.createArtworkRichcard( results[j], action, responseMessages )
-							// 		break;
-							// }
 						}
 					}
 					console.log(responseMessages);
@@ -589,7 +566,6 @@ class Bernie {
 
 		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
 
-		responseMessages.push( { type: 3, imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif' } );
 		responseMessages.push( new ResponseMessage(3, {imageUrl: "https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif"} ) );
 
 		const openingText = [
@@ -628,31 +604,7 @@ class Bernie {
 		return responseMessages;
 	}
 
-	createArtistRichcard(artist, action, responseMessages) {
-		const msg = RichcardGenerator.artistRichcard(artist);
-		console.log("@@@@@@", msg);
-		responseMessages.push(msg);
-
-		return responseMessages;
-	}
-
-
-	createArtworkRichcard(artwork, action, responseMessages) {
-		const msg = RichcardGenerator.artworkRichcard(artwork);
-		console.log("@@@@@@", msg);
-		responseMessages.push(msg);
-
-		return responseMessages;
-	}
-
-	createMovementRichcard( movement, action, responseMessages) {
-		const msg = RichcardGenerator.movementRichcard(movement);
-		console.log("@@@@@@", msg);
-		responseMessages.push(msg);
-
-		return responseMessages;
-	}
-
+	//GENERATE RESPONSE FROM TEMPLATE
 	generateResponse( entity, action, responseMessages ) {
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
