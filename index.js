@@ -35,6 +35,7 @@ restService.post('/hook', function (req, res) {
 					console.log("§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±§±", type, messages);
                     console.log('result: ', speech);
                     let hasRichcard = []
+                    let richcardPromises = []
                     let withRichcardsMessages = messages;
                     //NEED TO PREVENT SENDING TWICE
                     messages.forEach( ( msg ) => {
