@@ -425,10 +425,10 @@ class Bernie {
 						responseMessages.push(moreInfoOpening);
 						break;
 					case 'context':
-						responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+						responseMessages = this.entityContentResponse(this.entity, "Description", responseMessages)
 						break;
 					case 'additionalContent':
-						responseMessages = this.entityContentResponse(this.entity.content, "AdditionalContent", responseMessages)
+						responseMessages = this.entityContentResponse(this.entity, "AdditionalContent", responseMessages)
 						break;
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
@@ -633,7 +633,7 @@ class Bernie {
 			responseMessages.push(moreInfoOpening);
 		}
 		else if( !template.message && Array.isArray(entity.content) && entity.content.length > 0 ) {
-			responseMessages = this.entityContentResponse(entity.content, "Description", responseMessages);
+			responseMessages = this.entityContentResponse(entity, "Description", responseMessages);
 			for( let i = 0; i < entity.content.length; i++ ) {
 				let content = entity.content[i]
 				console.log("§#§#§#§#§#§#§#§#§#§#§#", content);
@@ -677,7 +677,9 @@ class Bernie {
 	}
 
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
-	entityContentResponse(content, keyword, responseMessages) {
+	entityContentResponse(entity, keyword, responseMessages) {
+		console.log("*************************************************************", entity);
+		const content = entity.content
 		content.forEach( function( content ) {
 			content = content.fields
 			if ( content.type === keyword ) {
@@ -691,6 +693,10 @@ class Bernie {
 					}
 				} )
 			}
+
+			// si Description et est une collection, montrer les images
+
+			//if( content.type === "Description" && entity.)
 		} )
 
 		return responseMessages
