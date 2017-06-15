@@ -56,7 +56,7 @@ restService.post('/hook', function (req, res) {
 
           			           }).catch( error => {
                                 console.log( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$SHIT", error );
-                                resolve( "YES" );
+                                reject( "TELL ME WHY" );
                             } )
                           } ) )
 
