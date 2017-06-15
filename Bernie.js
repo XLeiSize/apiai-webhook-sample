@@ -385,7 +385,7 @@ class Bernie {
 				this.entity = result.fields;
 				switch( params ){
 					case 'image': // PORTRAIT OR IMAGE
-						responseMessages = entityImageResponse( this.entity, responseMessages )
+						responseMessages = this.entityImageResponse( this.entity, responseMessages )
 						console.log( "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", responseMessages);
 						break;
 					case 'artistName':
