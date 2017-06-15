@@ -63,7 +63,7 @@ restService.post('/hook', function (req, res) {
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises)
+                    Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log(responses);
 
