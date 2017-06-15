@@ -60,47 +60,37 @@ restService.post('/hook', function (req, res) {
                             } ) )
                         }
                     } )
-                    settle(richcardPromises)
-                    .then(function (results) {
-                      console.log(results);
-                      results.forEach(function (result) {
-                        if (result.isFulfilled()) {
-                          console.log('Promise is fulfilled', result.value());
-                        } else {
-                          console.log('Promise is rejected', result.reason());
+
+                    Promise.all(richcardPromises)
+                    .then( values => {
+                      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
+                      let resolved = values.filter(value => value.status === 'resolved');
+                      let rejected = values.filter(value => value.status === 'rejected');
+                      console.log(resolved);
+                        for(let i = 0; i < values.length; i++ ){
+                          if( values[i] == "richcard" ){
+                            console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
+                            return res.json({
+                                speech: speech,
+                                displayText: speech,
+                                messages: withRichcardsMessages,
+                                source: 'berniewebhook'
+                            });
+                          }
                         }
-                      })
-                    });
-                    // Promise.all(richcardPromises)
-                    // .then( values => {
-                    //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-                    //   let resolved = values.filter(value => value.status === 'resolved');
-                    //   let rejected = values.filter(value => value.status === 'rejected');
-                    //   console.log(resolved);
-                    //     for(let i = 0; i < values.length; i++ ){
-                    //       if( values[i] == "richcard" ){
-                    //         console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
-                    //         return res.json({
-                    //             speech: speech,
-                    //             displayText: speech,
-                    //             messages: withRichcardsMessages,
-                    //             source: 'berniewebhook'
-                    //         });
-                    //       }
-                    //     }
-                    //
-                    //     console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-                    //     return res.json({
-                    //         speech: speech,
-                    //         displayText: speech,
-                    //         messages: messages,
-                    //         source: 'berniewebhook'
-                    //     });
-                    //
-                    // }).catch( error => {
-                    //     console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
-                    //
-                    // } )
+
+                        console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            messages: messages,
+                            source: 'berniewebhook'
+                        });
+
+                    }).catch( error => {
+                        console.log( "¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥*************¥**¥**********¥¥¥¥¥¥¥¥¥¥¥¥¥¥SHIT", error );
+
+                    } )
 
 
 
