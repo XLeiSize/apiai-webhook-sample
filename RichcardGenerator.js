@@ -101,7 +101,7 @@ class RichcardGenerator {
   }
 
 
-  generate(title, subtitle, imageUrl, options) {
+  generate(title, subtitle, imageUrl) {
     return new ResponseMessage(1, {
 			title: title,
 			subtitle: subtitle,
