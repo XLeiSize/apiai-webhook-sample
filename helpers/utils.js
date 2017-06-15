@@ -64,8 +64,13 @@ class Utils {
   }
 
   reflect(promise){
-    return promise.then(function(v){ return {v:v, status: "resolved" }},
-                        function(e){ return {e:e, status: "rejected" }});
+    return promise
+      .then(data => {
+        return {data: data, status: "resolved"}
+      })
+      .catch(error => {
+        return {error: error, status: "rejected"}
+      });
   }
 
   parseJSON (json) {
