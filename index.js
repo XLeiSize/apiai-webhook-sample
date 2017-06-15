@@ -42,6 +42,7 @@ restService.post('/hook', function (req, res) {
                     let withRichcardsMessages = messages;
                     messages.forEach( ( msg ) => {
                         if( msg.speech && msg.speech !== "" ) {
+                            console.log("MY message", msg);
                             richcardPromises.push( new Promise( ( resolve, reject ) => {
                                 bernie.parseSentMessages( msg ).then(( {sender, response } ) => {
                                   //put this response after previous one
@@ -58,15 +59,15 @@ restService.post('/hook', function (req, res) {
                                   //resolve( error );
                               } )
                             } ) )
+
+                            console.log("my richcards", richcardPromises);
                         }
                     } )
 
                     Promise.all(richcardPromises)
                     .then( values => {
                       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", responses);
-                      let resolved = values.filter(value => value.status === 'resolved');
-                      let rejected = values.filter(value => value.status === 'rejected');
-                      console.log(resolved);
+
                         for(let i = 0; i < values.length; i++ ){
                           if( values[i] == "richcard" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
