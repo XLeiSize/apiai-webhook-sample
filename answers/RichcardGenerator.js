@@ -2,6 +2,9 @@ const Utils = require('../helpers/utils.js');
 const ResponseMessage = require('./ResponseMessage.js');
 const Template = require('./TemplateEngine.js');
 
+const Wikiart = require('../database/wikiart.js');
+const Custom = require('../database/custom.js');
+
 class RichcardGenerator {
 
   constructor( ) {
@@ -65,7 +68,7 @@ class RichcardGenerator {
 
     this.subtitle = birthdate + ' - ' + deathdate
 
-    this.description = this.generateFromTemplate('richards_description', movement)
+    this.description = this.generateTextFromTemplate('richards_description', movement)
     return this.generate()
   }
 
@@ -85,7 +88,7 @@ class RichcardGenerator {
 
     this.subtitle = date + " - " + author
 
-    this.description = this.generateFromTemplate('richards_description', movement)
+    this.description = this.generateTextFromTemplate('richards_description', movement)
     return this.generate()
   }
 
@@ -101,16 +104,85 @@ class RichcardGenerator {
 
     this.imageUrl = "https:" + movement.image.fields.file.url
 
-    this.description = this.generateFromTemplate('richards_description', movement)
+    this.description = this.generateTextFromTemplate('richards_description', movement)
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
+
+    this.subitems = this.generateSubitems(movement, "mainArtworks")
     return this.generate()
   }
 
-  generateFromTemplate(action, entity) {
+  generateTextFromTemplate(action, entity) {
     console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
 		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
 		return template.message;
+  }
+
+  generateSubitems(entity, key) {
+    let custom = new Custom()
+    let wikiart = new Wikiart()
+    let list = entity[key]
+    let type = entity.sys.contentType.sys.id
+    console.log("ùùùùùùùùùùùùùùù", list, type);
+    let promises = [];
+		for( let i = 0; i < list.length; i++ ){
+      promises.push(
+        this.custom.getEntityByName(type, list[i])
+      )
+		}
+		return new Promise( (resolve, reject) => {
+			Promise.all(promises)
+			.then( results => {
+				let subitems = [];
+				for (let j = 0; j < results.length; j++) {
+					const entity = results[j]
+          const title = entity.fields.lastName ? entity.fields.firstName + " " + entity.fields.lastName : ( entity.fields.name ) ? entity.fields.name : entity.fields.title
+          const url = entity.fields.image.fields.file.url ? entity.fields.image.fields.file.url : ( entity.fields.images[0].fields.file.url ) ? entity.fields.images[0].fields.file.url : entity.fields.portrait.fields.file.url
+          const imageUrl = "https:" + url
+          subitems.push({
+            title: title,
+            imageUrl: url,
+            postback: title
+          })
+          console.log("SUBITEMS -SUBITEMS -SUBITEMS -SUBITEMS", subitems);
+
+				}
+				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
+				resolve( subitems );
+			}).catch( err => {
+				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
+				// WIKIART
+				let wikiartPromises = [];
+				let length = list.length > 5 ? 5 : list.length
+				for( let i = 0; i < length; i++ ) {
+					if (list[i] !== query) {
+						switch ( type ) {
+							case 'artist':
+								console.log(list[i]);
+								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
+								break;
+							case 'artwork':
+								wikiartPromises.push(this.wikiart.getArtworkByName( list[i] ))
+								break;
+						}
+					}
+				}
+				Promise.all(wikiartPromises)
+				.then((results) => {
+					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
+					for (let j = 0; j < results.length; j++) {
+						if ( typeof results[j] == "object" ) {
+							this.createRichcard(results[j], type, responseMessages)
+						}
+					}
+					console.log(responseMessages);
+					resolve( responseMessages );
+				})
+				.catch( error => { reject(error) } );
+					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
+					reject(error);
+			})
+		})
   }
 
 
@@ -119,7 +191,7 @@ class RichcardGenerator {
 			title: this.title,
 			subtitle: this.subtitle,
 			category: this.category,
-			subitems: { 'yolo': 'yolo', 'yaka': true },
+			subitems: this.subitems,
 			desc: this.description,
 			imageUrl: this.imageUrl,
 			buttons: [
