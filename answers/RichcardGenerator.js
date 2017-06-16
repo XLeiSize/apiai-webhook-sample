@@ -99,12 +99,9 @@ class RichcardGenerator {
 
     const imageUrl = "https:" + movement.image.fields.file.url
 
-    let description = movement.content.map(function(cont) {
-      return cont.fields.type == "Description" ? cont.fields.content[] : false;
-    })
     const description = this.generateFromTemplate('richards_description', movement)
     console.log(description);
-    return this.generate( title, subtitle, imageUrl )
+    return this.generate( title, subtitle, imageUrl, description )
   }
 
   generateFromTemplate(action, entity) {
@@ -115,7 +112,7 @@ class RichcardGenerator {
   }
 
 
-  generate(title, subtitle, imageUrl) {
+  generate(title, subtitle, imageUrl, description) {
     return new ResponseMessage(1, {
 			title: title,
 			subtitle: subtitle,
