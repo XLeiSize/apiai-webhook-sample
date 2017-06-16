@@ -119,8 +119,8 @@ class RichcardGenerator {
 			title: this.title,
 			subtitle: this.subtitle,
 			category: this.category,
-			data: { 'yolo': 'yolo', 'yaka': true },
-			desc: this.description,
+			subitems: { 'yolo': 'yolo', 'yaka': true },
+			description: this.description,
 			imageUrl: this.imageUrl,
 			buttons: [
 				{
