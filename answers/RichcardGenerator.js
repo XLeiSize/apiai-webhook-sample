@@ -30,7 +30,7 @@ class RichcardGenerator {
 
     if( typeof artist.fields == "object" ){
 			artist = artist.fields
-			title = artist.firstName ? artist.firstName + ' ' + artist.lastName : artist.lastName;
+			this.title = artist.firstName ? artist.firstName + ' ' + artist.lastName : artist.lastName;
 
 			if(artist.yearOfBirth) {
 				birthdate = artist.yearOfBirth;
@@ -52,7 +52,7 @@ class RichcardGenerator {
 			}
 			imageUrl = "https:" + artist.portrait.fields.file.url;
 		} else {
-			title = artist.artistName;
+			this.title = artist.artistName;
 
 			if(artist.birthDayAsString) {
 				birthdate = artist.birthDayAsString
@@ -63,11 +63,10 @@ class RichcardGenerator {
 			imageUrl = artist.image
 		}
 
-    let subtitle = birthdate + ' - ' + deathdate
+    this.subtitle = birthdate + ' - ' + deathdate
 
-    const description = this.generateFromTemplate('richards_description', movement)
-    console.log(description);
-    return this.generate( title, subtitle, imageUrl, description )
+    this.description = this.generateFromTemplate('richards_description', movement)
+    return this.generate()
   }
 
   artworkRichcard(artwork) {
@@ -80,32 +79,31 @@ class RichcardGenerator {
 			date = artwork.year
 			imageUrl = artwork.image
 		}
-		title = artwork.title
+		this.title = artwork.title
 
 		const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
 
-    const subtitle = date + " - " + author
+    this.subtitle = date + " - " + author
 
-    const description = this.generateFromTemplate('richards_description', movement)
-    console.log(description);
-    return this.generate( title, subtitle, imageUrl, description )
+    this.description = this.generateFromTemplate('richards_description', movement)
+    return this.generate()
   }
 
   movementRichcard(movement) {
     if( typeof movement.fields == "object" ){
 			movement = movement.fields
 		}
-		const title = movement.name;
+		this.title = movement.name;
 
 		const endYear = movement.endYear ? movement.endYear : 'Actuel'
 
-    const subtitle = movement.startYear + " - " + endYear
+    this.subtitle = movement.startYear + " - " + endYear
 
-    const imageUrl = "https:" + movement.image.fields.file.url
+    this.imageUrl = "https:" + movement.image.fields.file.url
 
-    const description = this.generateFromTemplate('richards_description', movement)
-    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", description);
-    return this.generate( title, subtitle, imageUrl, description )
+    this.description = this.generateFromTemplate('richards_description', movement)
+    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
+    return this.generate()
   }
 
   generateFromTemplate(action, entity) {
@@ -116,19 +114,19 @@ class RichcardGenerator {
   }
 
 
-  generate(title, subtitle, imageUrl, description) {
+  generate() {
     return new ResponseMessage(1, {
-			title: title,
-			subtitle: subtitle,
+			title: this.title,
+			subtitle: this.subtitle,
 			category: this.category,
 			data: { 'yolo': 'yolo', 'yaka': true },
-			desc: description,
-			imageUrl: imageUrl,
+			desc: this.description,
+			imageUrl: this.imageUrl,
 			buttons: [
 				{
 					type: 'postback',
 					title: 'Qui est-ce ?',
-					payload: 'Qui est ' + title
+					payload: 'Qui est ' + this.title
 				}
 			]
 		});

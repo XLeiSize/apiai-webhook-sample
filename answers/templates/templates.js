@@ -508,7 +508,7 @@ module.exports = {
 				'content'
 			],
 			templates: [
-				"{{#content}}{{#ifCond fields.type '==' 'Description'}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/ifCond}}{{/content}}"
+				"{{#content}}{{#ifCond fields.type '==' 'Description'}}{{#fields.content}}{{{ fields.body }}} {{/fields.content}}{{/ifCond}}{{/content}}"
 			]
 		}
 	],
