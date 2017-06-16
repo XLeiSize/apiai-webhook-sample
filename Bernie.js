@@ -410,11 +410,9 @@ class Bernie {
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						let movements = this.entity.movements
 						for( let i = 0; i < movements.length; i++ ){
-							this.createRichcard(movements[i], action, responseMessages)
+							responseMessages = this.createRichcard(movements[i], action, responseMessages)
 						}
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
-
-
 						break;
 					case 'mainArtists':
 					case 'contemporary':
