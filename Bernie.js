@@ -151,7 +151,7 @@ class Bernie {
 
 					if(action === "input.welcome"){
 						let newResponse = new ResponseMessage( 2, {
-							text: "Tu as besoin de moi ? 💁",
+							text: "",
 							quick_replies: [{
 				 				content_type: "text",
 				 				title: "Oui aide-moi 🙏",
@@ -259,7 +259,6 @@ class Bernie {
 						for( let i = 0; i < key.length; i++ ){
 							if( response.result.parameters[ keys[i] ].length > 1 ) {
 								const richcards = response.result.parameters[ keys[i] ];
-								console.log('richcards ' + keys[i] + ' ---> ', richcards);
 
 								for (let j = 0; j < richcards.length; j++) {
 									console.log(key[i], richcards[j]);
@@ -278,8 +277,6 @@ class Bernie {
 											richcardPromises.push(new Promise( reso => {
 												console.log('key[i]', key[i]);
 												this.createRichcard(entity, key[i], responseMessages)
-												// switch(key[i]) {
-
 												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
 												reso('success Custom');
 
@@ -544,7 +541,6 @@ class Bernie {
 				movement = image.author.fields.movements[0].fields.name
 			}
 		}
-
 		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
 
 		responseMessages.push( new ResponseMessage(3, {imageUrl: "https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif"} ) );
@@ -553,10 +549,10 @@ class Bernie {
 			'Tu veux en savoir plus sur quoi ?',
 			'Qu\'est-ce qui t\'intéresse ?'
 		]
-		let moreInfoOpening = {};
-		moreInfoOpening.type = 2;
-		moreInfoOpening.text = openingText[Math.floor(openingText.length * Math.random())];
-		moreInfoOpening.quick_replies = [{
+
+		let options = {}
+		options.text = openingText[Math.floor(openingText.length * Math.random())];
+		options.quick_replies = [{
 			content_type: "text",
 			title: "l'oeuvre 🖌️",
 			payload: "Qu'est ce que " + artistName + " voulais dire avec "  + title
@@ -567,12 +563,13 @@ class Bernie {
 		}];
 
 		if( movement ){
-			moreInfoOpening.quick_replies.push( {
+			options.quick_replies.push( {
 				content_type: "text",
 				title: "le mouvement 💫",
 				payload: "Qu'est ce que " + movement
 			} )
 		}
+		let moreInfoOpening = new ResponseMessage( 2, options);
 		responseMessages.push(moreInfoOpening);
 		return responseMessages;
 	}
