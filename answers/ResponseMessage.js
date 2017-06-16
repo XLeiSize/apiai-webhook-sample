@@ -12,7 +12,7 @@ class ResponseMessage {
 
   constructor( type, options ) {
     this.type = type
-    this.data = options.data
+    this.subitems = options.subitems
     switch(this.type) {
       case 0: this.textResponse(options)
         break;
@@ -33,7 +33,7 @@ class ResponseMessage {
     this.category = options.category
     this.title = options.title
     this.subtitle = options.subtitle
-    this.description = options.description
+    this.desc = options.desc
     this.imageUrl = options.imageUrl
     this.buttons = options.buttons
   }
