@@ -107,7 +107,7 @@ class RichcardGenerator {
     this.description = this.generateTextFromTemplate('richards_description', movement)
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 
-    this.subitems = this.generateSubitems(movement, "mainArtworks")
+    this.subitems = this.generateSubitems(movement, "mainArtworks", "movement")
     return this.generate()
   }
 
@@ -118,11 +118,10 @@ class RichcardGenerator {
 		return template.message;
   }
 
-  generateSubitems(entity, key) {
+  generateSubitems(entity, key, type) {
     let custom = new Custom()
     let wikiart = new Wikiart()
     let list = entity[key]
-    let type = entity.sys.contentType.sys.id
     console.log("ùùùùùùùùùùùùùùù", list, type);
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
