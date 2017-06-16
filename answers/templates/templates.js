@@ -500,5 +500,16 @@ module.exports = {
 				"{{#ifCond displayAsCentury '==' false }} mmmh ... Aux environ de {{startYear}} je dirais 🤔 {{else}}C'est difficile de donner une date de fin à un concept ... 🤔 Mais on peut à peu près la situer approximativement autour du {{centurify startYear}} 🤓 {{/ifCond}}"
 			]
 		},
-	]
+	],
+	'richards_description': [
+		{
+			id: 1,
+			params: [
+				'content'
+			],
+			templates: [
+				"{{#content}}{{#ifCond fields.type '==' 'Description'}}{{#fields.content}} {{{ fields.body }}} {{/fields.content}}{{/ifCond}}{{/content}}"
+			]
+		}
+	],
 }

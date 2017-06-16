@@ -8,8 +8,6 @@ const Template = require('./answers/TemplateEngine.js');
 const Wikiart = require('./database/wikiart.js');
 const Custom = require('./database/custom.js');
 
-const TemplateEngine = require('./answers/TemplateEngine.js');
-
 const ProcessData = require('./ProcessData.js');
 const ResponseMessage = require('./answers/ResponseMessage.js');
 const RichcardGenerator = require('./answers/RichcardGenerator.js');
@@ -151,7 +149,7 @@ class Bernie {
 
 					if(action === "input.welcome"){
 						let newResponse = new ResponseMessage( 2, {
-							text: "",
+							text: "Tu as besoin de moi ? 💁",
 							quick_replies: [{
 				 				content_type: "text",
 				 				title: "Oui aide-moi 🙏",

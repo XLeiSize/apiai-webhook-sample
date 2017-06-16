@@ -1,5 +1,6 @@
 const Utils = require('../helpers/utils.js');
 const ResponseMessage = require('./ResponseMessage.js');
+const Template = require('./TemplateEngine.js');
 
 class RichcardGenerator {
 
@@ -98,7 +99,19 @@ class RichcardGenerator {
 
     const imageUrl = "https:" + movement.image.fields.file.url
 
+    let description = movement.content.map(function(cont) {
+      return cont.fields.type == "Description" ? cont.fields.content[] : false;
+    })
+    const description = this.generateFromTemplate('richards_description', movement)
+    console.log(description);
     return this.generate( title, subtitle, imageUrl )
+  }
+
+  generateFromTemplate(action, entity) {
+    console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
+		const template = new Template(action, entity);
+		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
+		return template.message;
   }
 
 
@@ -108,7 +121,7 @@ class RichcardGenerator {
 			subtitle: subtitle,
 			category: this.category,
 			data: { 'yolo': 'yolo', 'yaka': true },
-			description: ' Lorem lorem lorem',
+			desc: description,
 			imageUrl: imageUrl,
 			buttons: [
 				{
