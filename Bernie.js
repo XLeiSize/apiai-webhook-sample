@@ -274,7 +274,7 @@ class Bernie {
 										if (typeof entity == 'object') {
 											richcardPromises.push(new Promise( reso => {
 												console.log('key[i]', key[i]);
-												this.createRichcard(entity, key[i], responseMessages)
+												response = this.createRichcard(entity, key[i], responseMessages)
 												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
 												reso('success Custom');
 
@@ -410,6 +410,8 @@ class Bernie {
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						let movements = this.entity.movements
 						for( let i = 0; i < movements.length; i++ ){
+							console.log(action);
+							console.log(movements[i]);
 							responseMessages = this.createRichcard(movements[i], action, responseMessages)
 						}
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );

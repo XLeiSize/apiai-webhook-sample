@@ -65,7 +65,9 @@ class RichcardGenerator {
 
     let subtitle = birthdate + ' - ' + deathdate
 
-    return this.generate( title, subtitle, imageUrl )
+    const description = this.generateFromTemplate('richards_description', movement)
+    console.log(description);
+    return this.generate( title, subtitle, imageUrl, description )
   }
 
   artworkRichcard(artwork) {
@@ -84,7 +86,9 @@ class RichcardGenerator {
 
     const subtitle = date + " - " + author
 
-    return this.generate( title, subtitle, imageUrl )
+    const description = this.generateFromTemplate('richards_description', movement)
+    console.log(description);
+    return this.generate( title, subtitle, imageUrl, description )
   }
 
   movementRichcard(movement) {
