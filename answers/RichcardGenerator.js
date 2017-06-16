@@ -104,7 +104,7 @@ class RichcardGenerator {
     const imageUrl = "https:" + movement.image.fields.file.url
 
     const description = this.generateFromTemplate('richards_description', movement)
-    console.log(description);
+    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", description);
     return this.generate( title, subtitle, imageUrl, description )
   }
 
