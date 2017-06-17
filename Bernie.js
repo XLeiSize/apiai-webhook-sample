@@ -439,7 +439,6 @@ class Bernie {
 						} else {
 							artists = this.entity[params]
 						}
-						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTISTS", artists);
 						this.createRichcardsList( artists, 'artist', query, action, responseMessages )
 						.then( responseMessages => {
 							resolve(responseMessages)
@@ -449,7 +448,6 @@ class Bernie {
 					case 'mainArtworks':
 						let artworks = this.entity[params];
 						hasPromise = true
-						console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ARTWORKS", artworks);
 						this.createRichcardsList( artworks, 'artwork', query, action, responseMessages )
 						.then( responseMessages => {
 							resolve(responseMessages)
