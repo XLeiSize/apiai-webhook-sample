@@ -612,7 +612,7 @@ class Bernie {
 			responseMessages = this.entityContentResponse(entity, "Description", responseMessages);
 			for( let i = 0; i < entity.content.length; i++ ) {
 				let content = entity.content[i]
-				console.log("§#§#§#§#§#§#§#§#§#§#§#", content);
+				console.log("§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#", content);
 				 if ( content.fields.type == "AdditionalContent" ) {
 						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 						console.log(name);
