@@ -274,7 +274,8 @@ class Bernie {
 										if (typeof entity == 'object') {
 											richcardPromises.push(new Promise( reso => {
 												console.log('key[i]', key[i]);
-												this.createRichcard(entity, key[i], responseMessages).then( responseMessages => {
+												this.createRichcard(entity, key[i]).then( richcard => {
+													responseMessages.push(richcard);
 													reso('success Custom');
 												} ).catch( err => {
 													reject( err );
@@ -295,7 +296,8 @@ class Bernie {
 													case 'artist':
 														this.wikiart.getArtistByName( name ).then((artist) => {
 															if (typeof artist == "object") {
-																this.createRichcard(artist, key[i], responseMessages).then( responseMessages => {
+																this.createRichcard(artist, key[i]).then( richcard => {
+																	responseMessages.push(richcard);
 																	reso('success Wikiart');
 																} ).catch( err => {
 																	reject( err );
@@ -308,7 +310,8 @@ class Bernie {
 													case 'artwork':
 														this.wikiart.getArtworkByName( name ).then(( artwork ) => {
 															if (typeof artwork == "object") {
-																this.createRichcard(artwork, key[i], responseMessages).then( responseMessages => {
+																this.createRichcard(artwork, key[i]).then( richcard => {
+																	responseMessages.push(richcard);
 																	reso('success Wikiart');
 																} ).catch( err => {
 																	reject( err );
@@ -320,7 +323,8 @@ class Bernie {
 													case 'movement':
 														this.wikiart.getMovementByName( name ).then(( movement ) => {
 															if (typeof artwork == "object") {
-																this.createRichcard(movement, key[i], responseMessages).then( responseMessages => {
+																this.createRichcard(movement, key[i]).then( richcard => {
+																	responseMessages.push(richcard);
 																	reso('success Wikiart');
 																} ).catch( err => {
 																	reject( err );
@@ -487,8 +491,7 @@ class Bernie {
 
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
-					console.log("my goddamn type", type);
-					richcardPromises.push(this.createRichcard(entity, type, responseMessages))
+					richcardPromises.push(this.createRichcard(entity, type))
 				}
 
 				Promise.all( richcardPromises ).then( richcards => {
@@ -528,7 +531,7 @@ class Bernie {
 						if ( typeof results[j] == "object" ) {
 							for (let j = 0; j < results.length; j++) {
 								const entity = results[j]
-								richcardPromises.push(this.createRichcard(results[j], type, responseMessages))
+								richcardPromises.push(this.createRichcard(results[j], type))
 							}
 
 							Promise.all( richcardPromises ).then( richcards => {
@@ -604,12 +607,11 @@ class Bernie {
 		return responseMessages;
 	}
 
-	createRichcard(entity, category, responseMessages) {
+	createRichcard(entity, category) {
 		return new Promise( (resolve, reject) => {
 			RichcardGenerator.richcard(entity, category).then( richcard => {
-				console.log("@@@@@@", richcard);
-				responseMessages.push(richcard);
-				resolve( responseMessages );
+				console.log("@@@@@@@@€€€€€€€€€@@@@@@@@€€€€€€€€€@@@@@@@@€€€€€€€€€", richcard);
+				resolve( richcard );
 			} ).catch( err => {
 				reject( err );
 			} );
