@@ -160,7 +160,6 @@ class RichcardGenerator {
 		    this.imageUrl = "https:" + movement.image.fields.file.url
 
 		    this.description = this.generateTextFromTemplate('richards_description', movement)
-		    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 				this.subitems = {
 					title: "Oeuvres principaux",
 					items: subitems
@@ -199,7 +198,7 @@ class RichcardGenerator {
 				type = "movement"
 				break;
 		}
-    console.log("ùùùùùùùùùùùùùùù", list, type);
+    console.log("ùùùùùùùùùùùùùùù", key, list, type, entity);
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
 			console.log("comparing",current, list[i]);
