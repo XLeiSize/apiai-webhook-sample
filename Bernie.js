@@ -487,6 +487,7 @@ class Bernie {
 
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
+					console.log("my goddamn type", type);
 					richcardPromises.push(this.createRichcard(entity, type, responseMessages))
 				}
 

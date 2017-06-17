@@ -12,6 +12,7 @@ class RichcardGenerator {
   }
 
   richcard( entity, category ) {
+		console.log(category);
     this.category = category
 		return new Promise( (resolve, reject) => {
 	    switch( category ) {
