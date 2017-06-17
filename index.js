@@ -63,7 +63,6 @@ restService.post('/hook', function (req, res) {
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    console.log(richcardPromises.map(Utils.reflect));
                     Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log(responses);
@@ -75,7 +74,7 @@ restService.post('/hook', function (req, res) {
                       }
 
                         for(let i = 0; i < responses.length; i++ ){
-                          if( responses[i] == "richcard" ){
+                          if( responses[i].status == "resolved" ){
                             console.log( "PARTY PARTY PARTY PARTY PARTY PARTY PARTY PARTY" );
                             answerOpt.messages = withRichcardsMessages;
                           } else {
