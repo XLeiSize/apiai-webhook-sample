@@ -112,8 +112,8 @@ class RichcardGenerator {
   artworkRichcard(artwork) {
 		console.log("WTFFFFFFFFFFFF", artwork);
     let date, imageUrl, title, movement
-		title = artwork.title
 		artwork = artwork.fields
+		title = artwork.title
 		date = artwork.endYear
 		movement = artwork.movements[0].fields
 		return new Promise( (resolve, reject) => {
