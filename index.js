@@ -93,7 +93,7 @@ restService.post('/hook', function (req, res) {
 
 
 				}).catch( err => {
-                    console.log("errr", err);
+                    console.log("ERROR FROM PROCESSSING API.AI RESULT", err);
                     reject(err);
                 });;
 
