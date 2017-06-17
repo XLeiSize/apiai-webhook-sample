@@ -256,9 +256,10 @@ class RichcardGenerator {
 					console.log(responseMessages);
 					resolve( responseMessages );
 				})
-				.catch( error => { reject(error) } );
-					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
+				.catch( error => {
+					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err, error)
 					reject(error);
+				} );
 			})
 		})
   }
