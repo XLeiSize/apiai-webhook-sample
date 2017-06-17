@@ -40,13 +40,13 @@ class RichcardGenerator {
   }
 
   artistRichcard( artist ) {
-    let imageUrl, title;
+    let imageUrl, title, movement;
 		let birthdate = '';
 		let deathdate = '';
 
     if( typeof artist.fields == "object" ){
 			artist = artist.fields
-			this.title = artist.firstName ? artist.firstName + ' ' + artist.lastName : artist.lastName;
+			title = artist.firstName ? artist.firstName + ' ' + artist.lastName : artist.lastName;
 
 			if(artist.yearOfBirth) {
 				birthdate = artist.yearOfBirth;
@@ -68,7 +68,7 @@ class RichcardGenerator {
 			}
 			imageUrl = "https:" + artist.portrait.fields.file.url;
 		} else {
-			this.title = artist.artistName;
+			title = artist.artistName;
 
 			if(artist.birthDayAsString) {
 				birthdate = artist.birthDayAsString
@@ -77,32 +77,68 @@ class RichcardGenerator {
 				deathdate = artist.deathDayAsString
 			}
 			imageUrl = artist.image
+			// TEMPORARY FIX FOR ARTIST COMING FROM WIKIART
+			return new Promise( (resolve, reject) => { resolve( this.generate() ) });
 		}
 
-    this.subtitle = birthdate + ' - ' + deathdate
+		movement = artist.movements[0]
 
-    this.description = this.generateTextFromTemplate('richards_description', movement)
-    return this.generate()
+		return new Promise( (resolve, reject) => {
+			this.generateSubitems(movement, "mainArtists").then( subitems => {
+
+				this.title = title
+				this.subtitle = birthdate + " - " + deathdate
+				this.imageUrl = imageUrl
+
+				this.description = this.generateTextFromTemplate('richards_description', artist)
+
+				console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
+				this.subitems = {
+					title: "Artistes similaires",
+					items: subitems
+				}
+				console.log("32232323232222323223232222232232", this.subitems);
+				let richcard = this.generate()
+
+				resolve(richcard)
+			}).catch( err => {
+				console.log(err);
+				reject()
+			} )
+		} )
   }
 
   artworkRichcard(artwork) {
-    let date, imageUrl, title
-		if( typeof artwork.fields == "object" ) {
-			artwork = artwork.fields
-			date = artwork.endYear
-			imageUrl = 'https:' + artwork.images[0].fields.file.url
-		} else {
-			date = artwork.year
-			imageUrl = artwork.image
-		}
-		this.title = artwork.title
+    let date, imageUrl, title, movement
+		artwork = artwork.fields
+		date = artwork.endYear
+		imageUrl = 'https:' + artwork.images[0].fields.file.url
+		movement = artwork.movements[0]
+		return new Promise( (resolve, reject) => {
+			this.generateSubitems(movement, "mainArtworks").then( subitems => {
 
-		const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
+				this.title = artwork.title
 
-    this.subtitle = date + " - " + author
+				const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
 
-    this.description = this.generateTextFromTemplate('richards_description', movement)
-    return this.generate()
+		    this.subtitle = date + " - " + author
+
+		    this.description = this.generateTextFromTemplate('richards_description', artwork)
+
+				console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
+				this.subitems = {
+					title: "Oeuvres similaires",
+					items: subitems
+				}
+				console.log("32232323232222323223232222232232", this.subitems);
+				let richcard = this.generate()
+
+				resolve(richcard)
+			}).catch( err => {
+				console.log(err);
+				reject()
+			} )
+		} )
   }
 
   movementRichcard(movement) {
@@ -128,7 +164,7 @@ class RichcardGenerator {
 				}
 				console.log("32232323232222323223232222232232", this.subitems);
 				let richcard = this.generate()
-				
+
 				resolve(richcard)
 			}).catch( err => {
 				console.log(err);
