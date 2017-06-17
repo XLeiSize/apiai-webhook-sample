@@ -492,6 +492,7 @@ class Bernie {
 				}
 
 				Promise.all( richcardPromises ).then( richcards => {
+					console.log("wassupbabe", richcards);
 					for (let i = 0; i < richcards.length; i++) {
 						responseMessages.push(richcards[i])
 					}
