@@ -106,28 +106,29 @@ class RichcardGenerator {
   }
 
   movementRichcard(movement) {
-    if( typeof movement.fields == "object" ){
+		if( typeof movement.fields == "object" ){
 			movement = movement.fields
 		}
-		this.title = movement.name;
-
-		const endYear = movement.endYear ? movement.endYear : 'Actuel'
-
-    this.subtitle = movement.startYear + " - " + endYear
-
-    this.imageUrl = "https:" + movement.image.fields.file.url
-
-    this.description = this.generateTextFromTemplate('richards_description', movement)
-    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
-		
 		return new Promise( (resolve, reject) => {
 			this.generateSubitems(movement, "mainArtworks").then( subitems => {
+
+				this.title = movement.name;
+
+				const endYear = movement.endYear ? movement.endYear : 'Actuel'
+
+		    this.subtitle = movement.startYear + " - " + endYear
+
+		    this.imageUrl = "https:" + movement.image.fields.file.url
+
+		    this.description = this.generateTextFromTemplate('richards_description', movement)
+		    console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 				this.subitems = {
 					title: "Oeuvres principaux",
 					items: subitems
 				}
 				console.log("32232323232222323223232222232232", this.subitems);
 				let richcard = this.generate()
+				
 				resolve(richcard)
 			}).catch( err => {
 				console.log(err);
