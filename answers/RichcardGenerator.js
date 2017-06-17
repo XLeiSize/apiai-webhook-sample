@@ -147,7 +147,7 @@ class RichcardGenerator {
 			.then( results => {
 				let subitems = [];
 				for (let j = 0; j < results.length; j++) {
-					const entity = results[j]
+					const entity = results[j].fields
           const title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 					console.log("title ++++++++++++++++++++", title);
           const url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
