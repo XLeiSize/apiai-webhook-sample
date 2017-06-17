@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Bernie = require('./Bernie.js');
+const Utils = require('./helpers/utils.js')
 let bernie = new Bernie();
 
 
@@ -62,7 +63,8 @@ restService.post('/hook', function (req, res) {
                         }
                     } )
                     console.log("YEAH ALRIGHT", richcardPromises);
-                    Promise.all(richcardPromises)
+                    console.log(richcardPromises.map(Utils.reflect));
+                    Promise.all(richcardPromises.map(Utils.reflect))
                     .then( responses => {
                       console.log(responses);
                       let  answerOpt = {
