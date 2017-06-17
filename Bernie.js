@@ -274,9 +274,13 @@ class Bernie {
 										if (typeof entity == 'object') {
 											richcardPromises.push(new Promise( reso => {
 												console.log('key[i]', key[i]);
-												response = this.createRichcard(entity, key[i], responseMessages)
+												this.createRichcard(entity, key[i], responseMessages).then( responseMessages => {
+													reso('success Custom');
+												} ).catch( err => {
+													reject( err );
+												} );
 												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
-												reso('success Custom');
+
 
 											}));
 										}
@@ -291,27 +295,37 @@ class Bernie {
 													case 'artist':
 														this.wikiart.getArtistByName( name ).then((artist) => {
 															if (typeof artist == "object") {
-																responseMessages = this.createRichcard(artist, key[i], responseMessages);
+																this.createRichcard(artist, key[i], responseMessages).then( responseMessages => {
+																	reso('success Wikiart');
+																} ).catch( err => {
+																	reject( err );
+																} );
 															}
-															reso('success Wikiart');
+
 														})
 														.catch( e => { reject(e) });
 														break;
 													case 'artwork':
 														this.wikiart.getArtworkByName( name ).then(( artwork ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createRichcard(artwork, key[i], responseMessages);
+																this.createRichcard(artwork, key[i], responseMessages).then( responseMessages => {
+																	reso('success Wikiart');
+																} ).catch( err => {
+																	reject( err );
+																} );
 															}
-															reso('success Wikiart');
 														})
 														.catch( e => { reject(e) });
 														break;
 													case 'movement':
 														this.wikiart.getMovementByName( name ).then(( movement ) => {
 															if (typeof artwork == "object") {
-																responseMessages = this.createRichcard(movement, key[i], responseMessages);
+																this.createRichcard(movement, key[i], responseMessages).then( responseMessages => {
+																	reso('success Wikiart');
+																} ).catch( err => {
+																	reject( err );
+																} );;
 															}
-															reso('success Wikiart');
 														})
 														.catch( e => { reject(e) });
 														break;
@@ -409,11 +423,6 @@ class Bernie {
 					case 'movement':
 						responseMessages = this.generateResponse( this.entity, action, responseMessages )
 						let movements = this.entity.movements
-						// for( let i = 0; i < movements.length; i++ ){
-						// 	console.log(action);
-						// 	console.log(movements[i]);
-						// 	responseMessages = this.createRichcard(movements[i], action, responseMessages)
-						// }
 						console.log( "%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%" , responseMessages );
 						break;
 					case 'mainArtists':
@@ -477,11 +486,14 @@ class Bernie {
 				let richcardPromises = [];
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
-					this.createRichcard(entity, type, responseMessages)
-					console.log("3####3#3#####3#3333##3###333##3###333#33##333######333333##", responseMessages);
+					this.createRichcard(entity, type, responseMessages).then( responseMessages => {
+						console.log("3####3#3#####3#3333##3###333##3###333#33##333######333333##", responseMessages);
+						resolve( responseMessages );
+					} ).catch( err => {
+						reject( err );
+					} );
 				}
-				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
-				resolve( responseMessages );
+
 			}).catch( err => {
 				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
 				// WIKIART
@@ -505,11 +517,14 @@ class Bernie {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" ) {
-							this.createRichcard(results[j], type, responseMessages)
+							this.createRichcard(results[j], type, responseMessages).then( responseMessages => {
+								console.log("9####9#99####9#9999##9###99999##999###9999##999#####9999999##", responseMessages);
+								resolve( responseMessages );
+							} ).catch( err => {
+								reject( err );
+							} );
 						}
 					}
-					console.log(responseMessages);
-					resolve( responseMessages );
 				})
 				.catch( error => { reject(error) } );
 					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
@@ -573,11 +588,15 @@ class Bernie {
 	}
 
 	createRichcard(entity, category, responseMessages) {
-		const msg = RichcardGenerator.richcard(entity, category);
-		console.log("@@@@@@", msg);
-		responseMessages.push(msg);
-
-		return responseMessages;
+		return new Promise( (resolve, reject) => {
+			RichcardGenerator.richcard(entity, category).then( richcard => {
+				console.log("@@@@@@", richcard);
+				responseMessages.push(richcard);
+				resolve( responseMessages );
+			} ).catch( err => {
+				reject( err );
+			} );
+		});
 	}
 
 	//GENERATE RESPONSE FROM TEMPLATE

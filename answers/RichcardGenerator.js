@@ -13,17 +13,30 @@ class RichcardGenerator {
 
   richcard( entity, category ) {
     this.category = category
-    switch( category ) {
-      case "artist":
-        return this.artistRichcard(entity)
-        break;
-      case "artwork":
-        return this.artworkRichcard(entity)
-        break;
-      case "movement":
-        return this.movementRichcard(entity)
-        break;
-    }
+		return new Promise( (resolve, reject) => {
+	    switch( category ) {
+	      case "artist":
+						this.artistRichcard(entity).then( richcard => {
+						 resolve(richcard)
+					 } ).catch( err => {
+						 reject(err)
+					 })
+	      case "artwork":
+						this.artworkRichcard(entity).then( richcard => {
+						 resolve(richcard)
+					 } ).catch( err => {
+						 reject(err)
+					 })
+	        break;
+	      case "movement":
+	        this.movementRichcard(entity).then( richcard => {
+						resolve(richcard)
+					} ).catch( err => {
+						reject(err)
+					})
+	        break;
+	    }
+		})
   }
 
   artistRichcard( artist ) {
@@ -106,18 +119,20 @@ class RichcardGenerator {
 
     this.description = this.generateTextFromTemplate('richards_description', movement)
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
-
-    this.generateSubitems(movement, "mainArtworks").then( subitems => {
-			this.subitems = {
-				title: "Oeuvres principaux",
-				items: subitems
-			}
-			console.log("32232323232222323223232222232232", this.subitems);
-			return this.generate()
-		}).catch( err => {
-			console.log(err);
-			return false;
+		return new Promise( (resolve, reject) => {
+			this.generateSubitems(movement, "mainArtworks").then( subitems => {
+				this.subitems = {
+					title: "Oeuvres principaux",
+					items: subitems
+				}
+				console.log("32232323232222323223232222232232", this.subitems);
+				resolve(this.generate())
+			}).catch( err => {
+				console.log(err);
+				reject()
+			} )
 		} )
+
 
   }
 
@@ -131,7 +146,6 @@ class RichcardGenerator {
   generateSubitems(entity, key) {
     let custom = new Custom()
     let wikiart = new Wikiart()
-		console.log(entity);
     let list = entity[key]
 		let type;
 		switch( key ){
