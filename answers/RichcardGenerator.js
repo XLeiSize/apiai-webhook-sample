@@ -112,6 +112,7 @@ class RichcardGenerator {
 				title: "Oeuvres principaux"
 				items: subitems
 			}
+			console.log("32232323232222323223232222232232", this.subitems);
 			return this.generate()
 		}).catch( err => {
 			console.log(err);
