@@ -121,6 +121,7 @@ class RichcardGenerator {
   generateSubitems(entity, key, type) {
     let custom = new Custom()
     let wikiart = new Wikiart()
+		console.log(entity);
     let list = entity[key]
     console.log("ùùùùùùùùùùùùùùù", list, type);
     let promises = [];
