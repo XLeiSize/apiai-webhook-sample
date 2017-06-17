@@ -81,7 +81,7 @@ class RichcardGenerator {
 			return new Promise( (resolve, reject) => { resolve( this.generate() ) });
 		}
 
-		movement = artist.movements[0]
+		movement = artist.movements[0].fields
 
 		return new Promise( (resolve, reject) => {
 			this.generateSubitems(movement, "mainArtists").then( subitems => {
@@ -113,7 +113,7 @@ class RichcardGenerator {
 		artwork = artwork.fields
 		date = artwork.endYear
 		imageUrl = 'https:' + artwork.images[0].fields.file.url
-		movement = artwork.movements[0]
+		movement = artwork.movements[0].fields
 		return new Promise( (resolve, reject) => {
 			this.generateSubitems(movement, "mainArtworks").then( subitems => {
 
