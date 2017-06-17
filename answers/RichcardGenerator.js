@@ -107,7 +107,7 @@ class RichcardGenerator {
     this.description = this.generateTextFromTemplate('richards_description', movement)
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 
-    this.subitems = this.generateSubitems(movement, "mainArtworks", "movement")
+    this.subitems = this.generateSubitems(movement, "mainArtworks")
     return this.generate()
   }
 
@@ -118,11 +118,23 @@ class RichcardGenerator {
 		return template.message;
   }
 
-  generateSubitems(entity, key, type) {
+  generateSubitems(entity, key) {
     let custom = new Custom()
     let wikiart = new Wikiart()
 		console.log(entity);
     let list = entity[key]
+		let type;
+		switch( key ){
+			case "mainArtworks":
+				type = "artwork"
+				break;
+			case "mainArtists":
+				type = "artist"
+				break;
+			case "movement":
+				type = "movement"
+				break;
+		}
     console.log("ùùùùùùùùùùùùùùù", list, type);
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
@@ -155,16 +167,14 @@ class RichcardGenerator {
 				let wikiartPromises = [];
 				let length = list.length > 5 ? 5 : list.length
 				for( let i = 0; i < length; i++ ) {
-					if (list[i] !== query) {
-						switch ( type ) {
-							case 'artist':
-								console.log(list[i]);
-								wikiartPromises.push(wikiart.getArtistByName( list[i] ))
-								break;
-							case 'artwork':
-								wikiartPromises.push(wikiart.getArtworkByName( list[i] ))
-								break;
-						}
+					switch ( type ) {
+						case 'artist':
+							console.log(list[i]);
+							wikiartPromises.push(wikiart.getArtistByName( list[i] ))
+							break;
+						case 'artwork':
+							wikiartPromises.push(wikiart.getArtworkByName( list[i] ))
+							break;
 					}
 				}
 				Promise.all(wikiartPromises)
