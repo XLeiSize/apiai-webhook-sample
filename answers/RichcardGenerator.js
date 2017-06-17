@@ -109,7 +109,7 @@ class RichcardGenerator {
 
     this.generateSubitems(movement, "mainArtworks").then( subitems => {
 			this.subitems = {
-				title: "Oeuvres principaux"
+				title: "Oeuvres principaux",
 				items: subitems
 			}
 			console.log("32232323232222323223232222232232", this.subitems);
