@@ -112,13 +112,14 @@ class RichcardGenerator {
   artworkRichcard(artwork) {
 		console.log("WTFFFFFFFFFFFF", artwork);
     let date, imageUrl, title, movement
+		title = artwork.title
 		artwork = artwork.fields
 		date = artwork.endYear
 		movement = artwork.movements[0].fields
 		return new Promise( (resolve, reject) => {
-			this.generateSubitems(movement, "mainArtworks").then( subitems => {
+			this.generateSubitems(movement, "mainArtworks", title).then( subitems => {
 
-				this.title = artwork.title
+				this.title = title
 
 				const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
 
@@ -178,9 +179,7 @@ class RichcardGenerator {
   }
 
   generateTextFromTemplate(action, entity) {
-    console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%action", action);
 		const template = new Template(action, entity);
-		console.log(" %%%%%%%%%%%%%%%%%%%%%%%%%%%template", template);
 		return template.message;
   }
 
@@ -203,7 +202,7 @@ class RichcardGenerator {
     console.log("ùùùùùùùùùùùùùùù", list, type);
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
-			console.log(current, list[i]);
+			console.log("comparing",current, list[i]);
 			if( list[i] !== current ){
 				promises.push(
 					custom.getEntityByName(type, list[i])
