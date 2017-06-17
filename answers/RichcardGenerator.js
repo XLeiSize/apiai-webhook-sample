@@ -113,7 +113,6 @@ class RichcardGenerator {
     let date, imageUrl, title, movement
 		artwork = artwork.fields
 		date = artwork.endYear
-		imageUrl = 'https:' + artwork.images[0].fields.file.url
 		movement = artwork.movements[0].fields
 		return new Promise( (resolve, reject) => {
 			this.generateSubitems(movement, "mainArtworks").then( subitems => {
@@ -123,7 +122,7 @@ class RichcardGenerator {
 				const author = artwork.author.fields.firstName + ' ' + artwork.author.fields.lastName
 
 		    this.subtitle = date + " - " + author
-				this.imageUrl = imageUrl
+				this.imageUrl = 'https:' + artwork.images[0].fields.file.url
 
 		    this.description = this.generateTextFromTemplate('richards_description', artwork)
 
