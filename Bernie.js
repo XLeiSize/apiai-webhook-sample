@@ -473,6 +473,8 @@ class Bernie {
 
 	createRichcardsList( list, type, query, action, responseMessages ) {
 		let promises = [];
+		let richcardPromises = [];
+
 		for( let i = 0; i < list.length; i++ ){
 			if(list[i] !== query){
 				promises.push(
@@ -483,16 +485,22 @@ class Bernie {
 		return new Promise( (resolve, reject) => {
 			Promise.all(promises)
 			.then( results => {
-				let richcardPromises = [];
+
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
-					this.createRichcard(entity, type, responseMessages).then( responseMessages => {
-						console.log("3####3#3#####3#3333##3###333##3###333#33##333######333333##", responseMessages);
-						resolve( responseMessages );
-					} ).catch( err => {
-						reject( err );
-					} );
+					richcardPromises.push(this.createRichcard(entity, type, responseMessages))
 				}
+
+				Promise.all( richcardPromises ).then( richcards => {
+					for (let i = 0; i < richcards.length; i++) {
+						responseMessages.push(richcards[i])
+					}
+					resolve( responseMessages );
+				} ).catch( err => {
+					console.log("ERROR IN RICHARD PROMISE WITH CUSTOM", err);
+
+					reject( err );
+				} );
 
 			}).catch( err => {
 				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
@@ -517,10 +525,18 @@ class Bernie {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" ) {
-							this.createRichcard(results[j], type, responseMessages).then( responseMessages => {
-								console.log("9####9#99####9#9999##9###99999##999###9999##999#####9999999##", responseMessages);
+							for (let j = 0; j < results.length; j++) {
+								const entity = results[j]
+								richcardPromises.push(this.createRichcard(results[j], type, responseMessages))
+							}
+
+							Promise.all( richcardPromises ).then( richcards => {
+								for (let i = 0; i < richcards.length; i++) {
+									responseMessages.push(richcards[i])
+								}
 								resolve( responseMessages );
 							} ).catch( err => {
+								console.log("ERROR IN RICHARD PROMISE WITH WIKIART", err);
 								reject( err );
 							} );
 						}
