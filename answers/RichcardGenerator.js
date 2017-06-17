@@ -110,6 +110,7 @@ class RichcardGenerator {
   }
 
   artworkRichcard(artwork) {
+		console.log("WTFFFFFFFFFFFF", artwork);
     let date, imageUrl, title, movement
 		artwork = artwork.fields
 		date = artwork.endYear
