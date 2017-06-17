@@ -108,7 +108,10 @@ class RichcardGenerator {
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 
     this.generateSubitems(movement, "mainArtworks").then( subitems => {
-			this.subitems = subitems
+			this.subitems = {
+				title: "Oeuvres principaux"
+				items: subitems
+			}
 			return this.generate()
 		}).catch( err => {
 			console.log(err);
@@ -157,14 +160,12 @@ class RichcardGenerator {
           const title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 					console.log("title ++++++++++++++++++++", title);
           const url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
-          const imageUrl = "https:" + url
+          const imageUrl = "https:"+ url
           subitems.push({
             title: title,
-            imageUrl: url,
+            imageUrl: imageUrl,
             postback: title
           })
-          console.log("SUBITEMS -SUBITEMS -SUBITEMS -SUBITEMS", subitems);
-
 				}
 				resolve( subitems );
 			}).catch( err => {
