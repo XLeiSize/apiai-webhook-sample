@@ -22,6 +22,7 @@ class RichcardGenerator {
 					 } ).catch( err => {
 						 reject(err)
 					 })
+					 break;
 	      case "artwork":
 						this.artworkRichcard(entity).then( richcard => {
 						 resolve(richcard)
