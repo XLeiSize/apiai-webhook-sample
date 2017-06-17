@@ -47,7 +47,6 @@ class Bernie {
 				// console.log('actionRequested', actionRequested);
 				console.log('@@@@@@@@@response', response);
 				console.log('@@@@@@@@@response.result.action', response.result.action);
-				console.log('@@@@@@@@@options', options);
 				if(actionRequested) {
 					for (let i = 0; i < actionRequested.length; i++) {
 						console.log('bbbbbbbbbbbbiatch', actionRequested[i], response.result.action);
@@ -59,7 +58,7 @@ class Bernie {
 								reject(err);
 							});
 						} else {
-							console.log(' lolilolilolilolilolilolilolilol ');
+							console.log(' oupsy no richcard ');
 							reject('not richcard');
 						}
 					}
@@ -83,7 +82,7 @@ class Bernie {
 							reject(err);
 						});
 					} else {
-						console.log('JPPPPPPPPPPPPPPPPPPP');
+						console.log('NORMAL');
 						this.processAPIAIResult(response, options).then( ( {type, messages} ) => {
 							resolve( {type: type, sender: this.sender, response: messages} );
 						}).catch( err => {
@@ -117,7 +116,7 @@ class Bernie {
 		return new Promise((resolve, reject) => {
 
 			this.apiaiRequest( options, ["richcards"] ).then(( {type, sender, response} ) => {
-					console.log("PROMISE apiaiRequest RESPONSE", response);
+					console.log("apiaiRequest parse sent message ", response);
 					responseMessages = response;
 					resolve( {sender: sender, response: responseMessages } );
 			}).catch( e => { reject(e) } );
@@ -167,7 +166,6 @@ class Bernie {
 
 						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/Ph8OWoJA2M3eM/giphy.gif"})
 						resolve( {type: 'richContent', messages: responseMessages} );
-
 
 					} else if(action === "ofcourse"){
 
@@ -257,7 +255,6 @@ class Bernie {
 						for( let i = 0; i < key.length; i++ ){
 							if( response.result.parameters[ keys[i] ].length > 1 ) {
 								const richcards = response.result.parameters[ keys[i] ];
-								console.log(richcards);
 								for (let j = 0; j < richcards.length; j++) {
 									console.log(key[i], richcards[j]);
 									promises.push(
@@ -270,10 +267,9 @@ class Bernie {
 									let richcardPromises = [];
 									for (let j = 0; j < results.length; j++) {
 										const entity = results[j];
-										console.log("&&&&&&&&&&&&&&&&&&&&&&&", entity);
+										console.log("&&&&&&&&&&&&&&&&&&&&&&& ENTITY &&&&&&&&&&&&&&&&&&&&&&&", entity);
 										if (typeof entity == 'object') {
 											richcardPromises.push(new Promise( reso => {
-												console.log('key[i]', key[i]);
 												this.createRichcard(entity, key[i]).then( richcard => {
 													responseMessages.push(richcard);
 													reso('success Custom');
@@ -495,19 +491,17 @@ class Bernie {
 				}
 
 				Promise.all( richcardPromises ).then( richcards => {
-					console.log("wassupbabe", richcards);
 					for (let i = 0; i < richcards.length; i++) {
 						responseMessages.push(richcards[i])
 					}
 					resolve( responseMessages );
 				} ).catch( err => {
 					console.log("ERROR IN RICHARD PROMISE WITH CUSTOM", err);
-
 					reject( err );
 				} );
 
 			}).catch( err => {
-				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
+				console.log("$$$$$$$$$$$$$$$$ createRichcardsList $$$$$$$$$$$$$$$$$ NOTHING IN CUSTOM DB, GO TO WIKIART", err);
 				// WIKIART
 				let wikiartPromises = [];
 				let length = list.length > 5 ? 5 : list.length
@@ -526,7 +520,7 @@ class Bernie {
 				}
 				Promise.all(wikiartPromises)
 				.then((results) => {
-					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
+					console.log("RESULTS FROM WIKIART", results);
 					for (let j = 0; j < results.length; j++) {
 						if ( typeof results[j] == "object" ) {
 							for (let j = 0; j < results.length; j++) {

@@ -94,6 +94,7 @@ restService.post('/hook', function (req, res) {
 
 				}).catch( err => {
                     console.log("ERROR FROM PROCESSSING API.AI RESULT", err);
+                    //EJECTED ERROR CAN CONTAIN MESSAGES TOO TO HANDLE ERROR RESPONSE
                     reject(err);
                 });;
 
