@@ -127,7 +127,7 @@ class RichcardGenerator {
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
       promises.push(
-        this.custom.getEntityByName(type, list[i])
+        custom.getEntityByName(type, list[i])
       )
 		}
 		return new Promise( (resolve, reject) => {
@@ -159,10 +159,10 @@ class RichcardGenerator {
 						switch ( type ) {
 							case 'artist':
 								console.log(list[i]);
-								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
+								wikiartPromises.push(wikiart.getArtistByName( list[i] ))
 								break;
 							case 'artwork':
-								wikiartPromises.push(this.wikiart.getArtworkByName( list[i] ))
+								wikiartPromises.push(wikiart.getArtworkByName( list[i] ))
 								break;
 						}
 					}
