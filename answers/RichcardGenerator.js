@@ -107,8 +107,14 @@ class RichcardGenerator {
     this.description = this.generateTextFromTemplate('richards_description', movement)
     console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 
-    this.subitems = this.generateSubitems(movement, "mainArtworks")
-    return this.generate()
+    this.generateSubitems(movement, "mainArtworks").then( subitems => {
+			this.subitems = subitems
+			return this.generate()
+		}).catch( err => {
+			console.log(err);
+			return false;
+		} )
+
   }
 
   generateTextFromTemplate(action, entity) {
@@ -160,7 +166,6 @@ class RichcardGenerator {
           console.log("SUBITEMS -SUBITEMS -SUBITEMS -SUBITEMS", subitems);
 
 				}
-				console.log("%%%%%%%%%%%%%%%%%%" + action + "%%%%%%%%%%%%%%%%%%", responseMessages);
 				resolve( subitems );
 			}).catch( err => {
 				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
