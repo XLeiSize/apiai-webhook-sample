@@ -85,7 +85,7 @@ class RichcardGenerator {
 		movement = artist.movements[0].fields
 
 		return new Promise( (resolve, reject) => {
-			this.generateSubitems(movement, "mainArtists", artist).then( subitems => {
+			this.generateSubitems(movement, "mainArtists", title).then( subitems => {
 
 				this.title = title
 				this.subtitle = birthdate + " - " + deathdate
@@ -184,7 +184,7 @@ class RichcardGenerator {
 		return template.message;
   }
 
-  generateSubitems(entity, key, currentEntity) {
+  generateSubitems(entity, key, current) {
     let custom = new Custom()
     let wikiart = new Wikiart()
     let list = entity[key]
@@ -203,9 +203,13 @@ class RichcardGenerator {
     console.log("ùùùùùùùùùùùùùùù", list, type);
     let promises = [];
 		for( let i = 0; i < list.length; i++ ){
-      promises.push(
-        custom.getEntityByName(type, list[i])
-      )
+			console.log(current, list[i]);
+			if( list[i] !== current ){
+				promises.push(
+					custom.getEntityByName(type, list[i])
+				)
+			}
+
 		}
 		return new Promise( (resolve, reject) => {
 			Promise.all(promises)
@@ -214,16 +218,15 @@ class RichcardGenerator {
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j].fields
 					//console.log("WESHALORS", entity);
-					if( entity.lastName !== currentEntity.lastName ||  entity.title !== currentEntity.title ||  entity.name !== currentEntity.name  ) {
-						const title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
-	          const url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
-	          const imageUrl = "https:"+ url
-	          subitems.push({
-	            title: title,
-	            imageUrl: imageUrl,
-	            postback: title
-	          })
-					}
+					const title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
+          const url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
+          const imageUrl = "https:"+ url
+          subitems.push({
+            title: title,
+            imageUrl: imageUrl,
+            postback: title
+          })
+
 
 				}
 				resolve( subitems );
