@@ -21,7 +21,6 @@ class Custom {
                 reject(new Error(response.body.error));
             }
             console.log(" Custom promise url", url);
-            console.log(" Custom promise response", response.body);
             let res = Utils.parseJSON(response.body)
             if( !res ) {
               reject('undefined');

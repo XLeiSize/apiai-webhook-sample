@@ -279,7 +279,7 @@ class Bernie {
 												} ).catch( err => {
 													reject( err );
 												} );
-												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG ------------------------ ", responseMessages);
+												console.log(" ------------------------ R-E-S-P-O-N-S-E MSG WITH RICHCARDS ------------------------ ", responseMessages);
 
 
 											}));
@@ -472,6 +472,7 @@ class Bernie {
 	}
 
 	createRichcardsList( list, type, query, action, responseMessages ) {
+		console.log("CREATE RICHCARDLIST FROM", list);
 		let promises = [];
 		let richcardPromises = [];
 
