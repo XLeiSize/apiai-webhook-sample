@@ -55,11 +55,8 @@ restService.post('/hook', function (req, res) {
                                   resolve( "richcard" )
 
             			           }).catch( error => {
-                                  console.log( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", error );
-                                  resolve( "nope" )
-                                  if( !msg ){
+                                    console.log( "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<", error );
                                     reject('OH HEEEEELL NO');
-                                  }
                               } )
                             } ) )
                         }
@@ -81,13 +78,13 @@ restService.post('/hook', function (req, res) {
                             answerOpt.messages = withRichcardsMessages;
                           } else {
                             console.log( "RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP RIP" );
-
                           }
                         }
 
                         return res.json(answerOpt);
 
                     }).catch( error => {
+                        console.log("ERROR CATCHED,RICHCARD NOT APPENDED");
                         console.log( error );
 
                     } )
