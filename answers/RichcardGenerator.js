@@ -149,7 +149,7 @@ class RichcardGenerator {
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j]
           const title = entity.lastName ? entity.firstName + " " + entity.lastName : ( entity.name ) ? entity.name : entity.title
-          const url = entity.image.fields.file.url ? entity.image.fields.file.url : ( entity.images[0].fields.file.url ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
+          const url = entity.image ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
           const imageUrl = "https:" + url
           subitems.push({
             title: title,
