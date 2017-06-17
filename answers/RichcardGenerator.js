@@ -214,8 +214,8 @@ class RichcardGenerator {
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j].fields
 					//console.log("WESHALORS", entity);
-					console.log(currentEntity.lastName, entity.lastName);
-					if( entity.lastName !== currentEntity.lastName ) {
+					console.log("SAME SAME SAME NOT SAME SAME ", currentEntity.lastName, entity.lastName);
+					if( entity.lastName !== currentEntity.lastName ||  entity.title !== currentEntity.title ||  entity.name !== currentEntity.name  ) {
 						const title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 	          const url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
 	          const imageUrl = "https:"+ url
