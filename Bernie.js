@@ -266,7 +266,7 @@ class Bernie {
 								.then( results => {
 									let richcardPromises = [];
 
-									for(let j = 0; j < results.length; i++ ){
+									for(let j = 0; j < results.length; j++ ){
                     if( results[j].status == "resolved" ){
 											const entity = results[j].data;
 											console.log("&&&&&&&&&&&&&&&&&&&&&&& ENTITY &&&&&&&&&&&&&&&&&&&&&&&", entity);
