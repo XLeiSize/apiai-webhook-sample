@@ -696,9 +696,9 @@ class Bernie {
 		if( keyword === "Description" && entity.isACollection ){
 			responseMessages = this.entityImageResponse( entity, responseMessages )
 		}
+		console.log("this content for AdditionalContent", content);
 
 		for( let i = 0; i < content.length; i++ ){
-			console.log("this content for AdditionalContent", content);
 			console.log(content[i].fields.type, keyword);
 			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
 				 moreInfoOpening = this.moreInfosOpeningResponse( entity )
