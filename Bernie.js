@@ -193,13 +193,13 @@ class Bernie {
 											break;
 										}
 									}
-									responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									//responseMessages = this.generateResponse(this.entity, action, responseMessages)
 									console.log("<RESPONSE>MESSAGE</RESPONSE>", responseMessages);
-									// if( !hasDescription ) {
-									// 	responseMessages = this.generateResponse(this.entity, action, responseMessages)
-									// } else {
-									// 	responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
-									// }
+									if( !hasDescription ) {
+										responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									} else {
+										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+									}
 									resolve( {type: 'richContent', messages: responseMessages} );
 								}
 
