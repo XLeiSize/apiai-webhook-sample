@@ -183,6 +183,7 @@ class RichcardGenerator {
   }
 
   generateSubitems(entity, key, current) {
+		let subitems = [];
     let custom = new Custom()
     let wikiart = new Wikiart()
     let list = entity[key]
@@ -212,7 +213,6 @@ class RichcardGenerator {
 		return new Promise( (resolve, reject) => {
 			Promise.all(promises)
 			.then( results => {
-				let subitems = [];
 				for (let j = 0; j < results.length; j++) {
 					const entity = results[j].fields
 					//console.log("WESHALORS", entity);
