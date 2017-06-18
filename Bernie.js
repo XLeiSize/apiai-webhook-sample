@@ -194,6 +194,7 @@ class Bernie {
 										}
 									}
 									responseMessages = this.generateResponse(this.entity, action, responseMessages)
+									console.log("<RESPONSE>MESSAGE</RESPONSE>", responseMessages);
 									// if( !hasDescription ) {
 									// 	responseMessages = this.generateResponse(this.entity, action, responseMessages)
 									// } else {

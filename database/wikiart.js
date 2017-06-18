@@ -41,7 +41,7 @@ class Wikiart {
     });
   }
 
-  getPaintingByName( name ) {
+  getArtworkByName( name ) {
     let url = encodeURI(this.baseURL + 'search/' + name + '/1?json=2');
     console.log(url);
     return new Promise((resolve, reject) => {
