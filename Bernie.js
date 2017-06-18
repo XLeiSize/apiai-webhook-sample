@@ -534,24 +534,22 @@ class Bernie {
 				Promise.all(wikiartPromises)
 				.then((results) => {
 					console.log("RESULTS FROM WIKIART", results);
-					for (let j = 0; j < results.length; j++) {
-						if ( typeof results[j] == "object" ) {
-							for (let j = 0; j < results.length; j++) {
-								const entity = results[j]
-								richcardPromises.push(this.createRichcard(results[j], type))
-							}
 
-							Promise.all( richcardPromises ).then( richcards => {
-								for (let i = 0; i < richcards.length; i++) {
-									responseMessages.push(richcards[i])
-								}
-								resolve( responseMessages );
-							} ).catch( err => {
-								console.log("ERROR IN RICHARD PROMISE WITH WIKIART", err);
-								reject( err );
-							} );
-						}
+					for (let j = 0; j < results.length; j++) {
+						const entity = results[j]
+						richcardPromises.push(this.createRichcard(results[j], type))
 					}
+
+					Promise.all( richcardPromises ).then( richcards => {
+						for (let i = 0; i < richcards.length; i++) {
+							responseMessages.push(richcards[i])
+						}
+						resolve( responseMessages );
+					} ).catch( err => {
+						console.log("ERROR IN RICHARD PROMISE WITH WIKIART", err);
+						reject( err );
+					} );
+
 				})
 				.catch( error => { reject(error) } );
 					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
