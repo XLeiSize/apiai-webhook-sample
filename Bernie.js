@@ -568,12 +568,18 @@ class Bernie {
 				movement = image.author.fields.movements[0].fields.name
 			}
 		}
-		responseMessages[responseMessages.length - 1].speech += " '" + title + "', réalisé par " + artistName + year + " 🤓";
+
+		const responseText = [
+			" '" + title + "', réalisé par " + artistName + year + " 🤓",
+			"Je vos que tu te trouves devant '" + title + "', réalisé par " + artistName + year + " 🤓"
+		]
+		responseMessages[responseMessages.length - 1].speech += responseText[Math.floor(responseText.length * Math.random())];
 
 		responseMessages.push( new ResponseMessage(3, {imageUrl: "https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif"} ) );
 
 		const openingText = [
 			'Tu veux en savoir plus sur quoi ?',
+			'Tu voudrais savoir quoi ?',
 			'Qu\'est-ce qui t\'intéresse ?'
 		]
 
