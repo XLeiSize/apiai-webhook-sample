@@ -69,15 +69,15 @@ class RichcardGenerator {
 			}
 			imageUrl = "https:" + artist.portrait.fields.file.url;
 		} else {
-			title = artist.artistName;
+			this.title = artist.artistName;
 
 			if(artist.birthDayAsString) {
-				birthdate = artist.birthDayAsString
+				this.birthdate = artist.birthDayAsString
 			}
 			if(artist.deathDayAsString) {
-				deathdate = artist.deathDayAsString
+				this.deathdate = artist.deathDayAsString
 			}
-			imageUrl = artist.image
+			this.imageUrl = artist.image
 			// TEMPORARY FIX FOR ARTIST COMING FROM WIKIART
 			return new Promise( (resolve, reject) => { resolve( this.generate() ) });
 		}
