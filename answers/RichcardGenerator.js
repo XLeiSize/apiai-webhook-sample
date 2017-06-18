@@ -224,8 +224,6 @@ class RichcardGenerator {
             imageUrl: imageUrl,
             postback: title
           })
-
-
 				}
 				resolve( subitems );
 			}).catch( err => {
@@ -248,12 +246,18 @@ class RichcardGenerator {
 				.then((results) => {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
 					for (let j = 0; j < results.length; j++) {
-						if ( typeof results[j] == "object" ) {
-							this.createRichcard(results[j], type, responseMessages)
-						}
+						const entity = results[j]
+						//console.log("WESHALORS", entity);
+						const title = ( entity.artistName ) ? entity.artistName : entity.title )
+	          const url = entity.image
+	          const imageUrl = url
+	          subitems.push({
+	            title: title,
+	            imageUrl: imageUrl,
+	            postback: title
+	          })
+						resolve( subitems );
 					}
-					console.log(responseMessages);
-					resolve( responseMessages );
 				})
 				.catch( error => {
 					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", err, error)
@@ -265,6 +269,18 @@ class RichcardGenerator {
 
 
   generate() {
+		let buttonTitle;
+		switch(this.category){
+			case'artist':
+				buttonTitle = "Qui est-ce ?"
+				break;
+			case'artwork':
+				buttonTitle = "Dis m'en plus"
+				break;
+			case'movement':
+				buttonTitle = "C'est quoi ?"
+				break;
+		}
     return new ResponseMessage(1, {
 			title: this.title,
 			subtitle: this.subtitle,
@@ -275,8 +291,8 @@ class RichcardGenerator {
 			buttons: [
 				{
 					type: 'postback',
-					title: 'Qui est-ce ?',
-					payload: 'Qui est ' + this.title
+					title: buttonTitle,
+					payload: this.title
 				}
 			]
 		});
