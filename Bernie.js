@@ -260,13 +260,14 @@ class Bernie {
 
 					} else if ( keywords[0] == "richcards" ) {
 
-						console.log("IN RICHCARDS STUFF", response);
+						console.log("IN RICHCARDS STUFF", response.result.parameters);
 						let promises = [];
 
 						const keys = [ 'artists', 'artworks', 'movements' ];
 						const key = [ 'artist', 'artwork', 'movement' ];
 						for( let i = 0; i < key.length; i++ ){
-							if( response.result.parameters[ keys[i] ].length > 1 ) {
+							console.log(keys[i]);
+							if( response.result.parameters[ keys[i] ].length > 0 ) {
 								const richcards = response.result.parameters[ keys[i] ];
 								console.log("parameters parsed", keys[i], richcards);
 								for (let j = 0; j < richcards.length; j++) {
