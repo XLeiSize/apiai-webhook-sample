@@ -23,7 +23,7 @@ class Custom {
             console.log(" Custom promise url", url);
             let res = Utils.parseJSON(response.body)
             if( !res ) {
-              reject('undefined');
+              reject({slug: Utils.slugify( name )});
             } else {
               resolve( res )
             }
