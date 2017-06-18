@@ -679,9 +679,9 @@ class Bernie {
 		let moreInfoOpening;
 		let content = entity.content
 		for( let i = 0; i < content.length; i++ ){
-			let cont = content[i].fields
-			if ( cont.type === keyword ) {
-				cont.content.forEach( function( description ) {
+			content = content[i].fields
+			if ( content.type === keyword ) {
+				content.content.forEach( function( description ) {
 					description = description.fields
 					if( description.body ) {
 						responseMessages.push( new ResponseMessage(0, {speech: description.body} ) );
@@ -698,6 +698,7 @@ class Bernie {
 		}
 
 		for( let i = 0; i < content.length; i++ ){
+			console.log("this content for AdditionalContent", content);
 			console.log(content[i].fields.type, keyword);
 			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
 
