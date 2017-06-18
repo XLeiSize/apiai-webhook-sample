@@ -652,34 +652,7 @@ class Bernie {
 				let content = entity.content[i]
 				console.log("§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#", content);
 				 if ( content.fields.type == "AdditionalContent" ) {
-						const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
-						console.log(name);
-						const openingText = [
-							'Veux-tu en savoir plus ? 😏',
-							'Je continue ?',
-							'Ça va ou tu veux en savoir plus ? '
-						]
-						const acceptText = [
-							'Dis m\'en plus !',
-							'Aller 👍'
-						]
-						const declineText = [
-							'C’était clair 👌',
-							'Ça ira ✋'
-						]
-
-						let moreInfoOpening = new ResponseMessage( 2,
-							{ text : openingText[Math.floor(openingText.length * Math.random())],
-								quick_replies : [{
-					 				content_type: "text",
-					 				title: acceptText[Math.floor(acceptText.length * Math.random())],
-					 				payload: "Dis m'en plus sur " + name
-					 			},{
-					 				content_type: "text",
-					 				title: declineText[Math.floor(declineText.length * Math.random())],
-					 				payload: "ça ira mon coco"
-					 			}]
-							});
+						let moreInfoOpening = this.moreInfoOpening( entity )
 
 			 			responseMessages.push(moreInfoOpening);
 						break;
@@ -692,6 +665,8 @@ class Bernie {
 
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(entity, keyword, responseMessages) {
+		let hasOpening = false;
+		let moreInfoOpening;
 		let content = entity.content
 		for( let i = 0; i < content.length; i++ ){
 			content = content[i].fields
@@ -708,9 +683,20 @@ class Bernie {
 			}
 		}
 		// si Description et est une collection, montrer les images
-		if( keyword === "Description" && entity.isACollection ){
+		if( keyword === "Description" && entity.isACollection && !hasOpening ){
 			responseMessages = this.entityImageResponse( entity, responseMessages )
 		}
+
+		for( let i = 0; i < content.length; i++ ){
+			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
+				 moreInfoOpening = this.moreInfoOpening( entity )
+				 responseMessages.push(moreInfoOpening)
+				 hasOpening = true
+				 break;
+			}
+		}
+
+		console.log("ENTITY CONTENT RESPONSE", responseMessages);
 
 		return responseMessages
 	}
@@ -736,6 +722,40 @@ class Bernie {
 		return responseMessages
 	}
 
+
+	moreInfosOpening( entity ) {
+		const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
+		console.log(name);
+		const openingText = [
+			'Veux-tu en savoir plus ? 😏',
+			'Je continue ?',
+			'Ça va ou tu veux en savoir plus ? '
+		]
+		const acceptText = [
+			'Dis m\'en plus !',
+			'Aller 👍'
+		]
+		const declineText = [
+			'C’était clair 👌',
+			'Ça ira ✋'
+		]
+
+		let moreInfoOpening = new ResponseMessage( 2,
+			{ text : openingText[Math.floor(openingText.length * Math.random())],
+				quick_replies : [{
+					content_type: "text",
+					title: acceptText[Math.floor(acceptText.length * Math.random())],
+					payload: "Dis m'en plus sur " + name
+				},{
+					content_type: "text",
+					title: declineText[Math.floor(declineText.length * Math.random())],
+					payload: "ça ira mon coco"
+				}]
+			});
+
+			return moreInfoOpening;
+	}
+
 	isDefined(obj) {
 		if (typeof obj == 'undefined') {
 			return false;
@@ -755,6 +775,5 @@ class Bernie {
 	}
 
 }
-
 
 module.exports = Bernie;
