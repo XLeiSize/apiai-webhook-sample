@@ -268,6 +268,7 @@ class Bernie {
 						for( let i = 0; i < key.length; i++ ){
 							if( response.result.parameters[ keys[i] ].length > 1 ) {
 								const richcards = response.result.parameters[ keys[i] ];
+								console.log("parameters parsed", keys[i], richcards);
 								for (let j = 0; j < richcards.length; j++) {
 									console.log(key[i], richcards[j]);
 									promises.push(
