@@ -703,7 +703,6 @@ class Bernie {
 			if ( keyword !== "AdditionalContent" && contents[i].fields.type == "AdditionalContent" ) {
 				 moreInfoOpening = this.moreInfosOpeningResponse( entity )
 				 responseMessages.push(moreInfoOpening)
-				 hasOpening = true
 				 break;
 			}
 		}
