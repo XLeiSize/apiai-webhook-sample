@@ -55,6 +55,9 @@ class RichcardGenerator {
 					birthdate = artist.monthOfBirth + '/' + birthdate;
 					if(artist.dayOfBirth) {
 						birthdate = artist.dayOfBirth + '/' + birthdate;
+						console.log("bithdate before parsing", birthdate);
+						birthdate = new Date(birthdate).getFullYear() + '.' + ('0' + new Date(birthdate).getMonth()).slice(-2) + '.' + ('0' + new Date(birthdate).getDate()).slice(-2)
+						console.log("bithdate after parsing", birthdate);
 					}
 				}
 			}
@@ -88,7 +91,7 @@ class RichcardGenerator {
 			this.generateSubitems(movement, "mainArtists", title).then( subitems => {
 
 				this.title = title
-				this.subtitle = birthdate + " - " + deathdate
+				this.subtitle = deathdate ? birthdate + " - " + deathdate : birthdate
 				this.imageUrl = imageUrl
 
 				this.description = this.generateTextFromTemplate('richards_description', artist)
