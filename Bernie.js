@@ -148,7 +148,7 @@ class Bernie {
 
 					if(action === "input.welcome"){
 						let newResponse = new ResponseMessage( 2, {
-							text: "Tu as besoin de moi ? 💁",
+							text: "Tu as besoin de moi ? 💁 ",
 							quick_replies: [{
 				 				content_type: "text",
 				 				title: "Oui aide-moi 🙏",

@@ -95,7 +95,14 @@ restService.post('/hook', function (req, res) {
 				}).catch( err => {
                     console.log("ERROR FROM PROCESSSING API.AI RESULT", err);
                     //EJECTED ERROR CAN CONTAIN MESSAGES TOO TO HANDLE ERROR RESPONSE
-                    reject(err);
+                    let  answerOpt = {
+                        speech: speech,
+                        displayText: speech,
+                        messages: [{type: 0, speech:"Oulah.... tu peux reformuler stp ? 😅"}],
+                        source: 'berniewebhook'
+                    }
+
+                    return res.json(answerOpt);
                 });;
 
             }
