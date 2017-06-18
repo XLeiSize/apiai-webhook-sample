@@ -248,7 +248,7 @@ class RichcardGenerator {
 					for (let j = 0; j < results.length; j++) {
 						const entity = results[j]
 						//console.log("WESHALORS", entity);
-						const title = ( entity.artistName ) ? entity.artistName : entity.title )
+						const title = ( entity.artistName ) ? entity.artistName : entity.title
 	          const url = entity.image
 	          const imageUrl = url
 	          subitems.push({
