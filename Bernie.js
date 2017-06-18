@@ -654,7 +654,7 @@ class Bernie {
 				console.log("§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#", content);
 				 if ( content.fields.type == "AdditionalContent" ) {
 						let moreInfoOpening = this.moreInfoOpening( entity )
-
+						console.log("more info opening", moreInfoOpening);
 			 			responseMessages.push(moreInfoOpening);
 						break;
 				 }
