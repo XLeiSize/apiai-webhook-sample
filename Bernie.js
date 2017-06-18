@@ -665,7 +665,7 @@ class Bernie {
 				let content = entity.content[i]
 				console.log("§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#§#", content);
 				 if ( content.fields.type == "AdditionalContent" ) {
-						let moreInfoOpening = this.moreInfoOpening( entity )
+						let moreInfoOpening = this.moreInfosOpeningResponse( entity )
 						console.log("more info opening", moreInfoOpening);
 			 			responseMessages.push(moreInfoOpening);
 						break;
@@ -702,7 +702,7 @@ class Bernie {
 
 		for( let i = 0; i < content.length; i++ ){
 			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
-				 moreInfoOpening = this.moreInfoOpening( entity )
+				 moreInfoOpening = this.moreInfosOpeningResponse( entity )
 				 responseMessages.push(moreInfoOpening)
 				 hasOpening = true
 				 break;
@@ -736,7 +736,7 @@ class Bernie {
 	}
 
 
-	moreInfosOpening( entity ) {
+	moreInfosOpeningResponse( entity ) {
 		const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
 		console.log("moreInfosOpening", name);
 		const openingText = [
