@@ -262,13 +262,14 @@ class Bernie {
 									);
 								}
 
-								Promise.all(promises)
+								Promise.all(promises.map(Utils.reflect))
 								.then( results => {
 									let richcardPromises = [];
-									for (let j = 0; j < results.length; j++) {
-										const entity = results[j];
-										console.log("&&&&&&&&&&&&&&&&&&&&&&& ENTITY &&&&&&&&&&&&&&&&&&&&&&&", entity);
-										if (typeof entity == 'object') {
+
+									for(let j = 0; j < results.length; i++ ){
+                    if( results[j].status == "resolved" ){
+											const entity = results[j].data;
+											console.log("&&&&&&&&&&&&&&&&&&&&&&& ENTITY &&&&&&&&&&&&&&&&&&&&&&&", entity);
 											richcardPromises.push(new Promise( reso => {
 												this.createRichcard(entity, key[i]).then( richcard => {
 													responseMessages.push(richcard);
