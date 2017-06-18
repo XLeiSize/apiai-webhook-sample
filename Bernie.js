@@ -260,7 +260,7 @@ class Bernie {
 
 					} else if ( keywords[0] == "richcards" ) {
 
-						console.log("IN RICHCARDS STUFF");
+						console.log("IN RICHCARDS STUFF", response);
 						let promises = [];
 
 						const keys = [ 'artists', 'artworks', 'movements' ];
