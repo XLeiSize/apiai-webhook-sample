@@ -52,21 +52,18 @@ class RichcardGenerator {
 			if(artist.yearOfBirth) {
 				birthdate = artist.yearOfBirth;
 				if(artist.monthOfBirth) {
-					birthdate = artist.monthOfBirth + '/' + birthdate;
+					birthdate = ('0' + artist.monthOfBirth).slice(-2) + '/' + birthdate;
 					if(artist.dayOfBirth) {
-						birthdate = artist.dayOfBirth + '/' + birthdate;
-						console.log("bithdate before parsing", birthdate);
-						birthdate = new Date(birthdate).getFullYear() + '.' + ('0' + new Date(birthdate).getMonth()).slice(-2) + '.' + ('0' + new Date(birthdate).getDate()).slice(-2)
-						console.log("bithdate after parsing", birthdate);
+						birthdate = ('0' + artist.dayOfBirth).slice(-2) + '/' + birthdate;
 					}
 				}
 			}
 			if(artist.yearOfDeath) {
 				deathdate = artist.yearOfDeath;
 				if(artist.monthOfDeath) {
-					deathdate = artist.monthOfDeath + '/' + deathdate;
+					deathdate = ('0' + artist.monthOfDeath).slice(-2) + '/' + deathdate;
 					if(artist.dayOfDeath) {
-						deathdate = artist.dayOfDeath + '/' + deathdate;
+						deathdate = ('0' + artist.dayOfDeath).slice(-2) + '/' + deathdate;
 					}
 				}
 			}
