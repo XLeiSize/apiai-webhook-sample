@@ -693,7 +693,7 @@ class Bernie {
 			}
 		}
 		// si Description et est une collection, montrer les images
-		if( keyword === "Description" && entity.isACollection && !hasOpening ){
+		if( keyword === "Description" && entity.isACollection ){
 			responseMessages = this.entityImageResponse( entity, responseMessages )
 		}
 
@@ -701,7 +701,6 @@ class Bernie {
 			console.log("this content for AdditionalContent", content);
 			console.log(content[i].fields.type, keyword);
 			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
-
 				 moreInfoOpening = this.moreInfosOpeningResponse( entity )
 				 responseMessages.push(moreInfoOpening)
 				 hasOpening = true
