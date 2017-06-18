@@ -725,7 +725,7 @@ class Bernie {
 
 	moreInfosOpening( entity ) {
 		const name =  ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
-		console.log(name);
+		console.log("moreInfosOpening", name);
 		const openingText = [
 			'Veux-tu en savoir plus ? 😏',
 			'Je continue ?',
@@ -752,7 +752,7 @@ class Bernie {
 					payload: "ça ira mon coco"
 				}]
 			});
-
+			console.log("moreInfosOpening msg", moreInfoOpening);
 			return moreInfoOpening;
 	}
 
