@@ -570,8 +570,8 @@ class Bernie {
 		}
 
 		const responseText = [
-			" '" + title + "', réalisé par " + artistName + year + " 🤓",
-			"Je vos que tu te trouves devant '" + title + "', réalisé par " + artistName + year + " 🤓"
+			" ''" + title + "'', réalisé par " + artistName + year + " 🤓",
+			"Je vos que tu te trouves devant ''" + title + "'', réalisé par " + artistName + year + " 🤓"
 		]
 		responseMessages[responseMessages.length - 1].speech += responseText[Math.floor(responseText.length * Math.random())];
 
