@@ -217,7 +217,12 @@ class Bernie {
 											resolve( {type: 'richContent', messages: responseMessages} );
 										}
 									})
-									.catch( err => { reject(err) } );
+									.catch( err => {
+										resolve( {type: 'richContent', messages: {
+											type: 0,
+											speech: "Je ne le connais pas ... sorry 😩"
+										}} );
+									 } );
 								}
 								break;
 								case 'artwork': {
@@ -226,19 +231,26 @@ class Bernie {
 											responseMessages = artwork;
 											resolve( {type: 'richContent', messages: responseMessages} );
 										} else {
-											reject();
+											resolve( {type: 'richContent', messages: {
+												type: 0,
+												speech: "Jamais entendu parler de cet oeuvre ... sorry 😩"
+											}} );
 										}
 									})
 								}
 								break;
 								case 'movement': {
-									this.wikiart.getMovementByName( query ).then(( movement ) => {
-										if ( typeof movement == "object" ) {
-											responseMessages = this.generateResponse( movement, action, responseMessages);
-											resolve( {type: 'richContent', messages: responseMessages} );
-										}
-									})
-									.catch( err => { reject(err) } );
+									// this.wikiart.getMovementByName( query ).then(( movement ) => {
+									// 	if ( typeof movement == "object" ) {
+									// 		responseMessages = this.generateResponse( movement, action, responseMessages);
+									// 		resolve( {type: 'richContent', messages: responseMessages} );
+									// 	}
+									// })
+									// .catch( err => { reject(err) } );
+									resolve( {type: 'richContent', messages: {
+										type: 0,
+										speech: "Désolé mais j'ai d'infos sur ce mouvement ... sorry 😩"
+									}} );
 								}
 								break;
 								default: break;
