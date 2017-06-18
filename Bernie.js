@@ -677,9 +677,9 @@ class Bernie {
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(entity, keyword, responseMessages) {
 		let moreInfoOpening;
-		let content = entity.content
-		for( let i = 0; i < content.length; i++ ){
-			content = content[i].fields
+		const contents = entity.content
+		for( let i = 0; i < contents.length; i++ ){
+			let content = contents[i].fields
 			if ( content.type === keyword ) {
 				content.content.forEach( function( description ) {
 					description = description.fields
@@ -698,9 +698,9 @@ class Bernie {
 		}
 		console.log("this content for AdditionalContent", content);
 
-		for( let i = 0; i < content.length; i++ ){
-			console.log(content[i].fields.type, keyword);
-			if ( keyword !== "AdditionalContent" && content[i].fields.type == "AdditionalContent" ) {
+		for( let i = 0; i < contents.length; i++ ){
+			console.log(contents[i].fields.type, keyword);
+			if ( keyword !== "AdditionalContent" && contents[i].fields.type == "AdditionalContent" ) {
 				 moreInfoOpening = this.moreInfosOpeningResponse( entity )
 				 responseMessages.push(moreInfoOpening)
 				 hasOpening = true
