@@ -198,7 +198,7 @@ class Bernie {
 									if( !hasDescription ) {
 										responseMessages = this.generateResponse(this.entity, action, responseMessages)
 									} else {
-										responseMessages = this.entityContentResponse(this.entity.content, "Description", responseMessages)
+										responseMessages = this.entityContentResponse(this.entity, "Description", responseMessages)
 									}
 									resolve( {type: 'richContent', messages: responseMessages} );
 								}
@@ -678,7 +678,6 @@ class Bernie {
 
 	// PARSE AND GENERATE RESPONSE FROM ENTITY.CONTENT ARRAY
 	entityContentResponse(entity, keyword, responseMessages) {
-		let hasOpening = false;
 		let moreInfoOpening;
 		let content = entity.content
 		for( let i = 0; i < content.length; i++ ){
