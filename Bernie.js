@@ -284,7 +284,7 @@ class Bernie {
 										}
 										else {
 											console.log('entity not found in custom DB');
-											const name = entity.error.slug;
+											const name = results[j].error.slug;
 											console.log('entity to search in wikiart', name);
 
 											richcardPromises.push( new Promise( reso => {
