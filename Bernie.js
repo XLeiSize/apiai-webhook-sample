@@ -218,10 +218,10 @@ class Bernie {
 										}
 									})
 									.catch( err => {
-										resolve( {type: 'richContent', messages: {
+										resolve( {type: 'richContent', messages: [{
 											type: 0,
 											speech: "Je ne le connais pas ... sorry 😩"
-										}} );
+										}]} );
 									 } );
 								}
 								break;
@@ -231,10 +231,10 @@ class Bernie {
 											responseMessages = artwork;
 											resolve( {type: 'richContent', messages: responseMessages} );
 										} else {
-											resolve( {type: 'richContent', messages: {
+											resolve( {type: 'richContent', messages: [{
 												type: 0,
 												speech: "Jamais entendu parler de cet oeuvre ... sorry 😩"
-											}} );
+											}]} );
 										}
 									})
 								}
@@ -247,10 +247,10 @@ class Bernie {
 									// 	}
 									// })
 									// .catch( err => { reject(err) } );
-									resolve( {type: 'richContent', messages: {
+									resolve( {type: 'richContent', messages: [{
 										type: 0,
 										speech: "Désolé mais j'ai d'infos sur ce mouvement ... sorry 😩"
-									}} );
+									}]} );
 								}
 								break;
 								default: break;
