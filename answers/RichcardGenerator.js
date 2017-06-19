@@ -87,7 +87,7 @@ class RichcardGenerator {
 		movement = artist.movements[0].fields
 
 		return new Promise( (resolve, reject) => {
-			this.generateSubitems(movement, "mainArtists", title).then( subitems => {
+			this.generateSubitems(artist, "mainArtworks", title).then( subitems => {
 
 				this.title = title
 				this.subtitle = deathdate ? birthdate + " - " + deathdate : birthdate
