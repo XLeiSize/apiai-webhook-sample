@@ -217,6 +217,7 @@ class RichcardGenerator {
 			.then( results => {
         const entity, title, url, imageUrl;
 				for (let j = 0; j < results.length; j++) {
+          console.log("result entity", result);
           if( results[j].fields ) {
             entity = results[j].fields
   					//console.log("WESHALORS", entity);
