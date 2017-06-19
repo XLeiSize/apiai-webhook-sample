@@ -726,7 +726,8 @@ class Bernie {
 					if( images[i] !== image ) {
 						items.push({
 							title:images[i].fields.title,
-							imageUrl: images[i].fields.file.url
+							imageUrl: images[i].fields.file.url,
+							postback: image.fields.title // get artwork name instead of image name
 						})
 					}
 				}
