@@ -215,7 +215,7 @@ class RichcardGenerator {
 		return new Promise( (resolve, reject) => {
 			Promise.all(promises)
 			.then( results => {
-        const entity, title, url, imageUrl;
+        let entity, title, url, imageUrl;
 				for (let j = 0; j < results.length; j++) {
           console.log("result entity", result);
           if( results[j].fields ) {
