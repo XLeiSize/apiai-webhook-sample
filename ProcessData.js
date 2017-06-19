@@ -89,11 +89,11 @@ class ProcessData {
                 resolve( { source: 'custom', painting: entity } );
               }
             }).catch( err =>{
-              reject('NOPE CUSTOM DB/VUFORIA')
+              reject('IMAGE NOT RECOGNIZED')
             } )
 
           } else {
-            reject('NOPE VUFORIA')
+            reject('IMAGE NOT RECOGNIZED')
           }
         }).catch( err => {
           visionClient.detectLogos( tempImg, {verbose: true}, function( err, logos, apiResponse ) {
@@ -105,7 +105,7 @@ class ProcessData {
                   resolve( { source: 'wikiart', painting: painting } );
               })
             } else {
-              reject( 'NOPE CLOUD VISION' );
+              reject( 'IMAGE NOT RECOGNIZED' );
             }
           } );
         } );
