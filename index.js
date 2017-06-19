@@ -95,8 +95,9 @@ restService.post('/hook', function (req, res) {
 				}).catch( err => {
                     console.log("ERROR FROM PROCESSSING API.AI RESULT", err);
                     //EJECTED ERROR CAN CONTAIN MESSAGES TOO TO HANDLE ERROR RESPONSE
+                    let answerOpt;
                     if( err === "IMAGE NOT RECOGNIZED") {
-                      let  answerOpt = {
+                      answerOpt = {
                           speech: speech,
                           displayText: speech,
                           messages: [{type: 3, imageUrl:"https://media.giphy.com/media/a5viI92PAF89q/giphy.gif"},
@@ -104,15 +105,14 @@ restService.post('/hook', function (req, res) {
                           source: 'berniewebhook'
                       }
                     }
-
-                    // else {
-                      let  answerOpt = {
+                    else {
+                      answerOpt = {
                           speech: speech,
                           displayText: speech,
                           messages: [{type: 0, speech:"Oulah... Tu peux reformuler ? 😅"}],
                           source: 'berniewebhook'
                       }
-                    // }
+                    }
 
 
                     return res.json(answerOpt);
