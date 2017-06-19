@@ -106,12 +106,12 @@ restService.post('/hook', function (req, res) {
                     }
 
                     // else {
-                    //   let  answerOpt = {
-                    //       speech: speech,
-                    //       displayText: speech,
-                    //       messages: [{type: 0, speech:"Oulah... Tu peux reformuler ? 😅"}],
-                    //       source: 'berniewebhook'
-                    //   }
+                      let  answerOpt = {
+                          speech: speech,
+                          displayText: speech,
+                          messages: [{type: 0, speech:"Oulah... Tu peux reformuler ? 😅"}],
+                          source: 'berniewebhook'
+                      }
                     // }
 
 

@@ -57,6 +57,7 @@ class Wikiart {
             if( !paintings ) {
               reject('undefined');
             } else {
+              console.log("paintings[i]", paintings[i]);
               let similarityScore = [];
               for( let i = 0; i < paintings.length; i++ ){
                   similarityScore.push( Utils.similarity( name , paintings[i].title  ) );
