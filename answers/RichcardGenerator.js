@@ -239,7 +239,7 @@ class RichcardGenerator {
 				let length = list.length > 5 ? 5 : list.length
         switch ( type ) {
           case 'artist':
-            console.log("ARTIST NAME", list[i]);
+            console.log("ARTIST NAME", err.slug);
             wikiartPromises.push(wikiart.getArtistByName( err.slug ))
             break;
           case 'artwork':
