@@ -717,12 +717,27 @@ class Bernie {
 
 	entityImageResponse( entity, responseMessages ) {
 		let images = entity.images ? entity.images : entity.portrait
+		let items = []
 		if( images.length > 1 ) {
 			images.forEach( function( image ){
+
+				for( let i = images.length; i > 0; i++ ) {
+					if( images[i] !== image ) {
+						items.push({
+							title:images[i].fields.title,
+							imageUrl: images[i].fields.file.url
+						})
+					}
+				}
+
 				responseMessages.push(
 					new ResponseMessage( 1, {
 					title: image.fields.title,
 					desc: image.fields.description ? image.fields.description : "coming soon ...",
+					subitems: {
+						title: "Dans la même collection",
+						items: items
+					},
 					imageUrl: "https:" + image.fields.file.url,
 					buttons: [
 						{
