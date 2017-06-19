@@ -721,7 +721,7 @@ class Bernie {
 		if( images.length > 1 ) {
 			images.forEach( function( image ){
 
-				for( let i = images.length; i > 0; i++ ) {
+				for( let i = images.length; i > 0; i-- ) {
 					if( images[i] !== image ) {
 						items.push({
 							title:images[i].fields.title,
