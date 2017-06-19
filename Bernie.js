@@ -750,11 +750,11 @@ class Bernie {
 		const openingText = [
 			'Veux-tu en savoir plus ? 😏',
 			'Je continue ?',
-			'Ça va ou tu veux en savoir plus ? '
+			'Ça va ou tu veux en savoir plus ?'
 		]
 		const acceptText = [
 			'Dis m\'en plus !',
-			'Aller 👍'
+			'Allez 👍'
 		]
 		const declineText = [
 			'C’était clair 👌',
