@@ -717,10 +717,10 @@ class Bernie {
 
 	entityImageResponse( entity, responseMessages ) {
 		let images = entity.images ? entity.images : entity.portrait
-		let items = []
+
 		if( images.length > 1 ) {
 			images.forEach( function( image ){
-
+				let items = []
 				for( let i = 0; i < images.length; i++ ) {
 					console.log("WESH", images[i]);
 					if( images[i] !== image ) {
