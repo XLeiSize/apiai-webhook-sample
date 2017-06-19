@@ -735,7 +735,7 @@ class Bernie {
 				responseMessages.push(
 					new ResponseMessage( 1, {
 					title: image.fields.title,
-					subtitle: image.fields.description,
+					subtitle: entity.startYear ? entity.startYear + " - " entity.endYear : entity.endYear,
 					desc: image.fields.description ? image.fields.description : "coming soon ...",
 					subitems: {
 						title: "Dans la même collection",
