@@ -217,16 +217,12 @@ class RichcardGenerator {
 			.then( results => {
         let entity, title, url, imageUrl;
 				for (let j = 0; j < results.length; j++) {
-          console.log("result entity", results[j]);
           if( results[j].fields ) {
             entity = results[j].fields
   					//console.log("WESHALORS", entity);
   					title = ( entity.title ) ? entity.title : ( entity.name ) ? entity.name : ( entity.lastName ) ? entity.firstName + " " + entity.lastName : entity.title
             url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
             imageUrl = "https:"+ url
-          }else{
-            title = results[j].artistName
-            imageUrl = results[j].image
           }
 
           subitems.push({
@@ -237,21 +233,19 @@ class RichcardGenerator {
 				}
 				resolve( subitems );
 			}).catch( err => {
-				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err);
+				console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", err.slug);
 				// WIKIART
 				let wikiartPromises = [];
 				let length = list.length > 5 ? 5 : list.length
-				for( let i = 0; i < length; i++ ) {
-					switch ( type ) {
-						case 'artist':
-							console.log(list[i]);
-							wikiartPromises.push(wikiart.getArtistByName( list[i] ))
-							break;
-						case 'artwork':
-							wikiartPromises.push(wikiart.getArtworkByName( list[i] ))
-							break;
-					}
-				}
+        switch ( type ) {
+          case 'artist':
+            console.log("ARTIST NAME", list[i]);
+            wikiartPromises.push(wikiart.getArtistByName( err.slug ))
+            break;
+          case 'artwork':
+            wikiartPromises.push(wikiart.getArtworkByName( err.slug ))
+            break;
+        }
 				Promise.all(wikiartPromises)
 				.then((results) => {
 					console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&++++++++++++++++++++++++++++", results);
