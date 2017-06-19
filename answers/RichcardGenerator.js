@@ -217,7 +217,7 @@ class RichcardGenerator {
 			.then( results => {
         let entity, title, url, imageUrl;
 				for (let j = 0; j < results.length; j++) {
-          console.log("result entity", result);
+          console.log("result entity", results[j]);
           if( results[j].fields ) {
             entity = results[j].fields
   					//console.log("WESHALORS", entity);
@@ -225,8 +225,8 @@ class RichcardGenerator {
             url = (entity.image) ? entity.image.fields.file.url : ( entity.images ) ? entity.images[0].fields.file.url : entity.portrait.fields.file.url
             imageUrl = "https:"+ url
           }else{
-            title = entity.artistName
-            imageUrl = entity.image
+            title = results[j].artistName
+            imageUrl = results[j].image
           }
 
           subitems.push({
