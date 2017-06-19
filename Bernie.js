@@ -734,6 +734,7 @@ class Bernie {
 				responseMessages.push(
 					new ResponseMessage( 1, {
 					title: image.fields.title,
+					subtitle: image.fields.description,
 					desc: image.fields.description ? image.fields.description : "coming soon ...",
 					subitems: {
 						title: "Dans la même collection",
