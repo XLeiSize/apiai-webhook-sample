@@ -164,7 +164,7 @@ class Bernie {
 						resolve( {type: 'richContent', messages: responseMessages} );
 					} else if(action === "hellno"){
 
-						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/Ph8OWoJA2M3eM/giphy.gif"})
+						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/k61nOBRRBMxva/giphy.gif"})
 						resolve( {type: 'richContent', messages: responseMessages} );
 
 					} else if(action === "ofcourse"){
