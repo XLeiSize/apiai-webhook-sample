@@ -524,7 +524,6 @@ class Bernie {
 					if (list[i] !== query) {
 						switch ( type ) {
 							case 'artist':
-								console.log(list[i]);
 								wikiartPromises.push(this.wikiart.getArtistByName( list[i] ))
 								break;
 							case 'artwork':
@@ -553,9 +552,10 @@ class Bernie {
 					} );
 
 				})
-				.catch( error => { reject(error) } );
+				.catch( error => {
 					console.log("ERRRRRROOOOOOROROROROROROROROR richcards/", error)
 					reject(error);
+				} );
 			})
 		})
 	}
