@@ -79,7 +79,7 @@ class RichcardGenerator {
 				this.deathdate = artist.deathDayAsString
 			}
 			this.imageUrl = artist.image
-			this.subtitle = deathdate ? birthdate + " - " + deathdate : birthdate
+			this.subtitle = this.deathdate ? this.birthdate + " - " + this.deathdate : this.birthdate
 			// TEMPORARY FIX FOR ARTIST COMING FROM WIKIART
 			return new Promise( (resolve, reject) => { resolve( this.generate() ) });
 		}
