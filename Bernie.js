@@ -722,7 +722,15 @@ class Bernie {
 				responseMessages.push(
 					new ResponseMessage( 1, {
 					title: image.fields.title,
-					imageUrl: "https:" + image.fields.file.url
+					desc: image.fields.description ? image.fields.description : "coming soon ...",
+					imageUrl: "https:" + image.fields.file.url,
+					buttons: [
+						{
+							type: 'postback',
+							title: "En savoir plus",
+							payload: "Qu'est ce que Ai Weiwei voulait dire avec Etude de Perspective ?"
+						}
+					]
 				} ))
 			})
 		} else {
