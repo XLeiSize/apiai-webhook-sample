@@ -97,7 +97,7 @@ class RichcardGenerator {
 
 				console.log("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°", this.description);
 				this.subitems = {
-					title: "Artistes similaires",
+					title: "Oeuvres associés",
 					items: subitems
 				}
 				console.log("32232323232222323223232222232232", this.subitems);
