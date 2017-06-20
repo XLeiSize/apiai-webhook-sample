@@ -800,8 +800,9 @@ class Bernie {
 	}
 
 	easterEggResponse( datas, responseMessages ) {
-		let items = [];
 		datas.forEach(function(data) {
+			let items = [];
+
 			for( let j = 0; j < datas.length; j++ ){
 				if( datas[j] !== data ) {
 					items.push({
