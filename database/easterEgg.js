@@ -4,7 +4,7 @@ module.exports = {
     'lastName': "Maury",
     'position': "Designer",
     'birthdate': "04/12/1994",
-    'description': "Hugo est vraiment un sale petit con.",
+    'description': "#Motion #DigitalDesigner #UX #UI #Innovation #VHS #Internet #Wingardium #Leviosaaaa #DachauSystem",
     'imageUrl': "https://pbs.twimg.com/profile_images/855412516515704832/94ZGsSZf_400x400.jpg"
   },
   {
@@ -12,7 +12,7 @@ module.exports = {
     'lastName': "Frairrot",
     'position': "Designer",
     'birthdate': "24/01/1992",
-    'description': "Camcam est vraiment un sale petit con.",
+    'description': "#MotionScientist #Shibalover #kawai #snearkhead #motion4life #illustrator #SweetPunk",
     'imageUrl': "https://pbs.twimg.com/profile_images/378800000096121309/457608dc79657f01ba8ebba8341ffb9c_400x400.png"
   },
   {
@@ -20,7 +20,7 @@ module.exports = {
     'lastName': "Boulongne",
     'position': "Développeur",
     'birthdate': "04/12/1994",
-    'description': "#CycleOfLife #Knicks4Life #CarryYourMom #JungleLife #IreliaOTP #FrontEndDev #Chpill",
+    'description': "#CycleOfLife #Knicks4Life #CarryYourMom #JungleLife #WW #IreliaOTP #FrontEndDev #Chpill",
     'imageUrl': "https://avatars2.githubusercontent.com/u/6549138"
   },
   {
@@ -28,7 +28,7 @@ module.exports = {
     'lastName': "Xing",
     'position': "Développeur",
     'birthdate': "01/10/1994",
-    'description': "Lei est vraiment un sale petit con.",
+    'description': "#BallIsLife #BleedPurpleAndGold #Kobe #GOAT #Digital #Boulanger #JaxOTP #NoBrainChamp #AKQA-47",
     'imageUrl': "https://pbs.twimg.com/profile_images/742352821081739264/FEP9n7Wu_400x400.jpg"
   }]
 }
