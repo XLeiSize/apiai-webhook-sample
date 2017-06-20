@@ -799,12 +799,11 @@ class Bernie {
 	}
 
 	easterEggResponse( datas, responseMessages ) {
-		let data;
 		let items = [];
-		for( let i = 0; i < datas.length; i++ ) {
-			data = datas[i]
+		datas.forEach(function(data) {
 			console.log("data", data);
 			for( let j = 0; j < datas.length; j++ ){
+				console.log("datas[j]", data);
 				if( datas[j] !== data ) {
 					items.push({
 						title: datas[j].firstName + " " + datas[j].lastName,
@@ -830,7 +829,7 @@ class Bernie {
 					}
 				]
 			} ) )
-		}
+		})
 
 		return responseMessages;
 	}
