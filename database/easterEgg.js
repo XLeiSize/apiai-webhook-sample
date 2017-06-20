@@ -20,7 +20,7 @@ module.exports = {
     'lastName': "Boulongne",
     'position': "Développeur",
     'birthdate': "04/12/1994",
-    'description': "Thomas est vraiment un sale petit con.",
+    'description': "#CycleOfLife #Knicks4Life #CarryYourMom #JungleLife #IreliaOTP #FrontEndDev #Chpill",
     'imageUrl': "https://avatars2.githubusercontent.com/u/6549138"
   },
   {

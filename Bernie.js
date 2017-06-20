@@ -163,16 +163,7 @@ class Bernie {
 						console.log(newResponse);
 						responseMessages.push(newResponse);
 						resolve( {type: 'richContent', messages: responseMessages} );
-					} else if(action === "hellno"){
-
-						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/k61nOBRRBMxva/giphy.gif"})
-						resolve( {type: 'richContent', messages: responseMessages} );
-
-					} else if(action === "ofcourse"){
-
-						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/P0RWkdsRpK7ss/giphy.gif"})
-						resolve( {type: 'richContent', messages: responseMessages} );
-
+				
 					} else if(action === "parents"){
 						responseMessages = this.easterEggResponse( EasterEgg.parents, responseMessages )
 						resolve( {type: 'richContent', messages: responseMessages} );
