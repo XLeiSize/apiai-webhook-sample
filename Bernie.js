@@ -801,9 +801,7 @@ class Bernie {
 	easterEggResponse( datas, responseMessages ) {
 		let items = [];
 		datas.forEach(function(data) {
-			console.log("data", data);
 			for( let j = 0; j < datas.length; j++ ){
-				console.log("datas[j]", data);
 				if( datas[j] !== data ) {
 					items.push({
 						title: datas[j].firstName + " " + datas[j].lastName,
@@ -830,6 +828,8 @@ class Bernie {
 				]
 			} ) )
 		})
+
+		console.log("easter egg resposne", responseMessages);
 
 		return responseMessages;
 	}
