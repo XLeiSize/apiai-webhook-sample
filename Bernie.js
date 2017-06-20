@@ -13,6 +13,8 @@ const ResponseMessage = require('./answers/ResponseMessage.js');
 const RichcardGenerator = require('./answers/RichcardGenerator.js');
 const Utils = require('./helpers/utils.js');
 
+const EasterEgg = require('./database/easterEgg.js')
+
 const WikiAPI = require('wikijs');
 const wiki = WikiAPI.default();
 
@@ -171,6 +173,10 @@ class Bernie {
 
 						responseMessages.push({type: 3, imageUrl: "https://media.giphy.com/media/P0RWkdsRpK7ss/giphy.gif"})
 						resolve( {type: 'richContent', messages: responseMessages} );
+
+					} else if(action === "parents"){
+
+						responseMessages = this.easterEggResponse( EasterEgg.parents, responseMessages )
 
 					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
@@ -584,7 +590,7 @@ class Bernie {
 
 		const responseText = [
 			" ''" + title + "'', réalisé par " + artistName + year + " 🤓",
-			"Je vos que tu te trouves devant ''" + title + "'', réalisé par " + artistName + year + " 🤓"
+			"Je vois que tu te trouves devant ''" + title + "'', réalisé par " + artistName + year + " 🤓"
 		]
 		responseMessages[responseMessages.length - 1].speech += responseText[Math.floor(responseText.length * Math.random())];
 
@@ -722,7 +728,6 @@ class Bernie {
 			images.forEach( function( image ){
 				let items = []
 				for( let i = 0; i < images.length; i++ ) {
-					console.log("WESH", images[i]);
 					if( images[i] !== image ) {
 						items.push({
 							title:images[i].fields.title,
@@ -734,22 +739,23 @@ class Bernie {
 
 				responseMessages.push(
 					new ResponseMessage( 1, {
-					title: image.fields.title,
-					subtitle: entity.startYear ? entity.startYear + " - " + entity.endYear : entity.endYear,
-					desc: image.fields.description ? image.fields.description : "coming soon ...",
-					subitems: {
-						title: "Dans la même collection",
-						items: items
-					},
-					imageUrl: "https:" + image.fields.file.url,
-					buttons: [
-						{
-							type: 'postback',
-							title: "En savoir plus",
-							payload: "Qu'est ce que Ai Weiwei voulait dire avec Etude de Perspective ?"
-						}
-					]
-				} ))
+						title: image.fields.title,
+						subtitle: entity.startYear ? entity.startYear + " - " + entity.endYear : entity.endYear,
+						desc: image.fields.description ? image.fields.description : "coming soon ...",
+						subitems: {
+							title: "Dans la même collection",
+							items: items
+						},
+						imageUrl: "https:" + image.fields.file.url,
+						buttons: [
+							{
+								type: 'postback',
+								title: "En savoir plus",
+								payload: "Qu'est ce que Ai Weiwei voulait dire avec Etude de Perspective ?"
+							}
+						]
+					} )
+				)
 			})
 		} else {
 			let image = Array.isArray( images ) ? images[0] : images
@@ -788,11 +794,46 @@ class Bernie {
 				},{
 					content_type: "text",
 					title: declineText[Math.floor(declineText.length * Math.random())],
-					payload: "ça ira mon coco"
+					payload: "Ça ira mon coco"
 				}]
 			});
 			console.log("moreInfosOpening msg", moreInfoOpening);
 			return moreInfoOpening;
+	}
+
+	easterEggResponse( datas, responseMessages ) {
+		let data, items;
+		for( let i = 0; i < datas.length; i++ ) {
+			data = datas[i]
+			for( let j = 0; j < datas.length; j++ ){
+				if( datas[j] !== data ) {
+					items.push({
+						title: datas[j].firstName + " " + datas[j].lastName,
+						imageUrl: datas[j].imageUrl,
+						postback: datas[j].firstName + " " + datas[j].lastName // get artwork name instead of image name
+					})
+				}
+			}
+			responseMessages.push(new ResponseMessage( 1, {
+				title: data.firstName + " " + data.lastName,
+				subtitle: data.position + " - " + data.birthdate,
+				desc: data.description,
+				subitems: {
+					title: "Mes autres parents",
+					items: items
+				},
+				imageUrl: data.imageUrl,
+				buttons: [
+					{
+						type: 'postback',
+						title: "Ok",
+						payload: "Ok"
+					}
+				]
+			} ) )
+		}
+
+		return responseMessages;
 	}
 
 	isDefined(obj) {
