@@ -799,7 +799,8 @@ class Bernie {
 	}
 
 	easterEggResponse( datas, responseMessages ) {
-		let data, items;
+		let data;
+		let items = [];
 		for( let i = 0; i < datas.length; i++ ) {
 			data = datas[i]
 			console.log("data", data);
