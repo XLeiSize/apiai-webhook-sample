@@ -15,6 +15,8 @@ const Utils = require('./helpers/utils.js');
 
 const EasterEgg = require('./database/easterEgg.js')
 
+console.log(EasterEgg);
+
 const WikiAPI = require('wikijs');
 const wiki = WikiAPI.default();
 
