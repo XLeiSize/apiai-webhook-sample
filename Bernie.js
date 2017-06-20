@@ -175,6 +175,7 @@ class Bernie {
 
 					} else if(action === "parents"){
 						responseMessages = this.easterEggResponse( EasterEgg.parents, responseMessages )
+						resolve( {type: 'richContent', messages: responseMessages} );
 					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
@@ -828,8 +829,6 @@ class Bernie {
 				]
 			} ) )
 		})
-
-		console.log("easter egg resposne", responseMessages);
 
 		return responseMessages;
 	}
