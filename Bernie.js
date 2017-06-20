@@ -175,9 +175,7 @@ class Bernie {
 						resolve( {type: 'richContent', messages: responseMessages} );
 
 					} else if(action === "parents"){
-
 						responseMessages = this.easterEggResponse( EasterEgg.parents, responseMessages )
-
 					} else if( keywords[0] == 'search' && ( keywords[1] == "artist" || keywords[1] == "artwork" || keywords[1] == "movement" ) ) {
 						//DO REQUEST TO BACKOFFICE
 						//:keyword/query
@@ -805,6 +803,7 @@ class Bernie {
 		let data, items;
 		for( let i = 0; i < datas.length; i++ ) {
 			data = datas[i]
+			console.log("data", data);
 			for( let j = 0; j < datas.length; j++ ){
 				if( datas[j] !== data ) {
 					items.push({
