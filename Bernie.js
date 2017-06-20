@@ -21,7 +21,6 @@ const wiki = WikiAPI.default();
 const APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_TOKEN || 'e2b37bad2f464a64a42e095ab5528e39';
 const APIAI_LANG = process.env.APIAI_LANG || 'fr';
 
-
 class Bernie {
 	constructor( options ) {
 		this.processData = new ProcessData(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "webhook"});
