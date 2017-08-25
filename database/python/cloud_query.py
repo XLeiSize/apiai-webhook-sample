@@ -122,14 +122,10 @@ if __name__ == '__main__':
                              max_num_results=str(args.max_num_results),
                              include_target_data=args.include_target_data,
                              image=args.image[0])
-
     if status == 200:
         print query_response
-
         sys.exit(0)
     else:
         print status
         print query_response
-
-
         sys.exit(status)
